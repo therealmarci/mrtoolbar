@@ -1,0 +1,36 @@
+{
+	"schemaVersion": 1,
+	"id": "mrtoolbar",
+	"version": "${version}",
+	"name": "MRtoolbar",
+	"description": "Client mod for the Paper plugin MRtoolbar (required there for the toolbar): freely bindable keys, highlighted tool slots in the hotbar and a hotbar design screen to match your texture pack. Does nothing on servers without the plugin.",
+	"authors": [
+		"_therealmarci"
+	],
+	"contact": {
+		"sources": "https://github.com/therealmarci/mrtoolbar"
+	},
+	"license": "LicenseRef-MRtoolbar",
+	"icon": "assets/mrtoolbar/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"at.marcelr.mrtoolbar.mod.MRtoolbarClient"
+		],
+		"modmenu": [
+			"at.marcelr.mrtoolbar.mod.compat.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"mrtoolbar.mixins.json"
+	],
+	"suggests": {
+		"modmenu": "*"
+	},
+	"depends": {
+		"fabricloader": ">=${loader}",
+		"minecraft": "~${minecraft}",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

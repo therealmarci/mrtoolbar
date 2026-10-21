@@ -1,0 +1,50 @@
+name: MRtoolbar
+version: '${version}'
+main: at.marcelr.mrtoolbar.MRToolbar
+api-version: '${mcVersion}'
+author: _therealmarci
+website: https://github.com/${githubRepository}
+description: Tool-Slots in der Hotbar mit Werkzeuggürtel - braucht den MRtoolbar-Mod (Fabric).
+
+commands:
+  toolbar:
+    description: Menü der Werkzeugleiste - Tool-Slots festlegen, Gürtel befüllen, Steuerung einstellen.
+    usage: /toolbar [on|off|takeback]
+    aliases: [tb, tools]
+  mrtoolbar:
+    description: Verwaltung von MRtoolbar.
+    usage: /mrtoolbar <reload|version|debug|gui|view>
+
+permissions:
+  mrtoolbar.player:
+    description: Alle Spieler-Rechte auf einmal - z.B. für die Default-Gruppe in LuckPerms.
+    default: op
+    children:
+      mrtoolbar.use: true
+  mrtoolbar.use:
+    description: Tool-Slots nutzen und /toolbar öffnen. Anzahl Tool-Slots per mrtoolbar.slots.<anzahl>, Gürtelgröße per mrtoolbar.belt.<anzahl> (max. 8).
+    default: op
+  mrtoolbar.admin:
+    description: Alle Admin-Rechte von MRtoolbar.
+    default: op
+    children:
+      mrtoolbar.admin.reload: true
+      mrtoolbar.admin.debug: true
+      mrtoolbar.admin.gui: true
+      mrtoolbar.admin.view: true
+      mrtoolbar.admin.update: true
+  mrtoolbar.admin.reload:
+    description: /mrtoolbar reload
+    default: op
+  mrtoolbar.admin.debug:
+    description: /mrtoolbar debug [spieler] - Mod-Verbindung und Tool-Slots eines Spielers anzeigen.
+    default: op
+  mrtoolbar.admin.gui:
+    description: /mrtoolbar gui - alle Online-Spieler mit Mod-Version und Tool-Slots (auch der MRtoolbar-Knopf in MRadmin).
+    default: op
+  mrtoolbar.admin.view:
+    description: Gürtel anderer Spieler ansehen (nur lesen) - /mrtoolbar view <spieler>, Admin-Menü und MRadmin-Spielermenü.
+    default: op
+  mrtoolbar.admin.update:
+    description: Hinweis beim Betreten des Servers, wenn ein Update verfügbar ist.
+    default: op

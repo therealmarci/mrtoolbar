@@ -1,0 +1,120 @@
+﻿# ==============================================================================
+#   MRtoolbar - Konfiguration
+# ==============================================================================
+#   Nach Änderungen:  /mrtoolbar reload   (kein Neustart nötig)
+#   Spieler-Menü:     /toolbar
+#
+#   Die Werkzeugleiste funktioniert nur mit dem MRtoolbar-Mod (Fabric) auf dem Client. Der Mod übernimmt Tasten
+#   und Darstellung, das Plugin alles, was mit Items zu tun hat. Spieler ohne Mod spielen ganz normal, nur ohne
+#   Werkzeugleiste. Versionen und Kompatibilität: docs/COMPATIBILITY.md
+#
+#   Texte & Nachrichten: lang/de.yml bzw. lang/en.yml.
+#
+#   Diese Datei ist UTF-8-kodiert. Falls Umlaute (ä, ö, ü) falsch angezeigt werden,
+#   im Editor die Kodierung auf "UTF-8" stellen.
+# ==============================================================================
+
+# Nicht ändern - wird für automatische Config-Updates verwendet.
+config-version: 6
+
+# Sprache der Texte (Menüs, Nachrichten). Die Texte stehen in plugins/MRtoolbar/lang/<sprache>.yml.
+#   auto = jeder Spieler bekommt die Sprache, die er in Minecraft eingestellt hat - genau wie der Client-Mod.
+#          Deutsch (auch Österreich/Schweiz) -> de.yml, alle anderen -> fallback-language.
+#   de / en / ... = feste Sprache für alle Spieler.
+# Die Konsole ist immer Englisch. Eigene Sprache: Datei kopieren (z.B. fr.yml) und übersetzen - mit "auto"
+# bekommen französische Spieler sie dann automatisch.
+language: auto
+
+# Sprache für Spieler, deren Minecraft-Sprache keine eigene Datei hat.
+fallback-language: en
+
+
+# ------------------------------------------------------------------------------
+#   1) TOOL-SLOTS & GÜRTEL
+# ------------------------------------------------------------------------------
+toolbar:
+  # Wie viele Hotbar-Slots jeder Spieler zu Tool-Slots machen darf (0-9).
+  # Mehr gibt es per Permission "mrtoolbar.slots.<anzahl>" (z.B. mrtoolbar.slots.3, die höchste zählt).
+  default-tool-slots: 2
+
+  # Wie viele Tools in den Gürtel eines Tool-Slots passen (1-8, das Rad hat 8 Felder).
+  # Das Tool, das gerade in der Hotbar liegt, zählt nicht mit.
+  # Mehr gibt es per Permission "mrtoolbar.belt.<anzahl>" (z.B. mrtoolbar.belt.8).
+  default-belt-size: 6
+
+  # Was in einen Gürtel darf. Einträge:
+  #   Item-Name         z.B. bow, shears, minecraft:fishing_rod
+  #   #Item-Tag         z.B. #minecraft:pickaxes (alle Spitzhacken)
+  #   "*"               jedes Item
+  allowed-items:
+    - "#minecraft:pickaxes"
+    - "#minecraft:axes"
+    - "#minecraft:shovels"
+    - "#minecraft:hoes"
+    - "#minecraft:swords"
+    - "#minecraft:spears"
+    - mace
+    - trident
+    - bow
+    - crossbow
+    - shield
+    - fishing_rod
+    - shears
+    - flint_and_steel
+    - brush
+    - spyglass
+    - carrot_on_a_stick
+    - warped_fungus_on_a_stick
+
+  # Welten, in denen Tool-Slots wie normale Slots funktionieren (Name, Groß-/Kleinschreibung egal).
+  # Die Gürtel bleiben erhalten.
+  disabled-worlds: []
+
+  # Was beim Tod mit dem Inhalt der Gürtel passiert:
+  #   drop = fällt wie das Inventar auf den Boden (Standard)
+  #   keep = bleibt im Gürtel
+  # Ist in der Welt keepInventory an, bleibt der Gürtel immer erhalten.
+  on-death: drop
+
+  # Im Adminmodus von MRadmin pausieren (Tool-Slots normal, /toolbar gesperrt, Gürtel bleibt beim Tod erhalten).
+  # Der Adminmodus hat ein eigenes Kreativ-Inventar - ohne Pause könnten Kreativ-Items im Gürtel landen.
+  pause-in-admin-mode: true
+
+
+# ------------------------------------------------------------------------------
+#   2) CLIENT-MOD
+# ------------------------------------------------------------------------------
+mod:
+  # Älteste Version des MRtoolbar-Mods, die noch erlaubt ist (z.B. "0.2.1", leer = jede kompatible Version).
+  # Welche Mod-Versionen grundsätzlich zum Plugin passen, ist im Plugin eingebaut (Protokollversion) - hier kann
+  # man zusätzlich ältere Versionen aussperren, z.B. wegen eines Fehlers im Mod.
+  minimum-version: ""
+
+  # Wo Spieler den Mod herunterladen (Link in den Hinweisen).
+  download-url: "https://github.com/therealmarci/mrtoolbar/releases"
+
+  # So lange wartet der Server nach dem Betreten auf den Mod, bevor der Spieler als "ohne Mod" gilt (Sekunden).
+  handshake-seconds: 5
+
+
+# ------------------------------------------------------------------------------
+#   3) UPDATE-CHECK
+# ------------------------------------------------------------------------------
+update-checker:
+  enabled: true
+  # Quelle: "github" (GitHub Releases, Standard) oder "modrinth"
+  source: github
+  # Auch Beta-/Alpha-Versionen melden. Läuft selbst eine Vorabversion (0.x), werden sie immer gemeldet.
+  include-prereleases: false
+  interval-hours: 6
+  # Spieler mit "mrtoolbar.admin.update" beim Betreten des Servers informieren.
+  notify-on-join: true
+
+
+# ------------------------------------------------------------------------------
+#   4) MENÜS
+# ------------------------------------------------------------------------------
+gui:
+  # Wie oft offene Menüs aktualisiert werden (in Ticks, 20 = 1 Sekunde).
+  refresh-ticks: 20
+  sounds: true

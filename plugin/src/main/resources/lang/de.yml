@@ -1,0 +1,169 @@
+﻿﻿# ==============================================================================
+#   MRtoolbar - Sprachdatei: Deutsch (de)
+# ==============================================================================
+#   Aktivieren: in der config.yml  language: de
+#   Eigene Sprache: diese Datei kopieren (z.B. als fr.yml), übersetzen und language: fr setzen.
+#   Fehlende Texte werden bei Updates automatisch ergänzt - deine Änderungen bleiben erhalten.
+#
+#   Format: MiniMessage - https://docs.advntr.dev/minimessage/format.html
+#   Leerer Text ("") = Nachricht wird nicht gesendet.
+# ==============================================================================
+
+# Nicht ändern - damit erkennt das Plugin bei Updates, welche Texte erneuert werden müssen.
+lang-version: 6
+
+prefix: "<dark_gray>[<gold>MRtoolbar</gold>]</dark_gray> "
+no-permission: "<prefix><red>Dazu hast du keine Berechtigung."
+player-only: "<prefix><red>Das geht nur im Spiel."
+reloaded: "<prefix><green>Konfiguration neu geladen."
+admin-usage: "<prefix><gray>Verwendung: <white>/<label> <reload|version|gui|view <spieler>|debug [spieler]>"
+toolbar-usage: "<prefix><gray>Verwendung: <white>/<label> [on|off|takeback]"
+toolbar-enabled: "<prefix><green>Werkzeugleiste eingeschaltet."
+toolbar-disabled: "<prefix><gray>Werkzeugleiste ausgeschaltet - Tool-Slots sind jetzt normale Slots, deine Gürtel bleiben erhalten."
+
+# ------------------------------------------------------------------ Wechseln
+# Actionbar nach dem Wechseln. <tool> = Name, <position> = Platz im Gürtel, <count> = Tools insgesamt
+switched: "<gold><tool></gold> <dark_gray>(<position>/<count>)"
+belt-empty: "<gray>Dein Gürtel ist leer - öffne ihn und leg Tools hinein"
+belt-no-other: "<gray>Kein weiteres Tool im Gürtel"
+belt-not-allowed: "<prefix><red>Das kann nicht in den Gürtel."
+slot-cleared-dropped: "<prefix><gold>Im Tool-Slot lag etwas, das nicht in den Gürtel gehört - dein Inventar ist voll, es liegt jetzt vor dir."
+limits-reduced: "<prefix><gold><count> Tool(s) passten nicht mehr in deine Gürtel und sind jetzt in deinem Inventar."
+admin-mode-paused: "<prefix><gray>Im Adminmodus ist die Werkzeugleiste pausiert."
+
+# ------------------------------------------------------------------ Tool-Slots
+slot-added: "<prefix><green>Slot <slot> ist jetzt ein Tool-Slot."
+slot-removed: "<prefix><gray>Slot <slot> ist wieder ein normaler Slot. <count> Tool(s) aus dem Gürtel sind in deinem Inventar."
+slot-limit: "<prefix><red>Du kannst höchstens <max> Tool-Slot(s) haben."
+slot-no-room: "<prefix><red>In Slot <slot> liegt ein Item und dein Inventar ist voll - mach erst Platz."
+
+state-on: "<green>an</green>"
+state-off: "<red>aus</red>"
+
+# ------------------------------------------------------------------ Menü /toolbar
+gui-title-main: "Werkzeugleiste"
+gui-help-name: "<gold>Werkzeugleiste"
+gui-help-lore:
+  - "<gray>Mach Hotbar-Slots zu <gold>Tool-Slots</gold>."
+  - "<gray>Ein Tool-Slot enthält nur Tools aus"
+  - "<gray>seinem <white>Gürtel</white>. Tasten zum Öffnen und"
+  - "<gray>Durchschalten stellst du in Minecraft"
+  - "<gray>ein: <white>Optionen → Steuerung → MRtoolbar</white>"
+  - ""
+  - "<gray>Die Zeile darunter ist deine Hotbar."
+gui-help-versions:
+  - ""
+  - "<gray>Server-Plugin: <white><server></white> <server-status>"
+  - "<gray>Client-Mod: <white><client></white> <client-status>"
+  - ""
+  - "<yellow>Klick: <gray>Download-Links im Chat"
+version-status-latest: "<green>✔ aktuell"
+version-status-update: "<gold>⬆ Update: <latest>"
+version-status-unknown: "<dark_gray>(Update-Status unbekannt)"
+help-links: "<prefix><gray>MRtoolbar - Mod: <download> <dark_gray>| <gray>Plugin: <plugin>"
+help-plugin-label: "<aqua><u>[GitHub]</u></aqua>"
+gui-slot-normal-name: "<white>Slot <slot> <dark_gray>· <gray>normal"
+gui-slot-normal-lore:
+  - "<gray>Tool-Slots: <white><used>/<max>"
+  - ""
+  - "<yellow>Klick: <gray>zum Tool-Slot machen"
+gui-slot-limit-lore:
+  - "<gray>Tool-Slots: <white><used>/<max>"
+  - ""
+  - "<red>Du hast keine weiteren Tool-Slots."
+gui-slot-tool-name: "<gold>Slot <slot> <dark_gray>· <gold>Tool-Slot"
+gui-slot-tool-lore:
+  - "<gray>In der Hand: <white><current>"
+  - "<gray>Im Gürtel: <white><tools>/<size>"
+  - ""
+  - "<yellow>Linksklick: <gray>Gürtel öffnen"
+  - "<yellow>Rechtsklick: <gray>wieder normaler Slot"
+gui-slot-tool-nothing: "nichts"
+gui-design-name: "<gold>Hotbar-Design"
+gui-design-lore:
+  - "<gray>Wie deine Tool-Slots markiert werden -"
+  - "<gray>passend zu deinem Texturepack."
+  - ""
+  - "<yellow>Klick: <gray>Design-Menü des Mods öffnen"
+gui-enabled-name: "<gold>Werkzeugleiste: <state>"
+gui-enabled-lore:
+  - "<gray>Aus = Tool-Slots verhalten sich wie normale"
+  - "<gray>Slots. Deine Gürtel bleiben erhalten."
+  - ""
+  - "<yellow>Klick: <gray>an/aus"
+
+# ------------------------------------------------------------------ Gürtel
+gui-title-belt: "Gürtel · Slot <slot>"
+gui-belt-locked-name: "<dark_gray>Gesperrt"
+gui-belt-locked-lore:
+  - "<gray>Dein Gürtel hat nicht mehr Plätze."
+gui-belt-info-name: "<gold>Gürtel <dark_gray>· <white><size> Plätze"
+gui-belt-info-lore:
+  - "<gray>Leg Tools hinein oder nimm sie"
+  - "<gray>heraus - wie bei einer Kiste."
+  - ""
+  - "<gray>Beim Schließen kommt dein Tool"
+  - "<gray>wieder in den Tool-Slot."
+
+# ------------------------------------------------------------------ Client-Mod
+# <download> = Link zum Mod (Adresse in der config.yml)
+mod-download-label: "<aqua><u>[MRtoolbar-Mod herunterladen]</u></aqua>"
+mod-required: "<prefix><gray>Die Werkzeugleiste braucht den <gold>MRtoolbar-Mod</gold> (Fabric). <download>"
+mod-required-take-back: "<prefix><gray>Deine Tools aus den Gürteln holst du mit <click:run_command:'/toolbar takeback'><yellow><u>[Tools zurückholen]</u></yellow></click> zurück ins Inventar."
+mod-missing-notice: "<prefix><gray>Ohne <gold>MRtoolbar-Mod</gold> sind deine Tool-Slots pausiert - deine Tools liegen sicher im Gürtel. <download>"
+mod-too-old: "<prefix><red>Dein MRtoolbar-Mod (<version>) ist zu alt für diesen Server - bitte aktualisieren. <download>"
+mod-too-new: "<prefix><red>Dein MRtoolbar-Mod (<version>) ist neuer als das Plugin auf diesem Server. Bitte melde das einem Admin oder nutze eine passende Mod-Version. <download>"
+take-back-done: "<prefix><green><count> Tool(s) sind jetzt in deinem Inventar, deine Tool-Slots sind wieder normale Slots."
+
+# ------------------------------------------------------------------ Team (/mrtoolbar gui, Gürtel ansehen, MRadmin)
+gui-back-name: "<yellow>Zurück"
+gui-close-name: "<red>Schließen"
+gui-title-admin: "Werkzeugleiste · Spieler"
+gui-admin-player-name: "<white><player>"
+gui-admin-player-lore:
+  - "<gray>Mod: <white><mod>"
+  - "<gray>Werkzeugleiste: <active>"
+  - "<gray>Tool-Slots: <white><slots>"
+gui-admin-player-click:
+  - ""
+  - "<yellow>Klick: <gray>Gürtel ansehen"
+gui-title-belt-view: "Gürtel · <player>"
+gui-view-slot-name: "<gold>Slot <slot> <dark_gray>· <gray>im Slot"
+gui-view-slot-empty-name: "<gray>Slot <slot> <dark_gray>· <gray>leer"
+gui-view-slot-lore:
+  - "<gray>Rechts daneben: der Gürtel <white>(<tools>/<size>)"
+  - "<dark_gray>Nur ansehen"
+gui-view-none-name: "<gray>Keine Tool-Slots"
+gui-view-offline-name: "<red>Spieler ist nicht mehr online"
+# Knopf in MRadmin. <modded> = Spieler mit Mod, <online> = online, <active> = mit Tool-Slots
+mradmin-summary:
+  - "<gray>Mit Mod: <white><modded></white><gray>/<online> online"
+  - "<gray>Nutzen Tool-Slots: <white><active>"
+mradmin-player-offline:
+  - "<gray>Spieler ist offline"
+
+# ------------------------------------------------------------------ Debug (/mrtoolbar debug)
+debug-info: "<prefix><gray>Spieler <white><player></white>\n<gray> Mod: <white><mod>\n<gray> Werkzeugleiste aktiv: <white><active></white> <dark_gray>(eingeschaltet: <enabled>)\n<gray> Tool-Slots: <white><slots>"
+debug-no-player: "<prefix><red>Spieler nicht gefunden (muss online sein)."
+debug-mod: "<version> (Protokoll <protocol>, <status>)"
+debug-status-ok: "passt"
+debug-status-mod-too-old: "zu alt"
+debug-status-mod-too-new: "zu neu"
+debug-mod-none: "keiner"
+debug-mod-outdated: "veraltet (ohne Handshake)"
+debug-yes: "ja"
+debug-no: "nein"
+
+# ------------------------------------------------------------------ Version & Updates
+version: "<prefix><gray>MRtoolbar <white>v<version></white> <dark_gray>(MC <mc>)</dark_gray> von <white><author></white>"
+version-latest: "<prefix><green>Du nutzt die aktuellste Version."
+version-outdated: "<prefix><gold>Neue Version verfügbar: <white><latest></white> <gray>(installiert: <current>) <download>"
+version-unknown: "<prefix><gray>Update-Status unbekannt: <reason>"
+version-checking: "<prefix><gray>Suche nach Updates ..."
+version-links: "<prefix><modrinth> <dark_gray>| <github>"
+update-download-label: "<aqua><u>[Download]</u></aqua>"
+update-join-notify: "<prefix><gold>Für MRtoolbar gibt es ein Update: <white><latest></white> <gray>(installiert: <current>) <download>"
+update-reason-disabled: "Update-Check ist deaktiviert"
+update-reason-not-found: "Projekt nicht gefunden (HTTP 404) - noch nicht veröffentlicht?"
+update-reason-no-release: "Keine veröffentlichte Version gefunden"
+update-reason-no-repository: "Kein GitHub-Repository hinterlegt"

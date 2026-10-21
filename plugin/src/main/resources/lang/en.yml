@@ -1,0 +1,168 @@
+﻿﻿# ==============================================================================
+#   MRtoolbar - Language file: English (en)
+# ==============================================================================
+#   Activate: in config.yml  language: en
+#   Own language: copy this file (e.g. as fr.yml), translate it and set language: fr.
+#   Missing texts are added automatically on updates - your changes are kept.
+#
+#   Format: MiniMessage - https://docs.advntr.dev/minimessage/format.html
+#   Empty text ("") = the message is not sent.
+# ==============================================================================
+
+# Do not change - tells the plugin which texts have to be renewed on updates.
+lang-version: 6
+
+prefix: "<dark_gray>[<gold>MRtoolbar</gold>]</dark_gray> "
+no-permission: "<prefix><red>You don't have permission to do that."
+player-only: "<prefix><red>This only works in game."
+reloaded: "<prefix><green>Configuration reloaded."
+admin-usage: "<prefix><gray>Usage: <white>/<label> <reload|version|gui|view <player>|debug [player]>"
+toolbar-usage: "<prefix><gray>Usage: <white>/<label> [on|off|takeback]"
+toolbar-enabled: "<prefix><green>Toolbar switched on."
+toolbar-disabled: "<prefix><gray>Toolbar switched off - tool slots are normal slots now, your belts are kept."
+
+# ------------------------------------------------------------------ Switching
+# Action bar after switching. <tool> = name, <position> = place in the belt, <count> = tools in total
+switched: "<gold><tool></gold> <dark_gray>(<position>/<count>)"
+belt-empty: "<gray>Your belt is empty - open it and put tools in"
+belt-no-other: "<gray>No other tool in the belt"
+belt-not-allowed: "<prefix><red>This can't go into the belt."
+slot-cleared-dropped: "<prefix><gold>Something that does not belong to the belt was in the tool slot - your inventory is full, it is lying in front of you now."
+limits-reduced: "<prefix><gold><count> tool(s) no longer fit into your belts and are now in your inventory."
+admin-mode-paused: "<prefix><gray>The toolbar is paused while you are in admin mode."
+
+# ------------------------------------------------------------------ Tool slots
+slot-added: "<prefix><green>Slot <slot> is now a tool slot."
+slot-removed: "<prefix><gray>Slot <slot> is a normal slot again. <count> tool(s) from the belt are in your inventory."
+slot-limit: "<prefix><red>You can have at most <max> tool slot(s)."
+slot-no-room: "<prefix><red>There is an item in slot <slot> and your inventory is full - make room first."
+
+state-on: "<green>on</green>"
+state-off: "<red>off</red>"
+
+# ------------------------------------------------------------------ Menu /toolbar
+gui-title-main: "Toolbar"
+gui-help-name: "<gold>Toolbar"
+gui-help-lore:
+  - "<gray>Turn hotbar slots into <gold>tool slots</gold>."
+  - "<gray>A tool slot only holds tools of its"
+  - "<white>belt</white><gray>. Keys to open and switch are set"
+  - "<gray>in Minecraft: <white>Options → Controls → MRtoolbar</white>"
+  - ""
+  - "<gray>The row below is your hotbar."
+gui-help-versions:
+  - ""
+  - "<gray>Server plugin: <white><server></white> <server-status>"
+  - "<gray>Client mod: <white><client></white> <client-status>"
+  - ""
+  - "<yellow>Click: <gray>download links in the chat"
+version-status-latest: "<green>✔ up to date"
+version-status-update: "<gold>⬆ update: <latest>"
+version-status-unknown: "<dark_gray>(update status unknown)"
+help-links: "<prefix><gray>MRtoolbar - mod: <download> <dark_gray>| <gray>plugin: <plugin>"
+help-plugin-label: "<aqua><u>[GitHub]</u></aqua>"
+gui-slot-normal-name: "<white>Slot <slot> <dark_gray>· <gray>normal"
+gui-slot-normal-lore:
+  - "<gray>Tool slots: <white><used>/<max>"
+  - ""
+  - "<yellow>Click: <gray>make it a tool slot"
+gui-slot-limit-lore:
+  - "<gray>Tool slots: <white><used>/<max>"
+  - ""
+  - "<red>You have no more tool slots."
+gui-slot-tool-name: "<gold>Slot <slot> <dark_gray>· <gold>tool slot"
+gui-slot-tool-lore:
+  - "<gray>In hand: <white><current>"
+  - "<gray>In the belt: <white><tools>/<size>"
+  - ""
+  - "<yellow>Left click: <gray>open belt"
+  - "<yellow>Right click: <gray>back to a normal slot"
+gui-slot-tool-nothing: "nothing"
+gui-design-name: "<gold>Hotbar design"
+gui-design-lore:
+  - "<gray>How your tool slots are highlighted -"
+  - "<gray>to match your texture pack."
+  - ""
+  - "<yellow>Click: <gray>open the mod's design screen"
+gui-enabled-name: "<gold>Toolbar: <state>"
+gui-enabled-lore:
+  - "<gray>Off = tool slots behave like normal slots."
+  - "<gray>Your belts are kept."
+  - ""
+  - "<yellow>Click: <gray>on/off"
+
+# ------------------------------------------------------------------ Belt
+gui-title-belt: "Belt · slot <slot>"
+gui-belt-locked-name: "<dark_gray>Locked"
+gui-belt-locked-lore:
+  - "<gray>Your belt has no more places."
+gui-belt-info-name: "<gold>Belt <dark_gray>· <white><size> places"
+gui-belt-info-lore:
+  - "<gray>Put tools in or take them out -"
+  - "<gray>just like a chest."
+  - ""
+  - "<gray>When you close it, your tool goes"
+  - "<gray>back into the tool slot."
+
+# ------------------------------------------------------------------ Client mod
+# <download> = link to the mod (address in config.yml)
+mod-download-label: "<aqua><u>[Download the MRtoolbar mod]</u></aqua>"
+mod-required: "<prefix><gray>The toolbar needs the <gold>MRtoolbar mod</gold> (Fabric). <download>"
+mod-required-take-back: "<prefix><gray>Get the tools out of your belts with <click:run_command:'/toolbar takeback'><yellow><u>[Take tools back]</u></yellow></click>."
+mod-missing-notice: "<prefix><gray>Without the <gold>MRtoolbar mod</gold> your tool slots are paused - your tools are safe in the belt. <download>"
+mod-too-old: "<prefix><red>Your MRtoolbar mod (<version>) is too old for this server - please update it. <download>"
+mod-too-new: "<prefix><red>Your MRtoolbar mod (<version>) is newer than the plugin on this server. Please tell an admin or use a matching mod version. <download>"
+take-back-done: "<prefix><green><count> tool(s) are now in your inventory, your tool slots are normal slots again."
+
+# ------------------------------------------------------------------ Team (/mrtoolbar gui, viewing belts, MRadmin)
+gui-back-name: "<yellow>Back"
+gui-close-name: "<red>Close"
+gui-title-admin: "Toolbar · players"
+gui-admin-player-name: "<white><player>"
+gui-admin-player-lore:
+  - "<gray>Mod: <white><mod>"
+  - "<gray>Toolbar: <active>"
+  - "<gray>Tool slots: <white><slots>"
+gui-admin-player-click:
+  - ""
+  - "<yellow>Click: <gray>view belts"
+gui-title-belt-view: "Belts · <player>"
+gui-view-slot-name: "<gold>Slot <slot> <dark_gray>· <gray>in the slot"
+gui-view-slot-empty-name: "<gray>Slot <slot> <dark_gray>· <gray>empty"
+gui-view-slot-lore:
+  - "<gray>To the right: the belt <white>(<tools>/<size>)"
+  - "<dark_gray>View only"
+gui-view-none-name: "<gray>No tool slots"
+gui-view-offline-name: "<red>Player is no longer online"
+# Button in MRadmin. <modded> = players with mod, <online> = online, <active> = with tool slots
+mradmin-summary:
+  - "<gray>With mod: <white><modded></white><gray>/<online> online"
+  - "<gray>Using tool slots: <white><active>"
+mradmin-player-offline:
+  - "<gray>Player is offline"
+
+# ------------------------------------------------------------------ Debug (/mrtoolbar debug)
+debug-info: "<prefix><gray>Player <white><player></white>\n<gray> Mod: <white><mod>\n<gray> Toolbar active: <white><active></white> <dark_gray>(switched on: <enabled>)\n<gray> Tool slots: <white><slots>"
+debug-no-player: "<prefix><red>Player not found (must be online)."
+debug-mod: "<version> (protocol <protocol>, <status>)"
+debug-status-ok: "fits"
+debug-status-mod-too-old: "too old"
+debug-status-mod-too-new: "too new"
+debug-mod-none: "none"
+debug-mod-outdated: "outdated (no handshake)"
+debug-yes: "yes"
+debug-no: "no"
+
+# ------------------------------------------------------------------ Version & updates
+version: "<prefix><gray>MRtoolbar <white>v<version></white> <dark_gray>(MC <mc>)</dark_gray> by <white><author></white>"
+version-latest: "<prefix><green>You are running the latest version."
+version-outdated: "<prefix><gold>New version available: <white><latest></white> <gray>(installed: <current>) <download>"
+version-unknown: "<prefix><gray>Update status unknown: <reason>"
+version-checking: "<prefix><gray>Checking for updates ..."
+version-links: "<prefix><modrinth> <dark_gray>| <github>"
+update-download-label: "<aqua><u>[Download]</u></aqua>"
+update-join-notify: "<prefix><gold>An update for MRtoolbar is available: <white><latest></white> <gray>(installed: <current>) <download>"
+update-reason-disabled: "the update check is disabled"
+update-reason-not-found: "project not found (HTTP 404) - not published yet?"
+update-reason-no-release: "no published version found"
+update-reason-no-repository: "no GitHub repository configured"

@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "at.marcelr.mrtoolbar.mod.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"HudMixin",
+		"MouseHandlerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
