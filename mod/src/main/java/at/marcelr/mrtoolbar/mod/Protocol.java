@@ -24,8 +24,16 @@ public final class Protocol {
         return Identifier.fromNamespaceAndPath("mrtoolbar", path);
     }
 
+    /**
+     * Sent as the ordinal - new actions only at the end. Plugins ignore codes they do not know, so a new action
+     * needs no new protocol (it just does nothing on older servers).
+     */
     public enum Action {
-        OPEN, NEXT, PREVIOUS
+        OPEN, NEXT, PREVIOUS,
+        /** Sort the own inventory. */
+        SORT,
+        /** Sort the open container (chest, barrel, hopper ...). */
+        SORT_CONTAINER
     }
 
     /** Result codes of {@link WelcomePayload} (never reused or reordered). */

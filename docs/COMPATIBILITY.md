@@ -65,6 +65,18 @@ Damit kann jede Mod-Version mit jeder Plugin-Version zumindest feststellen, ob s
 **Kein Protokollwechsel nötig** bei reinen Mod-Änderungen (Design, Tasten, Darstellung) oder Plugin-Änderungen,
 die keine Nachricht betreffen.
 
+**Neue `action`-Codes** (hinten angehängt) brauchen ebenfalls keinen Protokollwechsel: Jedes Plugin ab 0.1.0
+ignoriert Codes, die es nicht kennt (`ModBridge.action`). Ein neuer Mod auf einem älteren Server bleibt also
+kompatibel, die neue Taste macht dort nur nichts. Bestehende Codes nie umnummerieren.
+
+| Code | Aktion | Plugin ab | Mod ab |
+|---|---|---|---|
+| 0 | Gürtel öffnen | 0.1.0 | 0.1.0 |
+| 1 | nächstes Tool | 0.1.0 | 0.1.0 |
+| 2 | vorheriges Tool | 0.1.0 | 0.1.0 |
+| 3 | Inventar sortieren | 0.2.0 | 0.2.0 |
+| 4 | offenen Behälter sortieren (Kiste, Fass, Trichter ...) | 0.2.0 | 0.2.0 |
+
 ## Protokoll-Historie
 
 | Protokoll | Plugin ab | Mod ab | Änderung |

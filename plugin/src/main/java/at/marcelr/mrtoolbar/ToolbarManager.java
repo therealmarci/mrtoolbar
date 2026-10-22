@@ -166,7 +166,8 @@ public final class ToolbarManager {
         return value != null && value == hotbar;
     }
 
-    private boolean markedAny(ItemStack item) {
+    /** Whether {@code item} is the selected tool of any tool slot. */
+    public boolean markedAny(ItemStack item) {
         return item != null && !item.isEmpty() && item.getPersistentDataContainer().has(marker, PersistentDataType.INTEGER);
     }
 

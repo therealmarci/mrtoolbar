@@ -6,6 +6,7 @@ import at.marcelr.mrtoolbar.command.ToolbarCommand;
 import at.marcelr.mrtoolbar.gui.MenuListener;
 import at.marcelr.mrtoolbar.gui.BeltEditor;
 import at.marcelr.mrtoolbar.gui.ProtectionListener;
+import at.marcelr.mrtoolbar.sort.InventorySorter;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
@@ -22,15 +23,21 @@ public final class MRToolbar extends JavaPlugin {
 
     private FileConfiguration config;
     private Settings settings;
-    /** lang-version 4: toolbar only with the mod (help, belt-empty and usage texts changed); 5: /mrtoolbar debug; 6: gui, view. */
-    private final Messages messages = new Messages(6, Map.of(
+    /**
+     * lang-version 4: toolbar only with the mod (help, belt-empty and usage texts changed); 5: /mrtoolbar debug;
+     * 6: gui, view; 7: inventory sorting; 8: sorting containers.
+     */
+    private final Messages messages = new Messages(8, Map.of(
             4, Set.of("belt-empty", "gui-help-lore", "gui-slot-tool-lore", "gui-belt-info-name", "gui-belt-info-lore",
                     "toolbar-usage"),
             5, Set.of("admin-usage"),
-            6, Set.of("admin-usage")));
+            6, Set.of("admin-usage"),
+            7, Set.of("toolbar-usage"),
+            8, Set.of("gui-sort-help-lore")));
     private final ToolbarManager toolbars = new ToolbarManager(this);
     private final MRadminAdminMode adminMode = new MRadminAdminMode(getLogger());
     private final ModBridge modBridge = new ModBridge(this);
+    private final InventorySorter sorter = new InventorySorter(this);
     private UpdateChecker updateChecker;
     private MenuListener menuListener;
     private BukkitTask guardTask;
@@ -144,5 +151,9 @@ public final class MRToolbar extends JavaPlugin {
 
     public ModBridge modBridge() {
         return modBridge;
+    }
+
+    public InventorySorter sorter() {
+        return sorter;
     }
 }

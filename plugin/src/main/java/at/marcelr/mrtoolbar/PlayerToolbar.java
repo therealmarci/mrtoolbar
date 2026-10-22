@@ -1,5 +1,6 @@
 package at.marcelr.mrtoolbar;
 
+import at.marcelr.mrtoolbar.sort.SortMode;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataAdapterContext;
@@ -25,6 +26,10 @@ public final class PlayerToolbar {
     /** Tool slots by hotbar index. */
     private final Map<Integer, ToolSlot> slots = new TreeMap<>();
     private boolean enabled = true;
+    /** Slots sorting leaves alone (bits, see SortSlots), or null = the config default. */
+    private Long sortLocked;
+    /** Chosen sort order, or null = the config default. */
+    private SortMode sortMode;
 
     public Collection<ToolSlot> slots() {
         return slots.values();
@@ -55,17 +60,36 @@ public final class PlayerToolbar {
         this.enabled = enabled;
     }
 
+    /** @return the locked slots for sorting, or {@code defaults} if the player never changed them */
+    public long sortLocked(long defaults) {
+        return sortLocked != null ? sortLocked : defaults;
+    }
+
+    public void setSortLocked(long locked) {
+        this.sortLocked = locked;
+    }
+
+    public SortMode sortMode(SortMode defaultMode) {
+        return sortMode != null ? sortMode : defaultMode;
+    }
+
+    public void setSortMode(SortMode mode) {
+        this.sortMode = mode;
+    }
+
     // ------------------------------------------------------------------ storage
 
     private record Keys(NamespacedKey data, NamespacedKey version, NamespacedKey enabled, NamespacedKey slots,
-                        NamespacedKey hotbar, NamespacedKey active, NamespacedKey items) {
+                        NamespacedKey hotbar, NamespacedKey active, NamespacedKey items,
+                        NamespacedKey sortLocked, NamespacedKey sortMode) {
     }
 
     private static Keys keys(Plugin plugin) {
         return new Keys(new NamespacedKey(plugin, "toolbar"), new NamespacedKey(plugin, "version"),
                 new NamespacedKey(plugin, "enabled"), new NamespacedKey(plugin, "slots"),
                 new NamespacedKey(plugin, "hotbar"),
-                new NamespacedKey(plugin, "active"), new NamespacedKey(plugin, "items"));
+                new NamespacedKey(plugin, "active"), new NamespacedKey(plugin, "items"),
+                new NamespacedKey(plugin, "sort-locked"), new NamespacedKey(plugin, "sort-mode"));
     }
 
     public static PlayerToolbar read(Plugin plugin, PersistentDataContainer pdc) {
@@ -76,6 +100,8 @@ public final class PlayerToolbar {
             return toolbar;
         }
         toolbar.enabled = data.getOrDefault(k.enabled, PersistentDataType.BOOLEAN, true);
+        toolbar.sortLocked = data.get(k.sortLocked, PersistentDataType.LONG);
+        toolbar.sortMode = SortMode.parse(data.get(k.sortMode, PersistentDataType.STRING));
         List<PersistentDataContainer> slots = data.getOrDefault(k.slots,
                 PersistentDataType.LIST.dataContainers(), List.of());
         for (PersistentDataContainer entry : slots) {
@@ -102,6 +128,12 @@ public final class PlayerToolbar {
         PersistentDataContainer data = context.newPersistentDataContainer();
         data.set(k.version, PersistentDataType.INTEGER, DATA_VERSION);
         data.set(k.enabled, PersistentDataType.BOOLEAN, enabled);
+        if (sortLocked != null) {
+            data.set(k.sortLocked, PersistentDataType.LONG, sortLocked);
+        }
+        if (sortMode != null) {
+            data.set(k.sortMode, PersistentDataType.STRING, sortMode.id());
+        }
         List<PersistentDataContainer> entries = new ArrayList<>();
         for (ToolSlot slot : slots.values()) {
             PersistentDataContainer entry = context.newPersistentDataContainer();
