@@ -257,6 +257,10 @@ public final class ToolbarManager {
             case OPEN -> plugin.openBelt(player, slot);
             case NEXT -> cycle(player, slot, 1);
             case PREVIOUS -> cycle(player, slot, -1);
+            // Not tied to a tool slot - ModBridge hands them to the InventorySorter.
+            case SORT, SORT_CONTAINER -> {
+                return false;
+            }
         }
         return true;
     }
