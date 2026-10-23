@@ -240,12 +240,17 @@ public final class ModBridge implements Listener, PluginMessageListener {
         }
     }
 
-    /** action: byte action (0 open, 1 next, 2 previous). */
+    /** action: byte action (0 open, 1 next, 2 previous, 3 sort, 4 sort container). Unknown codes are ignored. */
     private void action(Player player, Wire.Reader in) throws IOException {
         int code = in.unsignedByte();
         ToolAction[] actions = ToolAction.values();
-        if (compatible(player) && code < actions.length) {
-            plugin.toolbars().perform(player, actions[code]);
+        if (!compatible(player) || code >= actions.length) {
+            return;
+        }
+        switch (actions[code]) {
+            case SORT -> plugin.sorter().sortByKey(player);
+            case SORT_CONTAINER -> plugin.sorter().sortContainerByKey(player);
+            default -> plugin.toolbars().perform(player, actions[code]);
         }
     }
 }

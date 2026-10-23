@@ -10,14 +10,14 @@
 # ==============================================================================
 
 # Do not change - tells the plugin which texts have to be renewed on updates.
-lang-version: 6
+lang-version: 8
 
 prefix: "<dark_gray>[<gold>MRtoolbar</gold>]</dark_gray> "
 no-permission: "<prefix><red>You don't have permission to do that."
 player-only: "<prefix><red>This only works in game."
 reloaded: "<prefix><green>Configuration reloaded."
 admin-usage: "<prefix><gray>Usage: <white>/<label> <reload|version|gui|view <player>|debug [player]>"
-toolbar-usage: "<prefix><gray>Usage: <white>/<label> [on|off|takeback]"
+toolbar-usage: "<prefix><gray>Usage: <white>/<label> [on|off|takeback|sort]"
 toolbar-enabled: "<prefix><green>Toolbar switched on."
 toolbar-disabled: "<prefix><gray>Toolbar switched off - tool slots are normal slots now, your belts are kept."
 
@@ -29,7 +29,7 @@ belt-no-other: "<gray>No other tool in the belt"
 belt-not-allowed: "<prefix><red>This can't go into the belt."
 slot-cleared-dropped: "<prefix><gold>Something that does not belong to the belt was in the tool slot - your inventory is full, it is lying in front of you now."
 limits-reduced: "<prefix><gold><count> tool(s) no longer fit into your belts and are now in your inventory."
-admin-mode-paused: "<prefix><gray>The toolbar is paused while you are in admin mode."
+toolbar-paused: "<prefix><gray>The toolbar is paused right now (admin mode or duel) - everything works again afterwards."
 
 # ------------------------------------------------------------------ Tool slots
 slot-added: "<prefix><green>Slot <slot> is now a tool slot."
@@ -90,6 +90,81 @@ gui-enabled-lore:
   - "<gray>Your belts are kept."
   - ""
   - "<yellow>Click: <gray>on/off"
+gui-sort-name: "<gold>Sort inventory"
+gui-sort-lore:
+  - "<gray>Which slots stay where they are"
+  - "<gray>when sorting - and in which"
+  - "<gray>order items are sorted."
+  - ""
+  - "<yellow>Click: <gray>set exceptions"
+
+# ------------------------------------------------------------------ Sorting the inventory
+# Action bar after sorting
+sort-done: "<green>Inventory sorted"
+sort-already: "<gray>Already sorted"
+sort-container-done: "<green>Sorted"
+sort-container-unsupported: "<gray>This can't be sorted"
+sort-disabled: "<prefix><gray>Sorting is switched off on this server."
+sort-mode-type: "Category"
+sort-mode-name: "Name (A-Z)"
+sort-mode-amount: "Amount"
+gui-title-sort: "Sorting · exceptions"
+# <slot> = gui-sort-slot-hotbar / gui-sort-slot-inventory, <current> = what is there right now
+gui-sort-slot-hotbar: "Hotbar <slot>"
+gui-sort-slot-inventory: "Inventory <slot>"
+gui-sort-slot-empty: "nothing"
+gui-sort-slot-free-name: "<green><slot> <dark_gray>· <green>sorted"
+gui-sort-slot-free-lore:
+  - "<gray>In there: <white><current>"
+  - ""
+  - "<yellow>Click: <gray>lock (stays where it is)"
+gui-sort-slot-locked-name: "<red><slot> <dark_gray>· <red>locked"
+gui-sort-slot-locked-lore:
+  - "<gray>In there: <white><current>"
+  - "<gray>Sorting leaves it alone."
+  - ""
+  - "<yellow>Click: <gray>sort it again"
+gui-sort-slot-tool-name: "<aqua><slot> <dark_gray>· <aqua>tool slot"
+gui-sort-slot-tool-lore:
+  - "<gray>In hand: <white><current>"
+  - "<gray>Tool slots are never sorted."
+gui-sort-all-inventory-name: "<gold>Whole inventory <dark_gray>· <state>"
+gui-sort-all-hotbar-name: "<gold>Whole hotbar <dark_gray>· <state>"
+gui-sort-part-free: "<green>sorted"
+gui-sort-part-locked: "<red>locked"
+gui-sort-part-mixed: "<yellow>mixed"
+gui-sort-part-lore:
+  - "<yellow>Left click: <gray>sort all"
+  - "<yellow>Right click: <gray>lock all"
+gui-sort-mode-name: "<gold>Order: <white><mode>"
+gui-sort-mode-selected: "<green>▶ <mode>"
+gui-sort-mode-other: "<gray>  <mode>"
+gui-sort-mode-lore:
+  - ""
+  - "<yellow>Left click: <gray>next"
+  - "<yellow>Right click: <gray>previous"
+gui-sort-now-name: "<gold>Sort now"
+gui-sort-now-lore:
+  - "<gray>Sorts your inventory with"
+  - "<gray>these settings."
+  - ""
+  - "<yellow>Click: <gray>sort"
+gui-sort-help-name: "<gold>Sorting the inventory"
+gui-sort-help-lore:
+  - "<gray>Your inventory on top, the hotbar below."
+  - "<green>Green</green><gray> = sorted, <red>red</red><gray> = stays."
+  - "<gray>You can also click straight into your"
+  - "<gray>real inventory below."
+  - ""
+  - "<gray>Equal items are stacked together."
+  - "<gray>Armour, offhand and tool slots are"
+  - "<gray>never touched."
+  - ""
+  - "<gray>Faster: <white>middle click</white><gray> in an open"
+  - "<gray>inventory. Over a chest, barrel,"
+  - "<gray>hopper etc. it sorts the container"
+  - "<gray>instead. Change it in"
+  - "<white>Options → Controls → MRtoolbar"
 
 # ------------------------------------------------------------------ Belt
 gui-title-belt: "Belt · slot <slot>"

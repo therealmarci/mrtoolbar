@@ -3,7 +3,9 @@
 	"package": "at.marcelr.mrtoolbar.mod.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
+		"AbstractContainerScreenAccessor",
 		"HudMixin",
+		"KeyMappingMixin",
 		"MouseHandlerMixin"
 	],
 	"injectors": {

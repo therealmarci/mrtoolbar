@@ -13,10 +13,22 @@ import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.networking.v1.ServerboundPlayChannelEvents;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenKeyboardEvents;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenMouseEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.Screen;
+import at.marcelr.mrtoolbar.mod.mixin.AbstractContainerScreenAccessor;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
@@ -41,6 +53,7 @@ public final class MRtoolbarClient implements ClientModInitializer {
     private static KeyMapping nextKey;
     private static KeyMapping previousKey;
     private static KeyMapping designKey;
+    private static KeyMapping sortKey;
 
     private static DesignConfig design;
     /** Tool slots from the server, or null (no MRtoolbar on the server, or incompatible). */
@@ -98,11 +111,37 @@ public final class MRtoolbarClient implements ClientModInitializer {
             status = null;
         });
 
-        openKey = key("open", InputConstants.KEY_B);
-        nextKey = key("next", InputConstants.UNKNOWN.getValue());
-        previousKey = key("previous", InputConstants.UNKNOWN.getValue());
-        scrollKey = key("scroll", InputConstants.KEY_LALT);
-        designKey = key("design", InputConstants.UNKNOWN.getValue());
+        // Fixed order in Options -> Controls (otherwise Minecraft sorts alphabetically by the translated name).
+        // The ids stay the same, so bindings players already changed are kept.
+        openKey = key("open", InputConstants.Type.KEYBOARD, InputConstants.KEY_B, 0);
+        scrollKey = key("scroll", InputConstants.Type.KEYBOARD, InputConstants.KEY_LALT, 1);
+        nextKey = key("next", InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), 2);
+        previousKey = key("previous", InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), 3);
+        sortKey = key("sort", InputConstants.Type.MOUSE, InputConstants.MOUSE_BUTTON_MIDDLE, 4);
+        designKey = key("design", InputConstants.Type.KEYBOARD, InputConstants.UNKNOWN.getValue(), 5);
+
+        // Sorting only works in inventory screens (key bindings do not fire there, so the screen events catch it).
+        // In the world the key does nothing - its default, the middle mouse button, is "Pick Block" there.
+        ScreenEvents.AFTER_INIT.register((client, screen, width, height) -> {
+            if (!(screen instanceof AbstractContainerScreen<?>)) {
+                return;
+            }
+            ScreenKeyboardEvents.allowKeyPress(screen).register((current, event) -> {
+                if (sortKey.matches(event) && !typing(current)) {
+                    send(sortTarget((AbstractContainerScreen<?>) current));
+                    return false;
+                }
+                return true;
+            });
+            ScreenMouseEvents.allowMouseClick(screen).register((current, event) -> {
+                // In creative the middle mouse button copies items in inventories - that has to keep working.
+                if (sortKey.matchesMouse(event) && (client.player == null || !client.player.hasInfiniteMaterials())) {
+                    send(sortTarget((AbstractContainerScreen<?>) current));
+                    return false;
+                }
+                return true;
+            });
+        });
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (helloSent && status == null && client.getConnection() != null && ++helloTicks % 60 == 0
@@ -122,12 +161,42 @@ public final class MRtoolbarClient implements ClientModInitializer {
             while (designKey.consumeClick()) {
                 client.gui.setScreen(new DesignScreen(null));
             }
+            // Presses in the world are dropped (see the screen events above).
+            while (sortKey.consumeClick()) {
+            }
         });
     }
 
-    private static KeyMapping key(String name, int defaultKey) {
-        return KeyMappingHelper.registerKeyMapping(new KeyMapping("key.mrtoolbar." + name,
-                InputConstants.Type.KEYBOARD, defaultKey, CATEGORY));
+    /**
+     * What the sort key sorts: the own inventory if the mouse is over it (or in the player's inventory screen, where
+     * the crafting grid is no container), otherwise the open container - the server checks whether it may.
+     */
+    private static Action sortTarget(AbstractContainerScreen<?> screen) {
+        if (screen instanceof InventoryScreen || screen instanceof CreativeModeInventoryScreen) {
+            return Action.SORT;
+        }
+        Slot slot = ((AbstractContainerScreenAccessor) screen).mrtoolbar$hoveredSlot();
+        return slot != null && slot.container instanceof Inventory ? Action.SORT : Action.SORT_CONTAINER;
+    }
+
+    /** Whether {@code key} only works in inventory screens (it then never clashes with keys used in the world). */
+    public static boolean screenOnly(KeyMapping key) {
+        return key != null && key == sortKey;
+    }
+
+    /** Whether a text field of the screen has the focus (e.g. the creative search) - then the key is a letter. */
+    private static boolean typing(Screen screen) {
+        for (GuiEventListener child : screen.children()) {
+            if (child instanceof EditBox box && box.isFocused()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static KeyMapping key(String name, InputConstants.Type type, int defaultKey, int order) {
+        return KeyMappingHelper.registerKeyMapping(new KeyMapping("key.mrtoolbar." + name, type, defaultKey,
+                CATEGORY, order));
     }
 
     private static void sayHello() {

@@ -8,8 +8,8 @@ description: Tool-Slots in der Hotbar mit Werkzeuggürtel - braucht den MRtoolba
 
 commands:
   toolbar:
-    description: Menü der Werkzeugleiste - Tool-Slots festlegen, Gürtel befüllen, Steuerung einstellen.
-    usage: /toolbar [on|off|takeback]
+    description: Menü der Werkzeugleiste - Tool-Slots festlegen, Gürtel befüllen, Ausnahmen fürs Sortieren.
+    usage: /toolbar [on|off|takeback|sort]
     aliases: [tb, tools]
   mrtoolbar:
     description: Verwaltung von MRtoolbar.
@@ -21,6 +21,14 @@ permissions:
     default: op
     children:
       mrtoolbar.use: true
+      mrtoolbar.sort: true
+      mrtoolbar.sort.containers: true
+  mrtoolbar.sort:
+    description: Inventar sortieren (Taste im Mod oder Knopf im Menü) und eigene Ausnahmen festlegen - /toolbar sort.
+    default: op
+  mrtoolbar.sort.containers:
+    description: Offene Kisten, Fässer, Shulker, Trichter usw. mit der Sortier-Taste sortieren (braucht auch mrtoolbar.sort).
+    default: op
   mrtoolbar.use:
     description: Tool-Slots nutzen und /toolbar öffnen. Anzahl Tool-Slots per mrtoolbar.slots.<anzahl>, Gürtelgröße per mrtoolbar.belt.<anzahl> (max. 8).
     default: op

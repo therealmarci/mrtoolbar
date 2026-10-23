@@ -10,14 +10,14 @@
 # ==============================================================================
 
 # Nicht ändern - damit erkennt das Plugin bei Updates, welche Texte erneuert werden müssen.
-lang-version: 6
+lang-version: 8
 
 prefix: "<dark_gray>[<gold>MRtoolbar</gold>]</dark_gray> "
 no-permission: "<prefix><red>Dazu hast du keine Berechtigung."
 player-only: "<prefix><red>Das geht nur im Spiel."
 reloaded: "<prefix><green>Konfiguration neu geladen."
 admin-usage: "<prefix><gray>Verwendung: <white>/<label> <reload|version|gui|view <spieler>|debug [spieler]>"
-toolbar-usage: "<prefix><gray>Verwendung: <white>/<label> [on|off|takeback]"
+toolbar-usage: "<prefix><gray>Verwendung: <white>/<label> [on|off|takeback|sort]"
 toolbar-enabled: "<prefix><green>Werkzeugleiste eingeschaltet."
 toolbar-disabled: "<prefix><gray>Werkzeugleiste ausgeschaltet - Tool-Slots sind jetzt normale Slots, deine Gürtel bleiben erhalten."
 
@@ -29,7 +29,7 @@ belt-no-other: "<gray>Kein weiteres Tool im Gürtel"
 belt-not-allowed: "<prefix><red>Das kann nicht in den Gürtel."
 slot-cleared-dropped: "<prefix><gold>Im Tool-Slot lag etwas, das nicht in den Gürtel gehört - dein Inventar ist voll, es liegt jetzt vor dir."
 limits-reduced: "<prefix><gold><count> Tool(s) passten nicht mehr in deine Gürtel und sind jetzt in deinem Inventar."
-admin-mode-paused: "<prefix><gray>Im Adminmodus ist die Werkzeugleiste pausiert."
+toolbar-paused: "<prefix><gray>Die Werkzeugleiste ist gerade pausiert (Adminmodus oder Duell) - danach geht alles wieder."
 
 # ------------------------------------------------------------------ Tool-Slots
 slot-added: "<prefix><green>Slot <slot> ist jetzt ein Tool-Slot."
@@ -91,6 +91,81 @@ gui-enabled-lore:
   - "<gray>Slots. Deine Gürtel bleiben erhalten."
   - ""
   - "<yellow>Klick: <gray>an/aus"
+gui-sort-name: "<gold>Inventar sortieren"
+gui-sort-lore:
+  - "<gray>Welche Slots beim Sortieren"
+  - "<gray>bleiben, wo sie sind - und in"
+  - "<gray>welcher Reihenfolge sortiert wird."
+  - ""
+  - "<yellow>Klick: <gray>Ausnahmen festlegen"
+
+# ------------------------------------------------------------------ Inventar sortieren
+# Actionbar nach dem Sortieren
+sort-done: "<green>Inventar sortiert"
+sort-already: "<gray>Schon sortiert"
+sort-container-done: "<green>Sortiert"
+sort-container-unsupported: "<gray>Das kann nicht sortiert werden"
+sort-disabled: "<prefix><gray>Sortieren ist auf diesem Server ausgeschaltet."
+sort-mode-type: "Kategorie"
+sort-mode-name: "Name (A-Z)"
+sort-mode-amount: "Menge"
+gui-title-sort: "Sortieren · Ausnahmen"
+# <slot> = gui-sort-slot-hotbar / gui-sort-slot-inventory, <current> = was dort gerade liegt
+gui-sort-slot-hotbar: "Hotbar <slot>"
+gui-sort-slot-inventory: "Inventar <slot>"
+gui-sort-slot-empty: "nichts"
+gui-sort-slot-free-name: "<green><slot> <dark_gray>· <green>wird sortiert"
+gui-sort-slot-free-lore:
+  - "<gray>Liegt dort: <white><current>"
+  - ""
+  - "<yellow>Klick: <gray>sperren (bleibt, wo es ist)"
+gui-sort-slot-locked-name: "<red><slot> <dark_gray>· <red>gesperrt"
+gui-sort-slot-locked-lore:
+  - "<gray>Liegt dort: <white><current>"
+  - "<gray>Wird beim Sortieren nicht angefasst."
+  - ""
+  - "<yellow>Klick: <gray>wieder mitsortieren"
+gui-sort-slot-tool-name: "<aqua><slot> <dark_gray>· <aqua>Tool-Slot"
+gui-sort-slot-tool-lore:
+  - "<gray>In der Hand: <white><current>"
+  - "<gray>Tool-Slots werden nie sortiert."
+gui-sort-all-inventory-name: "<gold>Ganzes Inventar <dark_gray>· <state>"
+gui-sort-all-hotbar-name: "<gold>Ganze Hotbar <dark_gray>· <state>"
+gui-sort-part-free: "<green>wird sortiert"
+gui-sort-part-locked: "<red>gesperrt"
+gui-sort-part-mixed: "<yellow>gemischt"
+gui-sort-part-lore:
+  - "<yellow>Linksklick: <gray>alle mitsortieren"
+  - "<yellow>Rechtsklick: <gray>alle sperren"
+gui-sort-mode-name: "<gold>Reihenfolge: <white><mode>"
+gui-sort-mode-selected: "<green>▶ <mode>"
+gui-sort-mode-other: "<gray>  <mode>"
+gui-sort-mode-lore:
+  - ""
+  - "<yellow>Linksklick: <gray>nächste"
+  - "<yellow>Rechtsklick: <gray>vorherige"
+gui-sort-now-name: "<gold>Jetzt sortieren"
+gui-sort-now-lore:
+  - "<gray>Sortiert dein Inventar mit"
+  - "<gray>diesen Einstellungen."
+  - ""
+  - "<yellow>Klick: <gray>sortieren"
+gui-sort-help-name: "<gold>Inventar sortieren"
+gui-sort-help-lore:
+  - "<gray>Oben dein Inventar, darunter die Hotbar."
+  - "<green>Grün</green><gray> = wird sortiert, <red>Rot</red><gray> = bleibt."
+  - "<gray>Du kannst auch direkt in dein echtes"
+  - "<gray>Inventar unten klicken."
+  - ""
+  - "<gray>Gleiche Items werden zusammengelegt."
+  - "<gray>Rüstung, Zweithand und Tool-Slots"
+  - "<gray>werden nie angefasst."
+  - ""
+  - "<gray>Schneller: <white>Mausrad-Klick</white><gray> in einem"
+  - "<gray>offenen Inventar. Über einer Kiste,"
+  - "<gray>einem Fass, Trichter usw. sortiert er"
+  - "<gray>stattdessen den Behälter. Ändern unter"
+  - "<white>Optionen → Steuerung → MRtoolbar"
 
 # ------------------------------------------------------------------ Gürtel
 gui-title-belt: "Gürtel · Slot <slot>"

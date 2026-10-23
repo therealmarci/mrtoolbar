@@ -15,7 +15,7 @@
 # ==============================================================================
 
 # Nicht ändern - wird für automatische Config-Updates verwendet.
-config-version: 6
+config-version: 9
 
 # Sprache der Texte (Menüs, Nachrichten). Die Texte stehen in plugins/MRtoolbar/lang/<sprache>.yml.
 #   auto = jeder Spieler bekommt die Sprache, die er in Minecraft eingestellt hat - genau wie der Client-Mod.
@@ -80,9 +80,61 @@ toolbar:
   # Der Adminmodus hat ein eigenes Kreativ-Inventar - ohne Pause könnten Kreativ-Items im Gürtel landen.
   pause-in-admin-mode: true
 
+  # In Duellen von MRpvp pausieren (auch im Arena-Editor und beim Zuschauen). MRpvp sichert das ganze Inventar
+  # samt ausgewähltem Tool und gibt es danach genau so zurück - die Werkzeugleiste darf dazwischen nichts verschieben.
+  pause-in-pvp: true
+
 
 # ------------------------------------------------------------------------------
-#   2) CLIENT-MOD
+#   2) INVENTAR SORTIEREN
+# ------------------------------------------------------------------------------
+#   Taste im Mod (Optionen → Steuerung → MRtoolbar → "Inventar sortieren", Standard Mausrad-Klick) - wirkt in
+#   offenen Inventaren und Kisten. Ausnahmen legt jeder Spieler selbst fest: /toolbar → Trichter, oder /toolbar sort
+#   (das Menü hat auch einen "Jetzt sortieren"-Knopf, der ohne Mod funktioniert).
+#   Nie sortiert: Tool-Slots, Rüstung, Zweithand, das Item am Mauszeiger.
+#   Permission: mrtoolbar.sort
+sorting:
+  enabled: true
+
+  # Reihenfolge, bis ein Spieler selbst eine wählt:
+  #   type   = Minecraft-Reihenfolge (Blöcke, dann Items - Gleiches liegt zusammen)
+  #   name   = alphabetisch nach Item-Name (englische ID)
+  #   amount = wovon man am meisten hat, zuerst
+  default-mode: type
+
+  # Slots, die ein Spieler gesperrt hat, solange er seine Ausnahmen nicht selbst ändert. Einträge:
+  #   hotbar          ganze Hotbar
+  #   hotbar-<1-9>    ein Hotbar-Slot
+  #   inventory       alle 27 Inventar-Slots
+  #   inventory-<1-27> ein Inventar-Slot (zeilenweise von links oben)
+  default-locked:
+    - hotbar
+
+  # Mindestabstand zwischen zwei Sortierungen eines Spielers (Ticks, 20 = 1 Sekunde, 0 = keiner).
+  cooldown-ticks: 10
+
+  # Behälter, die man mit der Sortier-Taste sortieren kann (Maus über dem Behälter). Permission:
+  # mrtoolbar.sort.containers. Leere Liste = nur das eigene Inventar.
+  #   chest       Kiste, Doppelkiste, Truhe mit Falle, Kisten-Lore, Kistenboot
+  #   barrel      Fass
+  #   shulker_box Shulker-Kiste
+  #   ender_chest eigene Endertruhe
+  #   hopper      Trichter, Trichter-Lore
+  #   dispenser   Werfer
+  #   dropper     Spender
+  # Menüs von Plugins (z.B. /toolbar, MRadmin) sind nie betroffen, auch wenn sie wie Kisten aussehen.
+  containers:
+    - chest
+    - barrel
+    - shulker_box
+    - ender_chest
+    - hopper
+    - dispenser
+    - dropper
+
+
+# ------------------------------------------------------------------------------
+#   3) CLIENT-MOD
 # ------------------------------------------------------------------------------
 mod:
   # Älteste Version des MRtoolbar-Mods, die noch erlaubt ist (z.B. "0.2.1", leer = jede kompatible Version).
@@ -98,7 +150,7 @@ mod:
 
 
 # ------------------------------------------------------------------------------
-#   3) UPDATE-CHECK
+#   4) UPDATE-CHECK
 # ------------------------------------------------------------------------------
 update-checker:
   enabled: true
@@ -112,7 +164,7 @@ update-checker:
 
 
 # ------------------------------------------------------------------------------
-#   4) MENÜS
+#   5) MENÜS
 # ------------------------------------------------------------------------------
 gui:
   # Wie oft offene Menüs aktualisiert werden (in Ticks, 20 = 1 Sekunde).

@@ -43,6 +43,7 @@ public final class ToolbarListener implements Listener {
         Player player = event.getPlayer();
         BeltEditor.closeFor(player);
         toolbars().unload(player);
+        plugin.sorter().forget(player);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)

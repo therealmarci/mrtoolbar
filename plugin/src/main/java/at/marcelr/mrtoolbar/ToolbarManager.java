@@ -104,11 +104,18 @@ public final class ToolbarManager {
     }
 
     /**
-     * Whether the player is in MRadmin's admin mode (and the toolbar pauses there): the admin inventory is a
-     * creative one, nothing of it may end up in a belt.
+     * Whether the toolbar pauses for the player right now:
+     * <ul>
+     *   <li>MRadmin's admin mode - the admin inventory is a creative one, nothing of it may end up in a belt;</li>
+     *   <li>MRpvp (duel, arena editor, watching) - MRpvp saves, clears and gives back the whole inventory, the
+     *       selected tool goes with it and comes back exactly as it was.</li>
+     * </ul>
+     * While paused nothing moves between belts and inventory (no guard, no take back, no limits).
      */
     public boolean paused(Player player) {
-        return plugin.settings().toolbar().pauseInAdminMode() && plugin.adminMode().active(player);
+        var s = plugin.settings().toolbar();
+        return (s.pauseInAdminMode() && plugin.adminMode().active(player))
+                || (s.pauseInPvp() && plugin.pvp().active(player));
     }
 
     /** The tool slot the player is holding, or null. */
@@ -123,6 +130,10 @@ public final class ToolbarManager {
 
     /** Gives back tools that no longer fit after a permission or config change (fewer slots or a smaller belt). */
     public void enforceLimits(Player player) {
+        if (paused(player)) {
+            // Tools handed out now would land in a temporary inventory (admin mode, duel) and be lost.
+            return;
+        }
         PlayerToolbar toolbar = get(player);
         int returned = 0;
         int max = maxToolSlots(player);
@@ -166,7 +177,8 @@ public final class ToolbarManager {
         return value != null && value == hotbar;
     }
 
-    private boolean markedAny(ItemStack item) {
+    /** Whether {@code item} is the selected tool of any tool slot. */
+    public boolean markedAny(ItemStack item) {
         return item != null && !item.isEmpty() && item.getPersistentDataContainer().has(marker, PersistentDataType.INTEGER);
     }
 
@@ -256,6 +268,10 @@ public final class ToolbarManager {
             case OPEN -> plugin.openBelt(player, slot);
             case NEXT -> cycle(player, slot, 1);
             case PREVIOUS -> cycle(player, slot, -1);
+            // Not tied to a tool slot - ModBridge hands them to the InventorySorter.
+            case SORT, SORT_CONTAINER -> {
+                return false;
+            }
         }
         return true;
     }

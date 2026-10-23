@@ -4,6 +4,35 @@
 [docs/RELEASES.md](../docs/RELEASES.md). Der Client-Mod hat ein eigenes [CHANGELOG](../mod/CHANGELOG.md) und eigene
 Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../docs/COMPATIBILITY.md).
 
+## [Unveröffentlicht]
+
+## [0.2.0] - 2026-10-23
+
+- **Inventar sortieren:** Taste im Mod (Standard: Mausrad-Klick in einem offenen Inventar) oder Knopf
+  „Jetzt sortieren“.
+  Gleiche Items werden zusammengelegt, Reihenfolge pro Spieler wählbar: Kategorie, Name, Menge.
+- **Ausnahmen** in `/toolbar` → Trichter bzw. `/toolbar sort`: Menü wie das Inventar (oben die drei Reihen, unten die
+  Hotbar), jeder Slot ein Schalter - grün wird sortiert, rot bleibt. Klick ins echte Inventar darunter schaltet
+  denselben Slot, dazu „ganzes Inventar / ganze Hotbar“. Gespeichert im Spielerdatensatz.
+- Nie sortiert: Tool-Slots, das gewählte Tool, Rüstung, Zweithand, Item am Mauszeiger.
+- **Behälter sortieren:** Sortier-Taste über einer offenen Kiste, Doppelkiste, Fass, Shulker-Kiste, Endertruhe,
+  Trichter, Werfer, Spender (auch Kisten-/Trichter-Loren und Kistenboote). Welche Typen, steht in
+  `sorting.containers`, Permission `mrtoolbar.sort.containers`. Menüs von Plugins werden nie sortiert.
+- Neue Permission `mrtoolbar.sort` (in `mrtoolbar.player` enthalten), Config-Abschnitt `sorting`
+  (an/aus, Standard-Reihenfolge, Standard-Sperren - Standard: Hotbar gesperrt -, Cooldown, Behälter).
+  config-version 8.
+- Sortieren über das Menü geht auch ohne Mod. Kein neues Protokoll - neue Mods funktionieren weiter mit Plugin 0.1.x.
+- **MRpvp:** In Duellen, im Arena-Editor und beim Zuschauen pausiert die Werkzeugleiste (`toolbar.pause-in-pvp`,
+  Standard an) - MRpvp sichert das ganze Inventar samt gewähltem Tool und gibt es danach genau so zurück.
+  config-version 9.
+- Neue Schnittstelle `MRtoolbarApi` (`paused`, `belts`) für andere Plugins; MRpvp zeigt damit die Gürtel im
+  gesicherten Inventar an.
+
+### Behoben
+- Während einer Pause (auch im MRadmin-Adminmodus) wird nichts mehr zwischen Gürtel und Inventar verschoben:
+  `/toolbar on|off|takeback` sind gesperrt, gekürzte Limits warten bis nach der Pause. Vorher konnten Tools im
+  Kreativ-Inventar des Adminmodus landen und mit ihm verschwinden.
+
 ## [0.1.0] - 2026-10-21
 
 Erste Vorabversion für Minecraft 26.3. Braucht auf dem Client den MRtoolbar-Mod (Protokoll 2).

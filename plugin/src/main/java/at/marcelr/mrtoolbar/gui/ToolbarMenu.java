@@ -20,13 +20,17 @@ import java.util.List;
 
 import static at.marcelr.mrtoolbar.Messages.tag;
 
-/** /toolbar: choose tool slots, open their belts, open the hotbar design of the mod, switch on/off. */
+/**
+ * /toolbar: choose tool slots, open their belts, open the hotbar design of the mod, sorting exceptions,
+ * switch on/off.
+ */
 public final class ToolbarMenu extends Menu {
 
     private static final int HOTBAR_ROW = 9;
     private static final int HELP = 4;
-    private static final int DESIGN = 30;
-    private static final int ENABLED = 32;
+    private static final int DESIGN = 29;
+    private static final int SORT = 31;
+    private static final int ENABLED = 33;
 
     public ToolbarMenu(MRToolbar plugin, Player viewer) {
         super(plugin, viewer, 4, plugin.messages().get("gui-title-main"));
@@ -97,6 +101,14 @@ public final class ToolbarMenu extends Menu {
             viewer.closeInventory();
             plugin.modBridge().openDesign(viewer);
         });
+
+        if (plugin.sorter().allowed(viewer)) {
+            set(SORT, Items.of(Material.HOPPER).name(messages.item("gui-sort-name"))
+                    .lore(messages.lore("gui-sort-lore")).build(), click -> {
+                clickSound();
+                new SortMenu(plugin, viewer).open();
+            });
+        }
 
         boolean enabled = toolbar.enabled();
         set(ENABLED, Items.of(enabled ? Material.LIME_CONCRETE : Material.RED_CONCRETE)
@@ -177,7 +189,7 @@ public final class ToolbarMenu extends Menu {
             return;
         }
         if (plugin.toolbars().paused(player)) {
-            messages.send(player, "admin-mode-paused");
+            messages.send(player, "toolbar-paused");
             return;
         }
         plugin.toolbars().enforceLimits(player);

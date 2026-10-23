@@ -26,9 +26,15 @@ Spieler ohne Mod spielen ganz normal auf dem Server, nur ohne Werkzeugleiste.
 |---|---|
 | `B` | Gürtel öffnen |
 | `Alt` halten + Mausrad | nächstes / vorheriges Tool |
+| Mausrad-Klick (im Inventar) | sortieren: Maus über dem eigenen Inventar → Inventar, über Kiste, Fass, Trichter usw. → der Behälter. Im Spiel bleibt es „Block auswählen“ |
 | nicht belegt | Nächstes Tool, Vorheriges Tool, Hotbar-Design öffnen |
 
 Alle Tasten lassen sich unter **Optionen → Steuerung → MRtoolbar** ändern.
+
+**Inventar sortieren:** Gleiche Items werden zusammengelegt und nach Kategorie, Name oder Menge geordnet. Welche Slots
+dabei bleiben, wo sie sind, legst du in `/toolbar` → Trichter (oder `/toolbar sort`) fest: ein Menü wie dein Inventar,
+jeder Slot ein Schalter (grün = wird sortiert, rot = gesperrt). Standardmäßig ist die Hotbar gesperrt. Tool-Slots,
+Rüstung und Zweithand werden nie angefasst.
 
 **Hotbar-Design** (Button in `/toolbar`, eigene Taste oder „Konfigurieren“ in Mod Menu): wie die Tool-Slots
 markiert werden - Rahmen, Ecken, Unterstrich, Hintergrund oder eine Textur aus dem Resourcepack, dazu Farbe,
@@ -51,6 +57,7 @@ Deckkraft, Dicke und Abstand. Die Vorschau nutzt die Hotbar deines Resourcepacks
 | `/toolbar` (`/tb`, `/tools`) | `mrtoolbar.use` | Menü: Tool-Slots, Gürtel, Hotbar-Design, an/aus, Versionen |
 | `/toolbar on` / `off` | `mrtoolbar.use` | Werkzeugleiste ein-/ausschalten |
 | `/toolbar takeback` | `mrtoolbar.use` | alle Tools aus den Gürteln zurück ins Inventar (geht auch ohne Mod) |
+| `/toolbar sort` | `mrtoolbar.sort` | Ausnahmen und Reihenfolge fürs Sortieren, „Jetzt sortieren“ (geht auch ohne Mod) |
 | `/mrtoolbar version` | – | Version und Update-Status |
 | `/mrtoolbar reload` | `mrtoolbar.admin.reload` | Config und Sprachdateien neu laden |
 | `/mrtoolbar debug [spieler]` | `mrtoolbar.admin.debug` | Mod-Verbindung, Status und Tool-Slots eines Spielers |
@@ -61,8 +68,10 @@ Deckkraft, Dicke und Abstand. Die Vorschau nutzt die Hotbar deines Resourcepacks
 
 | Permission | Standard | Bedeutung |
 |---|---|---|
-| `mrtoolbar.player` | OP | alle Spieler-Rechte (enthält `mrtoolbar.use`) |
+| `mrtoolbar.player` | OP | alle Spieler-Rechte (enthält `mrtoolbar.use` und `mrtoolbar.sort`) |
 | `mrtoolbar.use` | OP | Werkzeugleiste nutzen |
+| `mrtoolbar.sort` | OP | Inventar sortieren und eigene Ausnahmen festlegen |
+| `mrtoolbar.sort.containers` | OP | offene Kisten, Fässer, Shulker, Trichter usw. sortieren |
 | `mrtoolbar.slots.<n>` | – | höchstens `<n>` Tool-Slots (sonst `toolbar.default-tool-slots`) |
 | `mrtoolbar.belt.<n>` | – | `<n>` Plätze pro Gürtel, max. 8 (sonst `toolbar.default-belt-size`) |
 | `mrtoolbar.admin` | OP | alle Admin-Rechte |
@@ -71,6 +80,9 @@ Deckkraft, Dicke und Abstand. Die Vorschau nutzt die Hotbar deines Resourcepacks
 
 **MRadmin:** Ist MRadmin installiert, erscheint MRtoolbar dort automatisch im Dashboard und im Spieler-Menü (Mod-Version,
 Tool-Slots, Klick zeigt die Gürtel - nur ansehen, wie Inventar und Enderchest).
+
+**MRpvp:** In Duellen, im Arena-Editor und beim Zuschauen pausiert die Werkzeugleiste. MRpvp sichert das ganze Inventar
+samt gewähltem Tool und zeigt die Gürtel im gesicherten Inventar an (Schnittstelle `MRtoolbarApi`).
 
 ### Config (Auszug)
 
@@ -84,6 +96,12 @@ Tool-Slots, Klick zeigt die Gürtel - nur ansehen, wie Inventar und Enderchest).
 | `toolbar.disabled-worlds` | `[]` | Welten ohne Werkzeugleiste |
 | `toolbar.on-death` | `drop` | Gürtel-Inhalt beim Tod: `drop` oder `keep` |
 | `toolbar.pause-in-admin-mode` | `true` | im MRadmin-Adminmodus pausieren |
+| `toolbar.pause-in-pvp` | `true` | in MRpvp-Duellen, im Arena-Editor und beim Zuschauen pausieren |
+| `sorting.enabled` | `true` | Inventar-Sortieren an/aus |
+| `sorting.default-mode` | `type` | Reihenfolge, bis ein Spieler selbst wählt: `type`, `name`, `amount` |
+| `sorting.default-locked` | `[hotbar]` | gesperrte Slots für Spieler ohne eigene Ausnahmen (`hotbar`, `hotbar-3`, `inventory`, `inventory-5`) |
+| `sorting.cooldown-ticks` | `10` | Mindestabstand zwischen zwei Sortierungen |
+| `sorting.containers` | Kiste, Fass, Shulker, Endertruhe, Trichter, Werfer, Spender | welche Behälter sortiert werden können (Plugin-Menüs nie) |
 | `mod.minimum-version` | leer | ältere Mod-Versionen aussperren, z.B. `0.2.1` |
 | `mod.download-url` | GitHub Releases | Link in den Hinweisen |
 | `mod.handshake-seconds` | `5` | Wartezeit auf den Mod nach dem Betreten |
