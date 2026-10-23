@@ -29,7 +29,7 @@ belt-no-other: "<gray>Kein weiteres Tool im Gürtel"
 belt-not-allowed: "<prefix><red>Das kann nicht in den Gürtel."
 slot-cleared-dropped: "<prefix><gold>Im Tool-Slot lag etwas, das nicht in den Gürtel gehört - dein Inventar ist voll, es liegt jetzt vor dir."
 limits-reduced: "<prefix><gold><count> Tool(s) passten nicht mehr in deine Gürtel und sind jetzt in deinem Inventar."
-admin-mode-paused: "<prefix><gray>Im Adminmodus ist die Werkzeugleiste pausiert."
+toolbar-paused: "<prefix><gray>Die Werkzeugleiste ist gerade pausiert (Adminmodus oder Duell) - danach geht alles wieder."
 
 # ------------------------------------------------------------------ Tool-Slots
 slot-added: "<prefix><green>Slot <slot> ist jetzt ein Tool-Slot."

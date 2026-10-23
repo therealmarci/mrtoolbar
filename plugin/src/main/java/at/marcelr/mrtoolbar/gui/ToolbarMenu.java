@@ -189,7 +189,7 @@ public final class ToolbarMenu extends Menu {
             return;
         }
         if (plugin.toolbars().paused(player)) {
-            messages.send(player, "admin-mode-paused");
+            messages.send(player, "toolbar-paused");
             return;
         }
         plugin.toolbars().enforceLimits(player);

@@ -27,7 +27,8 @@ public record Settings(
     public enum DeathMode { DROP, KEEP }
 
     public record ToolbarSettings(int defaultToolSlots, int defaultBeltSize, ToolFilter allowed,
-                                  Set<String> disabledWorlds, DeathMode death, boolean pauseInAdminMode) {
+                                  Set<String> disabledWorlds, DeathMode death, boolean pauseInAdminMode,
+                                  boolean pauseInPvp) {
 
         public boolean disabledIn(String world) {
             return disabledWorlds.contains(world.toLowerCase(Locale.ROOT));
@@ -104,7 +105,8 @@ public record Settings(
                         .map(world -> world.toLowerCase(Locale.ROOT))
                         .collect(Collectors.toUnmodifiableSet()),
                 death,
-                c.getBoolean("toolbar.pause-in-admin-mode", true));
+                c.getBoolean("toolbar.pause-in-admin-mode", true),
+                c.getBoolean("toolbar.pause-in-pvp", true));
 
         SortMode mode = SortMode.parse(c.getString("sorting.default-mode", "type"));
         if (mode == null) {

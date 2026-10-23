@@ -15,7 +15,7 @@
 # ==============================================================================
 
 # Nicht ändern - wird für automatische Config-Updates verwendet.
-config-version: 8
+config-version: 9
 
 # Sprache der Texte (Menüs, Nachrichten). Die Texte stehen in plugins/MRtoolbar/lang/<sprache>.yml.
 #   auto = jeder Spieler bekommt die Sprache, die er in Minecraft eingestellt hat - genau wie der Client-Mod.
@@ -79,6 +79,10 @@ toolbar:
   # Im Adminmodus von MRadmin pausieren (Tool-Slots normal, /toolbar gesperrt, Gürtel bleibt beim Tod erhalten).
   # Der Adminmodus hat ein eigenes Kreativ-Inventar - ohne Pause könnten Kreativ-Items im Gürtel landen.
   pause-in-admin-mode: true
+
+  # In Duellen von MRpvp pausieren (auch im Arena-Editor und beim Zuschauen). MRpvp sichert das ganze Inventar
+  # samt ausgewähltem Tool und gibt es danach genau so zurück - die Werkzeugleiste darf dazwischen nichts verschieben.
+  pause-in-pvp: true
 
 
 # ------------------------------------------------------------------------------

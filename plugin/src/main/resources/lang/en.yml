@@ -29,7 +29,7 @@ belt-no-other: "<gray>No other tool in the belt"
 belt-not-allowed: "<prefix><red>This can't go into the belt."
 slot-cleared-dropped: "<prefix><gold>Something that does not belong to the belt was in the tool slot - your inventory is full, it is lying in front of you now."
 limits-reduced: "<prefix><gold><count> tool(s) no longer fit into your belts and are now in your inventory."
-admin-mode-paused: "<prefix><gray>The toolbar is paused while you are in admin mode."
+toolbar-paused: "<prefix><gray>The toolbar is paused right now (admin mode or duel) - everything works again afterwards."
 
 # ------------------------------------------------------------------ Tool slots
 slot-added: "<prefix><green>Slot <slot> is now a tool slot."

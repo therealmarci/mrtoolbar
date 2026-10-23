@@ -1,6 +1,7 @@
 package at.marcelr.mrtoolbar;
 
 import at.marcelr.mrtoolbar.api.MRadminAdminMode;
+import at.marcelr.mrtoolbar.api.MRpvpGame;
 import at.marcelr.mrtoolbar.command.MRToolbarCommand;
 import at.marcelr.mrtoolbar.command.ToolbarCommand;
 import at.marcelr.mrtoolbar.gui.MenuListener;
@@ -36,6 +37,7 @@ public final class MRToolbar extends JavaPlugin {
             8, Set.of("gui-sort-help-lore")));
     private final ToolbarManager toolbars = new ToolbarManager(this);
     private final MRadminAdminMode adminMode = new MRadminAdminMode(getLogger());
+    private final MRpvpGame pvp = new MRpvpGame(getLogger());
     private final ModBridge modBridge = new ModBridge(this);
     private final InventorySorter sorter = new InventorySorter(this);
     private UpdateChecker updateChecker;
@@ -143,6 +145,10 @@ public final class MRToolbar extends JavaPlugin {
 
     public UpdateChecker updateChecker() {
         return updateChecker;
+    }
+
+    public MRpvpGame pvp() {
+        return pvp;
     }
 
     public MRadminAdminMode adminMode() {

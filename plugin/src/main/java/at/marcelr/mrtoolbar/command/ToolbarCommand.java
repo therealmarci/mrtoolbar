@@ -51,6 +51,11 @@ public final class ToolbarCommand implements TabExecutor {
             plugin.messages().send(player, "no-permission");
             return true;
         }
+        if (plugin.toolbars().paused(player)) {
+            // on/off/takeback move tools between belts and inventory - not into a temporary one.
+            plugin.messages().send(player, "toolbar-paused");
+            return true;
+        }
         switch (args[0].toLowerCase(Locale.ROOT)) {
             case "on", "an" -> toggle(player, true);
             case "off", "aus" -> toggle(player, false);

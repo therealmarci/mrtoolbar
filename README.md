@@ -81,6 +81,9 @@ Deckkraft, Dicke und Abstand. Die Vorschau nutzt die Hotbar deines Resourcepacks
 **MRadmin:** Ist MRadmin installiert, erscheint MRtoolbar dort automatisch im Dashboard und im Spieler-Menü (Mod-Version,
 Tool-Slots, Klick zeigt die Gürtel - nur ansehen, wie Inventar und Enderchest).
 
+**MRpvp:** In Duellen, im Arena-Editor und beim Zuschauen pausiert die Werkzeugleiste. MRpvp sichert das ganze Inventar
+samt gewähltem Tool und zeigt die Gürtel im gesicherten Inventar an (Schnittstelle `MRtoolbarApi`).
+
 ### Config (Auszug)
 
 | Schlüssel | Standard | Bedeutung |
@@ -93,6 +96,7 @@ Tool-Slots, Klick zeigt die Gürtel - nur ansehen, wie Inventar und Enderchest).
 | `toolbar.disabled-worlds` | `[]` | Welten ohne Werkzeugleiste |
 | `toolbar.on-death` | `drop` | Gürtel-Inhalt beim Tod: `drop` oder `keep` |
 | `toolbar.pause-in-admin-mode` | `true` | im MRadmin-Adminmodus pausieren |
+| `toolbar.pause-in-pvp` | `true` | in MRpvp-Duellen, im Arena-Editor und beim Zuschauen pausieren |
 | `sorting.enabled` | `true` | Inventar-Sortieren an/aus |
 | `sorting.default-mode` | `type` | Reihenfolge, bis ein Spieler selbst wählt: `type`, `name`, `amount` |
 | `sorting.default-locked` | `[hotbar]` | gesperrte Slots für Spieler ohne eigene Ausnahmen (`hotbar`, `hotbar-3`, `inventory`, `inventory-5`) |

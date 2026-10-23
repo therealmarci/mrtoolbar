@@ -20,6 +20,16 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
   (an/aus, Standard-Reihenfolge, Standard-Sperren - Standard: Hotbar gesperrt -, Cooldown, Behälter).
   config-version 8.
 - Sortieren über das Menü geht auch ohne Mod. Kein neues Protokoll - neue Mods funktionieren weiter mit Plugin 0.1.x.
+- **MRpvp:** In Duellen, im Arena-Editor und beim Zuschauen pausiert die Werkzeugleiste (`toolbar.pause-in-pvp`,
+  Standard an) - MRpvp sichert das ganze Inventar samt gewähltem Tool und gibt es danach genau so zurück.
+  config-version 9.
+- Neue Schnittstelle `MRtoolbarApi` (`paused`, `belts`) für andere Plugins; MRpvp zeigt damit die Gürtel im
+  gesicherten Inventar an.
+
+### Behoben
+- Während einer Pause (auch im MRadmin-Adminmodus) wird nichts mehr zwischen Gürtel und Inventar verschoben:
+  `/toolbar on|off|takeback` sind gesperrt, gekürzte Limits warten bis nach der Pause. Vorher konnten Tools im
+  Kreativ-Inventar des Adminmodus landen und mit ihm verschwinden.
 
 ## [0.1.0] - 2026-10-21
 
