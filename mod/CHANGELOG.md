@@ -6,6 +6,8 @@ Versionen - welche Plugin-Versionen passen, steht in [docs/COMPATIBILITY.md](../
 
 ## [Unveröffentlicht]
 
+## [0.2.0] - 2026-10-23
+
 - **Taste „Inventar sortieren“** (Standard: Mausrad-Klick) in offenen Inventaren: Maus über dem eigenen Inventar
   sortiert das Inventar, über einer Kiste, einem Fass, Trichter usw. den Behälter (nicht beim Tippen in
   Suchfeldern, im Kreativmodus bleibt Mausrad-Klick „Item kopieren“). Sortiert wird auf dem Server, Ausnahmen in

@@ -6,6 +6,8 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+## [0.2.0] - 2026-10-23
+
 - **Inventar sortieren:** Taste im Mod (Standard: Mausrad-Klick in einem offenen Inventar) oder Knopf
   „Jetzt sortieren“.
   Gleiche Items werden zusammengelegt, Reihenfolge pro Spieler wählbar: Kategorie, Name, Menge.
