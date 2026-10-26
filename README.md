@@ -78,11 +78,14 @@ Deckkraft, Dicke und Abstand. Die Vorschau nutzt die Hotbar deines Resourcepacks
 | `mrtoolbar.admin.update` | OP | Update-Hinweis beim Betreten |
 | `mrtoolbar.admin.view` | OP | Gürtel anderer Spieler ansehen (auch über MRadmin) |
 
-**MRadmin:** Ist MRadmin installiert, erscheint MRtoolbar dort automatisch im Dashboard und im Spieler-Menü (Mod-Version,
-Tool-Slots, Klick zeigt die Gürtel - nur ansehen, wie Inventar und Enderchest).
+**Zusammenarbeit mit anderen Plugins:** MRtoolbar läuft **allein** – kein anderes Plugin ist Pflicht. Die MR-Plugins
+sprechen **über MRadmin** miteinander (Modul-Schnittstelle): Ohne MRadmin bekommen sie voneinander nichts mit.
 
-**MRpvp:** In Duellen, im Arena-Editor und beim Zuschauen pausiert die Werkzeugleiste. MRpvp sichert das ganze Inventar
-samt gewähltem Tool und zeigt die Gürtel im gesicherten Inventar an (Schnittstelle `MRtoolbarApi`).
+| Funktion | Braucht |
+|---|---|
+| MRtoolbar im Dashboard und im Spieler-Menü (Mod-Version, Tool-Slots, Klick zeigt die Gürtel - nur ansehen, wie Inventar und Enderchest) | MRadmin |
+| Pause im Adminmodus (`toolbar.pause-in-admin-mode`) | MRadmin |
+| Pause in Duellen, im Arena-Editor und beim Zuschauen (`toolbar.pause-in-pvp`); MRpvp sichert die Gürtel mit und zeigt sie im gesicherten Inventar an | MRadmin + MRpvp |
 
 ### Config (Auszug)
 
@@ -95,8 +98,8 @@ samt gewähltem Tool und zeigt die Gürtel im gesicherten Inventar an (Schnittst
 | `toolbar.allowed-items` | Werkzeuge, Waffen, … | was in einen Gürtel darf (Item-Namen, `#Tags`, `*`) |
 | `toolbar.disabled-worlds` | `[]` | Welten ohne Werkzeugleiste |
 | `toolbar.on-death` | `drop` | Gürtel-Inhalt beim Tod: `drop` oder `keep` |
-| `toolbar.pause-in-admin-mode` | `true` | im MRadmin-Adminmodus pausieren |
-| `toolbar.pause-in-pvp` | `true` | in MRpvp-Duellen, im Arena-Editor und beim Zuschauen pausieren |
+| `toolbar.pause-in-admin-mode` | `true` | im MRadmin-Adminmodus pausieren (braucht MRadmin) |
+| `toolbar.pause-in-pvp` | `true` | in MRpvp-Duellen, im Arena-Editor und beim Zuschauen pausieren (braucht MRpvp und MRadmin) |
 | `sorting.enabled` | `true` | Inventar-Sortieren an/aus |
 | `sorting.default-mode` | `type` | Reihenfolge, bis ein Spieler selbst wählt: `type`, `name`, `amount` |
 | `sorting.default-locked` | `[hotbar]` | gesperrte Slots für Spieler ohne eigene Ausnahmen (`hotbar`, `hotbar-3`, `inventory`, `inventory-5`) |

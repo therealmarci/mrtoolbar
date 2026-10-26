@@ -6,6 +6,17 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+### Geändert
+- **MRadmin über die Modul-API:** Das Plugin meldet sich als Modul bei MRadmin an (statt der alten
+  `MRadminHook`-Klasse). Die Pause im Admin-Modus fragt MRadmin jetzt ebenfalls über die Modul-API. Braucht MRadmin mit Modul-API; ohne MRadmin ändert sich nichts.
+- **Verbindung zu anderen MR-Plugins nur noch über MRadmin:** Die Pause in Duellen (`toolbar.pause-in-pvp`) und das
+  Mitsichern der Gürtel durch MRpvp funktionieren jetzt nur mit MRpvp **und** MRadmin (vorher eigene
+  Schnittstellen, `MRtoolbarApi` gibt es nicht mehr).
+
+### Behoben
+- Menüs mit Spielerköpfen fragten jede Sekunde erneut bei Mojang nach dem Skin (HTTP 429 im Log, besonders im
+  Offline-Mode). Köpfe werden jetzt einmal nachgeschlagen und 10 Minuten zwischengespeichert.
+
 ## [0.2.0] - 2026-10-23
 
 - **Inventar sortieren:** Taste im Mod (Standard: Mausrad-Klick in einem offenen Inventar) oder Knopf

@@ -114,8 +114,8 @@ public final class ToolbarManager {
      */
     public boolean paused(Player player) {
         var s = plugin.settings().toolbar();
-        return (s.pauseInAdminMode() && plugin.adminMode().active(player))
-                || (s.pauseInPvp() && plugin.pvp().active(player));
+        return (s.pauseInAdminMode() && plugin.mradmin().adminMode(player))
+                || (s.pauseInPvp() && plugin.mradmin().busyElsewhere(player));
     }
 
     /** The tool slot the player is holding, or null. */

@@ -1,7 +1,6 @@
 package at.marcelr.mrtoolbar;
 
-import at.marcelr.mrtoolbar.api.MRadminAdminMode;
-import at.marcelr.mrtoolbar.api.MRpvpGame;
+import at.marcelr.mrtoolbar.api.MRadminLink;
 import at.marcelr.mrtoolbar.command.MRToolbarCommand;
 import at.marcelr.mrtoolbar.command.ToolbarCommand;
 import at.marcelr.mrtoolbar.gui.MenuListener;
@@ -36,8 +35,7 @@ public final class MRToolbar extends JavaPlugin {
             7, Set.of("toolbar-usage"),
             8, Set.of("gui-sort-help-lore")));
     private final ToolbarManager toolbars = new ToolbarManager(this);
-    private final MRadminAdminMode adminMode = new MRadminAdminMode(getLogger());
-    private final MRpvpGame pvp = new MRpvpGame(getLogger());
+    private final MRadminLink mradmin = new MRadminLink(this);
     private final ModBridge modBridge = new ModBridge(this);
     private final InventorySorter sorter = new InventorySorter(this);
     private UpdateChecker updateChecker;
@@ -59,6 +57,9 @@ public final class MRToolbar extends JavaPlugin {
         getServer().getPluginManager().registerEvents(menuListener, this);
         getServer().getPluginManager().registerEvents(new ProtectionListener(this), this);
         getServer().getPluginManager().registerEvents(modBridge, this);
+        // Optional: MRadmin (module API) - dashboard button, player menu, admin mode pauses the belt.
+        getServer().getPluginManager().registerEvents(mradmin, this);
+        mradmin.connect();
         register("toolbar", new ToolbarCommand(this));
         register("mrtoolbar", new MRToolbarCommand(this));
 
@@ -147,12 +148,9 @@ public final class MRToolbar extends JavaPlugin {
         return updateChecker;
     }
 
-    public MRpvpGame pvp() {
-        return pvp;
-    }
-
-    public MRadminAdminMode adminMode() {
-        return adminMode;
+    /** The optional connection to MRadmin. */
+    public MRadminLink mradmin() {
+        return mradmin;
     }
 
     public ModBridge modBridge() {
