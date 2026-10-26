@@ -10,7 +10,7 @@
 	"contact": {
 		"sources": "https://github.com/therealmarci/mrtoolbar"
 	},
-	"license": "LicenseRef-MRtoolbar",
+	"license": "LicenseRef-MRtechnology",
 	"icon": "assets/mrtoolbar/icon.png",
 	"environment": "client",
 	"entrypoints": {

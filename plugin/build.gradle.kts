@@ -90,6 +90,6 @@ modrinth {
 // Die Lizenz liegt im Repository-Root (gilt für Plugin und Mod) und kommt mit in die JAR.
 tasks.jar {
     from(rootProject.file("../LICENSE")) {
-        rename { "LICENSE_MRtoolbar" }
+        rename { "LICENSE_MRtechnology" }
     }
 }
