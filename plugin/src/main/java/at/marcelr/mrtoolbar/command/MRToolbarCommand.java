@@ -125,7 +125,8 @@ public final class MRToolbarCommand implements TabExecutor {
                 tag("version", updates.currentVersion()), tag("mc", updates.minecraftVersion()),
                 tag("author", String.join(", ", plugin.getPluginMeta().getAuthors())));
         Runnable links = () -> messages.send(sender, "version-links",
-                tag("modrinth", link("Modrinth", updates.modrinthPage())),
+                tag("website", link("Website", updates.websitePage())),
+                tag("modrinth", link("Website", updates.websitePage())),
                 tag("github", link("GitHub", updates.githubPage())));
         if (plugin.settings().update().enabled()) {
             updates.checkNow(sender, links);

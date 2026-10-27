@@ -22,12 +22,16 @@ import java.util.logging.Level;
  */
 public final class ConfigUpdater {
 
-    public static final int CURRENT_VERSION = 9;
+    public static final int CURRENT_VERSION = 10;
     public static final String BOM = "\uFEFF";
     /** Texts whose content changed with new features; the new default replaces the old value. */
     private static final Set<String> REPLACED_KEYS = Set.of(
             // v6: "auto" (language of each player) replaces the fixed language of the test versions
             "language");
+    /** Defaults that changed: whoever still has the old default gets the new one, changed values are kept. */
+    private static final Map<String, Object> OLD_DEFAULTS = Map.of(
+            // v10: the mod is downloaded from the website instead of GitHub Releases
+            "mod.download-url", "https://github.com/therealmarci/mrtoolbar/releases");
     /** Keys that were renamed: old path -> new path (the value is carried over). */
     private static final Map<String, String> RENAMED_KEYS = Map.of(
             // (noch keine)
@@ -67,7 +71,8 @@ public final class ConfigUpdater {
             for (String oldKey : existing.getKeys(true)) {
                 String key = RENAMED_KEYS.getOrDefault(oldKey, oldKey);
                 if (existing.isConfigurationSection(oldKey) || key.equals("config-version")
-                        || REPLACED_KEYS.contains(key) || !template.contains(key)) {
+                        || REPLACED_KEYS.contains(key) || !template.contains(key)
+                        || existing.get(oldKey).equals(OLD_DEFAULTS.get(key))) {
                     continue;
                 }
                 template.set(key, existing.get(oldKey));

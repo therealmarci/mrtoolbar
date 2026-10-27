@@ -52,7 +52,7 @@ java {
 
 jar {
 	from(rootProject.file('../LICENSE')) {
-		rename { "LICENSE_MRtoolbar" }
+		rename { "LICENSE_MRtechnology" }
 	}
 }
 

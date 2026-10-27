@@ -2,8 +2,9 @@ name: MRtoolbar
 version: '${version}'
 main: at.marcelr.mrtoolbar.MRToolbar
 api-version: '${mcVersion}'
+softdepend: [MRadmin]
 author: _therealmarci
-website: https://github.com/${githubRepository}
+website: ${website}/docs/${websiteSlug}/
 description: Tool-Slots in der Hotbar mit Werkzeuggürtel - braucht den MRtoolbar-Mod (Fabric).
 
 commands:
