@@ -12,6 +12,7 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 - **Automatische Umstellung:** Bestehende Configs bekommen `language: auto`; eine bisher fest eingestellte Sprache wird zur `server-language`, damit z.B. die Discord-Logs eines deutschen Servers deutsch bleiben.
 
 ### Behoben & geändert
+- **Update-Hinweis bei `/mrtoolbar version` doppelt:** Fand die Abfrage eine neue Version, kam zuerst der Admin-Hinweis „Für MRtoolbar gibt es ein Update“ und direkt danach „Neue Version verfügbar“. Jetzt kommt nur noch die Antwort auf den Befehl. Die Download-Links führen auf die Website (https://mrtechnology.marcelr.at/download/mrtoolbar/).
 - **Sprache wurde bei Config-Updates zurückgesetzt:** Bei jedem Config-Update - zuletzt mit 0.3.0 - wurde `language` auf `auto` gestellt. Jetzt passiert das nur noch beim Update von sehr alten Testversionen (vor config-version 6). Wer `language` fest auf `de` oder `en` eingestellt hatte, sollte die Einstellung nach dem Update auf 0.3.0 prüfen.
 - **Config und plugin.yml auf Englisch:** Alle Kommentare in der `config.yml` und die Beschreibungen der Befehle und Permissions in der `plugin.yml` sind jetzt englisch. Bestehende Configs bekommen die neuen Kommentare beim nächsten Start automatisch (config-version 11, Sicherung als `config.v<alt>.backup.yml`), alle Einstellungen bleiben erhalten.
 
