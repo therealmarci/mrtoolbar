@@ -10,7 +10,7 @@
 # ==============================================================================
 
 # Nicht ändern - damit erkennt das Plugin bei Updates, welche Texte erneuert werden müssen.
-lang-version: 8
+lang-version: 9
 
 prefix: "<dark_gray>[<gold>MRtoolbar</gold>]</dark_gray> "
 no-permission: "<prefix><red>Dazu hast du keine Berechtigung."
@@ -235,7 +235,7 @@ version-latest: "<prefix><green>Du nutzt die aktuellste Version."
 version-outdated: "<prefix><gold>Neue Version verfügbar: <white><latest></white> <gray>(installiert: <current>) <download>"
 version-unknown: "<prefix><gray>Update-Status unbekannt: <reason>"
 version-checking: "<prefix><gray>Suche nach Updates ..."
-version-links: "<prefix><modrinth> <dark_gray>| <github>"
+version-links: "<prefix><website> <dark_gray>| <github>"
 update-download-label: "<aqua><u>[Download]</u></aqua>"
 update-join-notify: "<prefix><gold>Für MRtoolbar gibt es ein Update: <white><latest></white> <gray>(installiert: <current>) <download>"
 update-reason-disabled: "Update-Check ist deaktiviert"

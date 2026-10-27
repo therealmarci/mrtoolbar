@@ -127,7 +127,7 @@ public record Settings(
             minimum = "";
         }
         ModSettings mod = new ModSettings(minimum,
-                c.getString("mod.download-url", "https://github.com/therealmarci/mrtoolbar/releases").trim(),
+                c.getString("mod.download-url", "https://mrtechnology.marcelr.at/download/mrtoolbar/").trim(),
                 Math.clamp(c.getInt("mod.handshake-seconds", 5), 1, 60));
 
         String source = c.getString("update-checker.source", "github").toLowerCase(Locale.ROOT);

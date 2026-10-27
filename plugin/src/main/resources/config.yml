@@ -15,7 +15,7 @@
 # ==============================================================================
 
 # Nicht ändern - wird für automatische Config-Updates verwendet.
-config-version: 9
+config-version: 10
 
 # Sprache der Texte (Menüs, Nachrichten). Die Texte stehen in plugins/MRtoolbar/lang/<sprache>.yml.
 #   auto = jeder Spieler bekommt die Sprache, die er in Minecraft eingestellt hat - genau wie der Client-Mod.
@@ -143,7 +143,7 @@ mod:
   minimum-version: ""
 
   # Wo Spieler den Mod herunterladen (Link in den Hinweisen).
-  download-url: "https://github.com/therealmarci/mrtoolbar/releases"
+  download-url: "https://mrtechnology.marcelr.at/download/mrtoolbar/"
 
   # So lange wartet der Server nach dem Betreten auf den Mod, bevor der Spieler als "ohne Mod" gilt (Sekunden).
   handshake-seconds: 5

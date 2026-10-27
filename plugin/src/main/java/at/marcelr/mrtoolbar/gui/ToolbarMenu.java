@@ -47,7 +47,7 @@ public final class ToolbarMenu extends Menu {
             clickSound();
             UpdateChecker updates = plugin.updateChecker();
             messages.send(viewer, "help-links", tag("download", plugin.modBridge().downloadLink()),
-                    tag("plugin", messages.get("help-plugin-label").clickEvent(ClickEvent.openUrl(updates.githubPage()))));
+                    tag("plugin", messages.get("help-plugin-label").clickEvent(ClickEvent.openUrl(updates.websitePage()))));
         });
 
         int used = toolbar.slotCount();
