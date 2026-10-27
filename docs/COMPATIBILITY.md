@@ -53,7 +53,7 @@ also mit Plugin 0.2.0, solange sich das Protokoll nicht geändert hat.
 
 Damit kann jede Mod-Version mit jeder Plugin-Version zumindest feststellen, ob sie zusammenpassen.
 
-**Reihenfolge und Wiederholung:** Das Plugin schickt Nachrichten an einen Spieler immer in der Reihenfolge, in der sie entstehen - auch wenn sie warten müssen, bis der Client einen Kanal angekündigt hat (`state` darf `welcome` nie überholen). `state` kommt bei jeder Änderung und zusätzlich alle 10 Sekunden; der Mod muss gleiche `state`-Nachrichten also einfach überschreiben können. Ab der nächsten Mod-Version (nach 0.2.1) behält der Mod einen `state`, der vor dem `welcome` ankommt.
+**Reihenfolge und Wiederholung:** Das Plugin schickt Nachrichten an einen Spieler immer in der Reihenfolge, in der sie entstehen - auch wenn sie warten müssen, bis der Client einen Kanal angekündigt hat (`state` darf `welcome` nie überholen). `state` kommt bei jeder Änderung und zusätzlich alle 10 Sekunden; der Mod muss gleiche `state`-Nachrichten also einfach überschreiben können. Ab Mod 0.2.2 behält der Mod einen `state`, der vor dem `welcome` ankommt.
 
 **Protokoll erhöhen**, sobald sich `state`, `action`, `design` ändern oder eine neue Nachricht dazukommt:
 

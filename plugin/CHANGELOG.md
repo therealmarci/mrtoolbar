@@ -6,6 +6,8 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+## [0.4.0] - 2026-10-27
+
 ### Neu
 - **Alle Server auf die Sprache des Spielers:** Bestehende Configs mit fest eingestellter Sprache (`language: de`/`en`) werden auf `language: auto` umgestellt - jeder Spieler bekommt die Sprache seines Minecraft-Clients, wie bei MRsleep, MRchunks und MRadmin.
 - **Server-Sprache (`server-language`):** Texte ohne einzelnen Empfänger kommen in dieser Sprache (Standard `en`).

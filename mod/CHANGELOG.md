@@ -6,8 +6,10 @@ Versionen - welche Plugin-Versionen passen, steht in [docs/COMPATIBILITY.md](../
 
 ## [Unveröffentlicht]
 
+## [0.2.2] - 2026-10-27
+
 ### Behoben & geändert
-- **Rahmen in der Hotbar fehlte nach dem Einloggen:** Kam der Toolbar-Status vom Server vor der Antwort auf die Anmeldung an, verwarf der Mod ihn. Jetzt behält er ihn. Das Plugin behebt den Fehler ab seiner nächsten Version auch für ältere Mods; das Protokoll bleibt gleich.
+- **Rahmen in der Hotbar fehlte nach dem Einloggen:** Kam der Toolbar-Status vom Server vor der Antwort auf die Anmeldung an, verwarf der Mod ihn. Jetzt behält er ihn. Das Plugin behebt den Fehler ab 0.4.0 auch für ältere Mods; das Protokoll bleibt gleich.
 
 ## [0.2.1] - 2026-10-27
 
