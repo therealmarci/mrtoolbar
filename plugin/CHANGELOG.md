@@ -6,6 +6,10 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+### Behoben & geändert
+- **Sprache wurde bei Config-Updates zurückgesetzt:** Bei jedem Config-Update - zuletzt mit 0.3.0 - wurde `language` auf `auto` gestellt. Jetzt passiert das nur noch beim Update von sehr alten Testversionen (vor config-version 6). Wer `language` fest auf `de` oder `en` eingestellt hatte, sollte die Einstellung nach dem Update auf 0.3.0 prüfen.
+- **Config und plugin.yml auf Englisch:** Alle Kommentare in der `config.yml` und die Beschreibungen der Befehle und Permissions in der `plugin.yml` sind jetzt englisch. Bestehende Configs bekommen die neuen Kommentare beim nächsten Start automatisch (config-version 11, Sicherung als `config.v<alt>.backup.yml`), alle Einstellungen bleiben erhalten.
+
 ## [0.3.0] - 2026-10-27
 
 ### Geändert – Lizenz, Doku, Website
