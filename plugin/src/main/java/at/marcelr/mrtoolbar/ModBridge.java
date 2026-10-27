@@ -17,6 +17,7 @@ import org.jspecify.annotations.NonNull;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
@@ -50,11 +51,19 @@ public final class ModBridge implements Listener, PluginMessageListener {
     private final Map<UUID, Client> clients = new HashMap<>();
     /** Last state sent per player, to send only changes. */
     private final Map<UUID, byte[]> sent = new HashMap<>();
+    /** When the state was last sent per player (ms) - it is sent again now and then, see {@link #RESEND_MILLIS}. */
+    private final Map<UUID, Long> sentAt = new HashMap<>();
     /**
-     * Messages for channels the client has not announced yet, per player and channel (the newest wins). Bukkit drops
-     * plugin messages to unannounced channels silently - and the mod's hello can arrive before its announcement.
+     * Messages for channels the client has not announced yet, per player in the order they were sent (per channel the
+     * newest wins). Bukkit drops plugin messages to unannounced channels silently - and the mod's hello can arrive
+     * before its announcement. The order matters: a state that overtakes the welcome is thrown away by the mod.
      */
-    private final Map<UUID, Map<String, byte[]>> waiting = new HashMap<>();
+    private final Map<UUID, LinkedHashMap<String, byte[]>> waiting = new HashMap<>();
+    /**
+     * The state goes out again after this long even without a change, so a mod that missed it (or lost it some other
+     * way) shows the tool slots again by itself instead of only after switching the toolbar off and on.
+     */
+    private static final long RESEND_MILLIS = 10_000;
 
     public ModBridge(MRToolbar plugin) {
         this.plugin = plugin;
@@ -101,19 +110,47 @@ public final class ModBridge implements Listener, PluginMessageListener {
             mask |= 1 << slot.hotbar();
         }
         byte[] state = new Wire.Writer().bool(toolbars.active(player)).shortValue(mask).bytes();
-        if (!Arrays.equals(state, sent.get(player.getUniqueId()))) {
-            sent.put(player.getUniqueId(), state);
+        UUID id = player.getUniqueId();
+        long now = System.currentTimeMillis();
+        if (!Arrays.equals(state, sent.get(id)) || now - sentAt.getOrDefault(id, 0L) >= RESEND_MILLIS) {
+            sent.put(id, state);
+            sentAt.put(id, now);
             send(player, STATE, state);
         }
     }
 
-    /** Sends a message now, or as soon as the client announced the channel. */
+    /**
+     * Sends a message now, or as soon as the client announced the channel. While something is waiting, later messages
+     * wait behind it, so they never overtake each other (e.g. the state the welcome).
+     */
     private void send(Player player, String channel, byte[] message) {
-        if (player.getListeningPluginChannels().contains(channel)) {
+        LinkedHashMap<String, byte[]> queue = waiting.get(player.getUniqueId());
+        if ((queue == null || queue.isEmpty()) && player.getListeningPluginChannels().contains(channel)) {
             player.sendPluginMessage(plugin, channel, message);
-        } else {
-            waiting.computeIfAbsent(player.getUniqueId(), id -> new HashMap<>()).put(channel, message);
+            return;
         }
+        queue = waiting.computeIfAbsent(player.getUniqueId(), id -> new LinkedHashMap<>());
+        // Newest wins, but at the end of the queue - it was sent after everything else in it.
+        queue.remove(channel);
+        queue.put(channel, message);
+    }
+
+    /** Sends the waiting messages in order, up to the first one whose channel the client has not announced yet. */
+    private void flush(Player player) {
+        LinkedHashMap<String, byte[]> queue = waiting.get(player.getUniqueId());
+        if (queue == null) {
+            return;
+        }
+        var it = queue.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, byte[]> next = it.next();
+            if (!player.getListeningPluginChannels().contains(next.getKey())) {
+                return;
+            }
+            player.sendPluginMessage(plugin, next.getKey(), next.getValue());
+            it.remove();
+        }
+        waiting.remove(player.getUniqueId());
     }
 
     /** Opens the hotbar design screen of the mod. @return false without a compatible mod */
@@ -140,17 +177,14 @@ public final class ModBridge implements Listener, PluginMessageListener {
 
     @EventHandler
     public void onRegister(PlayerRegisterChannelEvent event) {
-        Map<String, byte[]> messages = waiting.get(event.getPlayer().getUniqueId());
-        byte[] message = messages == null ? null : messages.remove(event.getChannel());
-        if (message != null) {
-            event.getPlayer().sendPluginMessage(plugin, event.getChannel(), message);
-        }
+        flush(event.getPlayer());
     }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         clients.remove(event.getPlayer().getUniqueId());
         sent.remove(event.getPlayer().getUniqueId());
+        sentAt.remove(event.getPlayer().getUniqueId());
         waiting.remove(event.getPlayer().getUniqueId());
     }
 

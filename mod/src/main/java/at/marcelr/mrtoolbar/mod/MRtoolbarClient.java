@@ -79,14 +79,14 @@ public final class MRtoolbarClient implements ClientModInitializer {
         PayloadTypeRegistry.clientboundPlay().register(DesignPayload.TYPE, DesignPayload.CODEC);
 
         ClientPlayNetworking.registerGlobalReceiver(WelcomePayload.TYPE, (payload, context) -> welcome(payload));
+        // Kept even if it comes before the welcome (older plugins could send it first) - state() only hands it out
+        // once the welcome said OK, and an incompatible welcome clears it.
         ClientPlayNetworking.registerGlobalReceiver(StatePayload.TYPE, (payload, context) -> {
-            if (compatible) {
-                if (!payload.equals(state)) {
-                    LOG.info("Tool slots from the server: active={}, slots={}", payload.active(),
-                            Integer.toBinaryString(payload.slots()));
-                }
-                state = payload;
+            if (!payload.equals(state)) {
+                LOG.info("Tool slots from the server: active={}, slots={}", payload.active(),
+                        Integer.toBinaryString(payload.slots()));
             }
+            state = payload;
         });
         ClientPlayNetworking.registerGlobalReceiver(DesignPayload.TYPE,
                 (payload, context) -> context.client().gui.setScreen(new DesignScreen(null)));
