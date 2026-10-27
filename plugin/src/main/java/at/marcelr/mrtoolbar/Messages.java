@@ -4,6 +4,7 @@ import at.marcelr.mrtoolbar.util.LanguageChoice;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.World;
@@ -24,6 +25,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 import java.util.logging.Level;
 
@@ -60,6 +62,8 @@ public final class Messages {
     private volatile String fixed;
     /** Language for players whose game language has no file. */
     private volatile String fallbackCode = BUNDLED.getFirst();
+    /** Language of texts without a player recipient (Discord, MRadmin ...). */
+    private volatile String serverCode = BUNDLED.getFirst();
     /** The English texts - the console is always English, whatever language players get. */
     private volatile YamlConfiguration english = new YamlConfiguration();
 
@@ -69,8 +73,9 @@ public final class Messages {
      * @param setting  "auto" = every player gets the language of their game (Minecraft setting), otherwise a fixed
      *                 language for everyone ("de", "en", "deutsch" ...)
      * @param fallback language for players whose game language has no file
+     * @param server   language of texts without a player recipient (Discord, MRadmin ...)
      */
-    public void load(JavaPlugin plugin, String setting, String fallback) {
+    public void load(JavaPlugin plugin, String setting, String fallback, String server) {
         File dir = new File(plugin.getDataFolder(), "lang");
         for (String code : BUNDLED) {
             if (!new File(dir, code + ".yml").exists()) {
@@ -90,6 +95,7 @@ public final class Messages {
         english = loaded.get("en");
 
         fallbackCode = LanguageChoice.resolve(loaded.keySet(), fallback, BUNDLED.getFirst());
+        serverCode = LanguageChoice.resolve(loaded.keySet(), server, fallbackCode);
         boolean auto = setting == null || setting.isBlank() || setting.trim().equalsIgnoreCase("auto");
         fixed = auto ? null : LanguageChoice.resolve(loaded.keySet(), setting, fallbackCode);
     }
@@ -168,13 +174,13 @@ public final class Messages {
         return config;
     }
 
-    /** Texts for the current recipient (see {@link #as}); outside of that the fixed or fallback language. */
+    /** Texts for the current recipient (see {@link #as}); outside of that the fixed or the server language. */
     private YamlConfiguration texts() {
         YamlConfiguration current = CURRENT.get();
         if (current != null) {
             return current;
         }
-        YamlConfiguration texts = languages.get(fixed != null ? fixed : fallbackCode);
+        YamlConfiguration texts = languages.get(fixed != null ? fixed : serverCode);
         return texts != null ? texts : english;
     }
 
@@ -206,6 +212,32 @@ public final class Messages {
             action.run();
             return null;
         });
+    }
+
+    /**
+     * Runs {@code action} with the server language - for texts without a player recipient (Discord, MRadmin ...)
+     * that are built while a command or menu of some player is running.
+     */
+    public <T> T server(Supplier<T> action) {
+        YamlConfiguration target = languages.getOrDefault(fixed != null ? fixed : serverCode, english);
+        YamlConfiguration previous = CURRENT.get();
+        CURRENT.set(target);
+        try {
+            return action.get();
+        } finally {
+            if (previous == null) {
+                CURRENT.remove();
+            } else {
+                CURRENT.set(previous);
+            }
+        }
+    }
+
+    /** Runs {@code action} once per recipient, each time in the recipient's language (see {@link #as}). */
+    public void each(Iterable<? extends CommandSender> recipients, Consumer<CommandSender> action) {
+        for (CommandSender recipient : recipients) {
+            run(recipient, () -> action.accept(recipient));
+        }
     }
 
     /** @return the raw message, or null if it is configured as empty */
@@ -297,14 +329,9 @@ public final class Messages {
         });
     }
 
+    /** Sends the message to everyone in the world, each player in their own language. */
     public void broadcast(World world, String key, TagResolver... resolvers) {
-        if (raw(key) == null) {
-            return;
-        }
-        Component message = get(key, resolvers);
-        for (Player player : world.getPlayers()) {
-            player.sendMessage(message);
-        }
+        each(world.getPlayers(), player -> send(player, key, resolvers));
     }
 
     /** Plain-text placeholder (cannot inject formatting). */
@@ -315,5 +342,17 @@ public final class Messages {
     /** Placeholder with a formatted component as value. */
     public static TagResolver tag(String name, Component value) {
         return Placeholder.component(name, value);
+    }
+
+    /**
+     * Placeholder whose value (text or component) is only built when the message is built - so a placeholder made
+     * for one player and sent to another is still in the recipient's language.
+     */
+    public static TagResolver lazy(String name, Supplier<?> value) {
+        return TagResolver.resolver(name, (arguments, context) -> {
+            Object result = value.get();
+            return Tag.selfClosingInserting(result instanceof Component component ? component
+                    : Component.text(String.valueOf(result)));
+        });
     }
 }

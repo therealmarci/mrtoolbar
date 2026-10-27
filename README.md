@@ -118,7 +118,9 @@ Alles steht kommentiert in `plugins/MRtoolbar/config.yml`. Änderungen übernimm
 
 | Einstellung | Standard | Bedeutung |
 |---|---|---|
-| `language` | `auto` | `auto` = wie im Minecraft-Client des Spielers (wie der Mod), sonst `de` oder `en` |
+| `language` | `auto` | `auto` = wie im Minecraft-Client des Spielers (wie der Mod), sonst `de` oder `en` für alle |
+| `fallback-language` | `en` | Für Spieler, deren Minecraft-Sprache keine eigene Datei hat |
+| `server-language` | `en` | Texte ohne einzelnen Empfänger (z.B. in der Weboberfläche von MRadmin) |
 | `toolbar.default-tool-slots` | `2` | Tool-Slots pro Spieler |
 | `toolbar.default-belt-size` | `6` | Plätze pro Gürtel (1-8) |
 | `toolbar.allowed-items` | Werkzeuge, Waffen … | Was in einen Gürtel darf (Item-Namen, `#Tags`, `*` für alles) |
