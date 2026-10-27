@@ -17,13 +17,39 @@ commands:
     usage: /mrtoolbar <reload|version|debug|gui|view>
 
 permissions:
+  # ------------------------------------------------------------------ Groups
+  # The same in every MRtechnology plugin: <plugin>.player for players, <plugin>.groups.support / staff / admin for
+  # the team - each group contains the one below. The single permissions further down stay usable on their own;
+  # the slot and belt sizes (mrtoolbar.slots.<n>, mrtoolbar.belt.<n>) are in no group on purpose.
   mrtoolbar.player:
-    description: All player permissions at once - e.g. for the default group in LuckPerms.
+    description: "Player: tool slots and /toolbar, sort the inventory and open containers."
     default: op
     children:
       mrtoolbar.use: true
       mrtoolbar.sort: true
       mrtoolbar.sort.containers: true
+  mrtoolbar.groups.support:
+    description: "Group support: player + overview of all players with mod version and tool slots, view other players' belts."
+    default: op
+    children:
+      mrtoolbar.player: true
+      mrtoolbar.admin.gui: true
+      mrtoolbar.admin.view: true
+  mrtoolbar.groups.staff:
+    description: "Group staff: support + /mrtoolbar debug."
+    default: op
+    children:
+      mrtoolbar.groups.support: true
+      mrtoolbar.admin.debug: true
+  mrtoolbar.groups.admin:
+    description: "Group admin: everything of MRtoolbar - reload, update notice."
+    default: op
+    children:
+      mrtoolbar.groups.staff: true
+      mrtoolbar.admin.reload: true
+      mrtoolbar.admin.update: true
+
+  # ------------------------------------------------------------------ Single permissions
   mrtoolbar.sort:
     description: Sort the inventory (key in the mod or button in the menu) and set your own exceptions - /toolbar sort.
     default: op
@@ -33,15 +59,6 @@ permissions:
   mrtoolbar.use:
     description: Use tool slots and open /toolbar. Number of tool slots via mrtoolbar.slots.<number>, belt size via mrtoolbar.belt.<number> (max. 8).
     default: op
-  mrtoolbar.admin:
-    description: All admin permissions of MRtoolbar.
-    default: op
-    children:
-      mrtoolbar.admin.reload: true
-      mrtoolbar.admin.debug: true
-      mrtoolbar.admin.gui: true
-      mrtoolbar.admin.view: true
-      mrtoolbar.admin.update: true
   mrtoolbar.admin.reload:
     description: /mrtoolbar reload
     default: op

@@ -74,6 +74,9 @@ Ob es ein Mod-Update gibt, zeigt `/toolbar` im Buch oben links.
 3. **Spielern die Rechte geben** - ohne sie dürfen nur OPs die Werkzeugleiste nutzen:
    ```text
    /lp group default permission set mrtoolbar.player true
+   /lp group supporter permission set mrtoolbar.groups.support true
+   /lp group staff permission set mrtoolbar.groups.staff true
+   /lp group admin permission set mrtoolbar.groups.admin true
    ```
 4. Deinen Spielern den Link zum Mod geben: **https://mrtechnology.marcelr.at/download/mrtoolbar/**. Im Spiel steht der Link auch in `/toolbar`, und wer mit Tool-Slots, aber ohne Mod beitritt, bekommt einen Hinweis mit Link.
 
@@ -97,7 +100,9 @@ Ob es ein Mod-Update gibt, zeigt `/toolbar` im Buch oben links.
 | `mrtoolbar.sort.containers` | OP | Offene Kisten, Fässer, Shulker, Trichter … sortieren |
 | `mrtoolbar.slots.<n>` | – | Höchstens `<n>` Tool-Slots (sonst `toolbar.default-tool-slots`) |
 | `mrtoolbar.belt.<n>` | – | `<n>` Plätze pro Gürtel, höchstens 8 (sonst `toolbar.default-belt-size`) |
-| `mrtoolbar.admin` | OP | Alle folgenden Admin-Rechte |
+| `mrtoolbar.groups.support` | OP | **Gruppe** Support: Spieler + Admin-Menü, Gürtel anderer ansehen |
+| `mrtoolbar.groups.staff` | OP | **Gruppe** Staff: Support + `/mrtoolbar debug` |
+| `mrtoolbar.groups.admin` | OP | **Gruppe** Admin: alles (+ Reload, Update-Hinweis). Die Gruppen sind in allen MRtechnology-Plugins gleich aufgebaut, jede enthält die darunter |
 | `mrtoolbar.admin.gui` · `view` | OP | Admin-Menü · Gürtel anderer ansehen (auch über MRadmin) |
 | `mrtoolbar.admin.debug` · `reload` | OP | `/mrtoolbar debug` · `/mrtoolbar reload` |
 | `mrtoolbar.admin.update` | OP | Update-Hinweis beim Betreten |

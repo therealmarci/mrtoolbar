@@ -127,6 +127,16 @@ final class MRadminModule implements AdminModule {
                 : AdminMenu.playerLines(plugin, online));
     }
 
+    @Override
+    public boolean openMenu(Player viewer, Runnable back) {
+        if (!viewer.hasPermission(AdminMenu.PERM_GUI)) {
+            plugin.messages().send(viewer, "no-permission");
+            return false;
+        }
+        plugin.messages().run(viewer, () -> new AdminMenu(plugin, viewer).open());
+        return true;
+    }
+
     /** The player's belts (read-only). */
     @Override
     public boolean openPlayerMenu(Player viewer, UUID player, Runnable back) {
