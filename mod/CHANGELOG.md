@@ -6,6 +6,11 @@ Versionen - welche Plugin-Versionen passen, steht in [docs/COMPATIBILITY.md](../
 
 ## [Unveröffentlicht]
 
+## [0.2.2] - 2026-10-27
+
+### Behoben & geändert
+- **Rahmen in der Hotbar fehlte nach dem Einloggen:** Kam der Toolbar-Status vom Server vor der Antwort auf die Anmeldung an, verwarf der Mod ihn. Jetzt behält er ihn. Das Plugin behebt den Fehler ab 0.4.0 auch für ältere Mods; das Protokoll bleibt gleich.
+
 ## [0.2.1] - 2026-10-27
 
 - **MRtechnology Lizenz 1.0:** Der Mod steht jetzt unter der einheitlichen Lizenz aller MRtechnology-Projekte (`LICENSE_MRtechnology` in der JAR, `LicenseRef-MRtechnology` in `fabric.mod.json`). Ausdrücklich erlaubt: den Mod aus der offiziellen Quelle nutzen ([mrtechnology.marcelr.at](https://mrtechnology.marcelr.at/download/mrtoolbar/)), Server-Betreiber dürfen dorthin verlinken. Sonst keine Änderungen, das Protokoll bleibt gleich.

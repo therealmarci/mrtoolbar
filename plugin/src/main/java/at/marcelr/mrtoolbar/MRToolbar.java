@@ -104,7 +104,8 @@ public final class MRToolbar extends JavaPlugin {
 
     private void loadConfiguration() {
         config = ConfigUpdater.load(this);
-        messages.load(this, config.getString("language", "auto"), config.getString("fallback-language", "en"));
+        messages.load(this, config.getString("language", "auto"), config.getString("fallback-language", "en"),
+                config.getString("server-language", "en"));
         settings = Settings.from(config, getLogger());
     }
 

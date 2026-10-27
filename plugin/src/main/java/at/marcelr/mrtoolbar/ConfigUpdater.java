@@ -10,7 +10,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 
 /**
@@ -22,12 +21,15 @@ import java.util.logging.Level;
  */
 public final class ConfigUpdater {
 
-    public static final int CURRENT_VERSION = 10;
+    public static final int CURRENT_VERSION = 11;
     public static final String BOM = "\uFEFF";
-    /** Texts whose content changed with new features; the new default replaces the old value. */
-    private static final Set<String> REPLACED_KEYS = Set.of(
+    /**
+     * Keys whose value is replaced by the new default, with the config-version that introduced the change: only files
+     * older than that version are affected - a later update must not overwrite the value again.
+     */
+    private static final Map<String, Integer> REPLACED_KEYS = Map.of(
             // v6: "auto" (language of each player) replaces the fixed language of the test versions
-            "language");
+            "language", 6);
     /** Defaults that changed: whoever still has the old default gets the new one, changed values are kept. */
     private static final Map<String, Object> OLD_DEFAULTS = Map.of(
             // v10: the mod is downloaded from the website instead of GitHub Releases
@@ -71,12 +73,20 @@ public final class ConfigUpdater {
             for (String oldKey : existing.getKeys(true)) {
                 String key = RENAMED_KEYS.getOrDefault(oldKey, oldKey);
                 if (existing.isConfigurationSection(oldKey) || key.equals("config-version")
-                        || REPLACED_KEYS.contains(key) || !template.contains(key)
+                        || version < REPLACED_KEYS.getOrDefault(key, 0) || !template.contains(key)
                         || existing.get(oldKey).equals(OLD_DEFAULTS.get(key))) {
                     continue;
                 }
                 template.set(key, existing.get(oldKey));
                 carried++;
+            }
+            // v11: every player gets the language of their game; a fixed language so far stays for Discord & co.
+            if (version < 11) {
+                String old = existing.getString("language", "auto").trim();
+                if (!old.isEmpty() && !old.equalsIgnoreCase("auto")) {
+                    template.set("server-language", old);
+                }
+                template.set("language", "auto");
             }
             template.set("config-version", CURRENT_VERSION);
             // Keep long messages on one line instead of folding them.

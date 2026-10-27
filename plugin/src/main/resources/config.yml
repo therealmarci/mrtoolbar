@@ -1,51 +1,55 @@
 ﻿# ==============================================================================
-#   MRtoolbar - Konfiguration
+#   MRtoolbar - Configuration
 # ==============================================================================
-#   Nach Änderungen:  /mrtoolbar reload   (kein Neustart nötig)
-#   Spieler-Menü:     /toolbar
+#   After changes:   /mrtoolbar reload   (no restart needed)
+#   Player menu:     /toolbar
+#   Help & docs:     https://mrtechnology.marcelr.at/docs/mrtoolbar/
 #
-#   Die Werkzeugleiste funktioniert nur mit dem MRtoolbar-Mod (Fabric) auf dem Client. Der Mod übernimmt Tasten
-#   und Darstellung, das Plugin alles, was mit Items zu tun hat. Spieler ohne Mod spielen ganz normal, nur ohne
-#   Werkzeugleiste. Versionen und Kompatibilität: docs/COMPATIBILITY.md
+#   The tool bar only works with the MRtoolbar mod (Fabric) on the client. The mod handles keys and
+#   rendering, the plugin everything to do with items. Players without the mod play normally, just without
+#   the tool bar. Versions and compatibility: docs/COMPATIBILITY.md
 #
-#   Texte & Nachrichten: lang/de.yml bzw. lang/en.yml.
+#   Texts & messages: lang/de.yml or lang/en.yml.
 #
-#   Diese Datei ist UTF-8-kodiert. Falls Umlaute (ä, ö, ü) falsch angezeigt werden,
-#   im Editor die Kodierung auf "UTF-8" stellen.
+#   This file is UTF-8 encoded. If special characters (ä, ö, ü) look wrong,
+#   set the encoding in your editor to "UTF-8".
 # ==============================================================================
 
-# Nicht ändern - wird für automatische Config-Updates verwendet.
-config-version: 10
+# Do not change - used for automatic config updates.
+config-version: 11
 
-# Sprache der Texte (Menüs, Nachrichten). Die Texte stehen in plugins/MRtoolbar/lang/<sprache>.yml.
-#   auto = jeder Spieler bekommt die Sprache, die er in Minecraft eingestellt hat - genau wie der Client-Mod.
-#          Deutsch (auch Österreich/Schweiz) -> de.yml, alle anderen -> fallback-language.
-#   de / en / ... = feste Sprache für alle Spieler.
-# Die Konsole ist immer Englisch. Eigene Sprache: Datei kopieren (z.B. fr.yml) und übersetzen - mit "auto"
-# bekommen französische Spieler sie dann automatisch.
+# Language of the texts (menus, messages). The texts are in plugins/MRtoolbar/lang/<language>.yml.
+#   auto = every player gets the language set in their Minecraft client - just like the client mod.
+#          German (also Austria/Switzerland) -> de.yml, English -> en.yml, a language without a file -> fallback-language.
+#   de / en / ... = fixed language for all players.
+# The console is always English. Own language: copy a file (e.g. as fr.yml) and translate it - with "auto"
+# French players then get it automatically.
 language: auto
 
-# Sprache für Spieler, deren Minecraft-Sprache keine eigene Datei hat.
+# Language for players whose Minecraft language has no file of its own.
 fallback-language: en
 
+# Language of texts that are not meant for a single player: texts MRadmin shows outside the game (web interface).
+server-language: en
+
 
 # ------------------------------------------------------------------------------
-#   1) TOOL-SLOTS & GÜRTEL
+#   1) TOOL SLOTS & BELTS
 # ------------------------------------------------------------------------------
 toolbar:
-  # Wie viele Hotbar-Slots jeder Spieler zu Tool-Slots machen darf (0-9).
-  # Mehr gibt es per Permission "mrtoolbar.slots.<anzahl>" (z.B. mrtoolbar.slots.3, die höchste zählt).
+  # How many hotbar slots each player may turn into tool slots (0-9).
+  # More via the permission "mrtoolbar.slots.<number>" (e.g. mrtoolbar.slots.3, the highest counts).
   default-tool-slots: 2
 
-  # Wie viele Tools in den Gürtel eines Tool-Slots passen (1-8, das Rad hat 8 Felder).
-  # Das Tool, das gerade in der Hotbar liegt, zählt nicht mit.
-  # Mehr gibt es per Permission "mrtoolbar.belt.<anzahl>" (z.B. mrtoolbar.belt.8).
+  # How many tools fit into the belt of a tool slot (1-8, the wheel has 8 fields).
+  # The tool currently in the hotbar does not count.
+  # More via the permission "mrtoolbar.belt.<number>" (e.g. mrtoolbar.belt.8).
   default-belt-size: 6
 
-  # Was in einen Gürtel darf. Einträge:
-  #   Item-Name         z.B. bow, shears, minecraft:fishing_rod
-  #   #Item-Tag         z.B. #minecraft:pickaxes (alle Spitzhacken)
-  #   "*"               jedes Item
+  # What may go into a belt. Entries:
+  #   item name         e.g. bow, shears, minecraft:fishing_rod
+  #   #item tag         e.g. #minecraft:pickaxes (all pickaxes)
+  #   "*"               any item
   allowed-items:
     - "#minecraft:pickaxes"
     - "#minecraft:axes"
@@ -66,63 +70,63 @@ toolbar:
     - carrot_on_a_stick
     - warped_fungus_on_a_stick
 
-  # Welten, in denen Tool-Slots wie normale Slots funktionieren (Name, Groß-/Kleinschreibung egal).
-  # Die Gürtel bleiben erhalten.
+  # Worlds in which tool slots work like normal slots (name, case does not matter).
+  # The belts are kept.
   disabled-worlds: []
 
-  # Was beim Tod mit dem Inhalt der Gürtel passiert:
-  #   drop = fällt wie das Inventar auf den Boden (Standard)
-  #   keep = bleibt im Gürtel
-  # Ist in der Welt keepInventory an, bleibt der Gürtel immer erhalten.
+  # What happens to the contents of the belts on death:
+  #   drop = dropped on the ground like the inventory (default)
+  #   keep = stays in the belt
+  # If keepInventory is on in the world, the belt is always kept.
   on-death: drop
 
-  # Im Adminmodus von MRadmin pausieren (Tool-Slots normal, /toolbar gesperrt, Gürtel bleibt beim Tod erhalten).
-  # Der Adminmodus hat ein eigenes Kreativ-Inventar - ohne Pause könnten Kreativ-Items im Gürtel landen.
+  # Pause in MRadmin's admin mode (tool slots act normally, /toolbar locked, belt kept on death).
+  # The admin mode has its own creative inventory - without the pause, creative items could end up in the belt.
   pause-in-admin-mode: true
 
-  # In Duellen von MRpvp pausieren (auch im Arena-Editor und beim Zuschauen). MRpvp sichert das ganze Inventar
-  # samt ausgewähltem Tool und gibt es danach genau so zurück - die Werkzeugleiste darf dazwischen nichts verschieben.
+  # Pause in MRpvp duels (also in the arena editor and while spectating). MRpvp saves the whole inventory
+  # including the selected tool and gives it back exactly like that - the tool bar must not move anything in between.
   pause-in-pvp: true
 
 
 # ------------------------------------------------------------------------------
-#   2) INVENTAR SORTIEREN
+#   2) INVENTORY SORTING
 # ------------------------------------------------------------------------------
-#   Taste im Mod (Optionen → Steuerung → MRtoolbar → "Inventar sortieren", Standard Mausrad-Klick) - wirkt in
-#   offenen Inventaren und Kisten. Ausnahmen legt jeder Spieler selbst fest: /toolbar → Trichter, oder /toolbar sort
-#   (das Menü hat auch einen "Jetzt sortieren"-Knopf, der ohne Mod funktioniert).
-#   Nie sortiert: Tool-Slots, Rüstung, Zweithand, das Item am Mauszeiger.
+#   Key in the mod (Options → Controls → MRtoolbar → "Sort inventory", default: middle mouse button) - works in
+#   open inventories and chests. Every player sets their own exceptions: /toolbar → hopper, or /toolbar sort
+#   (the menu also has a "Sort now" button that works without the mod).
+#   Never sorted: tool slots, armour, off-hand, the item on the cursor.
 #   Permission: mrtoolbar.sort
 sorting:
   enabled: true
 
-  # Reihenfolge, bis ein Spieler selbst eine wählt:
-  #   type   = Minecraft-Reihenfolge (Blöcke, dann Items - Gleiches liegt zusammen)
-  #   name   = alphabetisch nach Item-Name (englische ID)
-  #   amount = wovon man am meisten hat, zuerst
+  # Order until a player picks one themselves:
+  #   type   = Minecraft order (blocks, then items - same things end up together)
+  #   name   = alphabetical by item name (English ID)
+  #   amount = what you have most of first
   default-mode: type
 
-  # Slots, die ein Spieler gesperrt hat, solange er seine Ausnahmen nicht selbst ändert. Einträge:
-  #   hotbar          ganze Hotbar
-  #   hotbar-<1-9>    ein Hotbar-Slot
-  #   inventory       alle 27 Inventar-Slots
-  #   inventory-<1-27> ein Inventar-Slot (zeilenweise von links oben)
+  # Slots a player has locked as long as they do not change their exceptions themselves. Entries:
+  #   hotbar           the whole hotbar
+  #   hotbar-<1-9>     one hotbar slot
+  #   inventory        all 27 inventory slots
+  #   inventory-<1-27> one inventory slot (row by row from the top left)
   default-locked:
     - hotbar
 
-  # Mindestabstand zwischen zwei Sortierungen eines Spielers (Ticks, 20 = 1 Sekunde, 0 = keiner).
+  # Minimum time between two sorts of a player (ticks, 20 = 1 second, 0 = none).
   cooldown-ticks: 10
 
-  # Behälter, die man mit der Sortier-Taste sortieren kann (Maus über dem Behälter). Permission:
-  # mrtoolbar.sort.containers. Leere Liste = nur das eigene Inventar.
-  #   chest       Kiste, Doppelkiste, Truhe mit Falle, Kisten-Lore, Kistenboot
-  #   barrel      Fass
-  #   shulker_box Shulker-Kiste
-  #   ender_chest eigene Endertruhe
-  #   hopper      Trichter, Trichter-Lore
-  #   dispenser   Werfer
-  #   dropper     Spender
-  # Menüs von Plugins (z.B. /toolbar, MRadmin) sind nie betroffen, auch wenn sie wie Kisten aussehen.
+  # Containers that can be sorted with the sort key (mouse over the container). Permission:
+  # mrtoolbar.sort.containers. Empty list = only the player's own inventory.
+  #   chest       chest, double chest, trapped chest, minecart with chest, chest boat
+  #   barrel      barrel
+  #   shulker_box shulker box
+  #   ender_chest the player's own ender chest
+  #   hopper      hopper, minecart with hopper
+  #   dispenser   dispenser
+  #   dropper     dropper
+  # Plugin menus (e.g. /toolbar, MRadmin) are never affected, even if they look like chests.
   containers:
     - chest
     - barrel
@@ -134,39 +138,39 @@ sorting:
 
 
 # ------------------------------------------------------------------------------
-#   3) CLIENT-MOD
+#   3) CLIENT MOD
 # ------------------------------------------------------------------------------
 mod:
-  # Älteste Version des MRtoolbar-Mods, die noch erlaubt ist (z.B. "0.2.1", leer = jede kompatible Version).
-  # Welche Mod-Versionen grundsätzlich zum Plugin passen, ist im Plugin eingebaut (Protokollversion) - hier kann
-  # man zusätzlich ältere Versionen aussperren, z.B. wegen eines Fehlers im Mod.
+  # Oldest version of the MRtoolbar mod that is still allowed (e.g. "0.2.1", empty = any compatible version).
+  # Which mod versions fit the plugin in principle is built into the plugin (protocol version) - here you
+  # can additionally lock out older versions, e.g. because of a bug in the mod.
   minimum-version: ""
 
-  # Wo Spieler den Mod herunterladen (Link in den Hinweisen).
+  # Where players download the mod (link in the notices).
   download-url: "https://mrtechnology.marcelr.at/download/mrtoolbar/"
 
-  # So lange wartet der Server nach dem Betreten auf den Mod, bevor der Spieler als "ohne Mod" gilt (Sekunden).
+  # How long the server waits for the mod after joining before the player counts as "without mod" (seconds).
   handshake-seconds: 5
 
 
 # ------------------------------------------------------------------------------
-#   4) UPDATE-CHECK
+#   4) UPDATE CHECK
 # ------------------------------------------------------------------------------
 update-checker:
   enabled: true
-  # Quelle: "github" (GitHub Releases, Standard) oder "modrinth"
+  # Source: "github" (GitHub Releases, default) or "modrinth"
   source: github
-  # Auch Beta-/Alpha-Versionen melden. Läuft selbst eine Vorabversion (0.x), werden sie immer gemeldet.
+  # Also report beta/alpha versions. If a pre-release (0.x) is running, they are always reported.
   include-prereleases: false
   interval-hours: 6
-  # Spieler mit "mrtoolbar.admin.update" beim Betreten des Servers informieren.
+  # Notify players with "mrtoolbar.admin.update" when they join the server.
   notify-on-join: true
 
 
 # ------------------------------------------------------------------------------
-#   5) MENÜS
+#   5) MENUS
 # ------------------------------------------------------------------------------
 gui:
-  # Wie oft offene Menüs aktualisiert werden (in Ticks, 20 = 1 Sekunde).
+  # How often open menus are refreshed (in ticks, 20 = 1 second).
   refresh-ticks: 20
   sounds: true
