@@ -49,7 +49,14 @@ public final class MRToolbarCommand implements TabExecutor {
         Messages messages = plugin.messages();
         String sub = args.length == 0 ? "version" : args[0].toLowerCase(Locale.ROOT);
         switch (sub) {
-            case "version", "ver" -> sendVersion(sender);
+            case "version", "ver" -> {
+                // For players too (in mrtoolbar.player).
+                if (sender.hasPermission("mrtoolbar.version")) {
+                    sendVersion(sender);
+                } else {
+                    messages.send(sender, "no-permission");
+                }
+            }
             case "reload" -> {
                 if (!sender.hasPermission(PERM_RELOAD)) {
                     messages.send(sender, "no-permission");

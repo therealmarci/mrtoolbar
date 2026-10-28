@@ -6,6 +6,21 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+## [0.5.0] - 2026-10-28
+
+> [!WARNING]
+> **Neue Permission-Gruppen:** Das Paket `mrtoolbar.admin` gibt es nicht mehr. Stattdessen gibt es in allen MRtechnology-Plugins dieselben Gruppen `<plugin>.player` und `<plugin>.groups.support|staff|admin`. Admin-Gruppen umstellen, z.B. `/lp group admin permission unset mrtoolbar.admin` und `/lp group admin permission set mrtoolbar.groups.admin true`.
+
+### Neu
+- **Permission-Gruppen:** `mrtoolbar.groups.support` (Admin-Menü, Gürtel anderer ansehen), `mrtoolbar.groups.staff` (+ `/mrtoolbar debug`) und `mrtoolbar.groups.admin` (alles). Jede Gruppe enthält die darunter und `mrtoolbar.player`.
+- **Knopf im MRadmin-Dashboard:** öffnet das Admin-Menü jetzt direkt über die Modul-API.
+
+### Entfernt
+- **Paket `mrtoolbar.admin`:** ersetzt durch `mrtoolbar.groups.admin`.
+
+### Behoben & geändert
+- **`/mrtoolbar version` nur noch mit Permission:** `mrtoolbar.version` (in `mrtoolbar.player`) - bisher durfte das jeder.
+
 ## [0.4.0] - 2026-10-27
 
 ### Neu
