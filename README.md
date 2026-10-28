@@ -89,7 +89,7 @@ Ob es ein Mod-Update gibt, zeigt `/toolbar` im Buch oben links.
 | `/mrtoolbar view <spieler>` | Gürtel eines Spielers ansehen (nur lesen) | `mrtoolbar.admin.view` |
 | `/mrtoolbar debug [spieler]` | Mod-Verbindung, Status und Tool-Slots eines Spielers | `mrtoolbar.admin.debug` |
 | `/mrtoolbar reload` | Config und Sprachdateien neu laden | `mrtoolbar.admin.reload` |
-| `/mrtoolbar version` | Version und Update-Status | alle |
+| `/mrtoolbar version` | Version und Update-Status | `mrtoolbar.version` (in `mrtoolbar.player`) |
 
 ### Permissions
 | Permission | Standard | Wofür |

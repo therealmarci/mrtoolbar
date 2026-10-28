@@ -22,9 +22,10 @@ permissions:
   # the team - each group contains the one below. The single permissions further down stay usable on their own;
   # the slot and belt sizes (mrtoolbar.slots.<n>, mrtoolbar.belt.<n>) are in no group on purpose.
   mrtoolbar.player:
-    description: "Player: tool slots and /toolbar, sort the inventory and open containers."
+    description: "Player: tool slots and /toolbar, sort the inventory and open containers; /mrtoolbar version."
     default: op
     children:
+      mrtoolbar.version: true
       mrtoolbar.use: true
       mrtoolbar.sort: true
       mrtoolbar.sort.containers: true
@@ -50,6 +51,9 @@ permissions:
       mrtoolbar.admin.update: true
 
   # ------------------------------------------------------------------ Single permissions
+  mrtoolbar.version:
+    description: /mrtoolbar version - version, update status and links.
+    default: op
   mrtoolbar.sort:
     description: Sort the inventory (key in the mod or button in the menu) and set your own exceptions - /toolbar sort.
     default: op

@@ -16,6 +16,9 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 ### Entfernt
 - **Paket `mrtoolbar.admin`:** ersetzt durch `mrtoolbar.groups.admin`.
 
+### Behoben & geändert
+- **`/mrtoolbar version` nur noch mit Permission:** `mrtoolbar.version` (in `mrtoolbar.player`) - bisher durfte das jeder.
+
 ## [0.4.0] - 2026-10-27
 
 ### Neu
