@@ -6,6 +6,8 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+## [0.5.0] - 2026-10-28
+
 > [!WARNING]
 > **Neue Permission-Gruppen:** Das Paket `mrtoolbar.admin` gibt es nicht mehr. Stattdessen gibt es in allen MRtechnology-Plugins dieselben Gruppen `<plugin>.player` und `<plugin>.groups.support|staff|admin`. Admin-Gruppen umstellen, z.B. `/lp group admin permission unset mrtoolbar.admin` und `/lp group admin permission set mrtoolbar.groups.admin true`.
 
