@@ -21,6 +21,13 @@ Spieler **ohne** Mod spielen ganz normal auf dem Server, nur ohne Werkzeugleiste
 | Sprachen | Deutsch, Englisch - automatisch wie im Minecraft-Client |
 | Status | Vorabversion (0.x) - Bedienung und Config können sich bis 1.0.0 noch ändern |
 
+## Was kann MRtoolbar?
+- **Tool-Slots:** Ein Hotbar-Slot wird zum Gürtel mit bis zu 8 Werkzeugen. Du schaltest per Taste oder `Alt` + Mausrad durch - die Hotbar bleibt frei für Blöcke und Essen.
+- **Inventar und Kisten sortieren** mit einem Mausrad-Klick. Welche Slots dabei bleiben, legst du selbst fest.
+- **Hotbar-Design:** Rahmen, Ecken, Unterstrich, Hintergrund oder eine eigene Textur für deine Tool-Slots.
+- **Sicher:** Alle Items liegen auf dem Server, der Mod zeigt nur an. Spieler ohne Mod spielen ganz normal und holen ihre Tools mit `/toolbar takeback` zurück.
+- **Für Admins:** Anzahl der Slots und Gürtelgröße per Permission, Übersicht über alle Gürtel, alles in der `config.yml` einstellbar.
+
 ---
 
 ## Für Spieler
