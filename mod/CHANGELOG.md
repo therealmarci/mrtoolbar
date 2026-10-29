@@ -6,6 +6,11 @@ Versionen - welche Plugin-Versionen passen, steht in [docs/COMPATIBILITY.md](../
 
 ## [Unveröffentlicht]
 
+## [1.0.0] - 2026-10-29
+
+### Behoben & geändert
+- **Stabile Version 1.0.0:** Der Mod ist ausgereift und ändert sich gegenüber 0.2.2 nicht. Er passt zum Plugin 1.0.0 (und zu allen Plugin-Versionen mit Protokoll 2).
+
 ## [0.2.2] - 2026-10-27
 
 ### Behoben & geändert

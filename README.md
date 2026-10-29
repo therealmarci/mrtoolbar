@@ -19,7 +19,7 @@ Spieler **ohne** Mod spielen ganz normal auf dem Server, nur ohne Werkzeugleiste
 | Client | Fabric Loader + Fabric API für Minecraft 26.3 |
 | Benötigt | nichts - LuckPerms empfohlen, MRadmin optional |
 | Sprachen | Deutsch, Englisch - automatisch wie im Minecraft-Client |
-| Status | Vorabversion (0.x) - Bedienung und Config können sich bis 1.0.0 noch ändern |
+| Status | stabil (1.x) - Plugin und Mod |
 
 ## Was kann MRtoolbar?
 - **Tool-Slots:** Ein Hotbar-Slot wird zum Gürtel mit bis zu 8 Werkzeugen. Du schaltest per Taste oder `Alt` + Mausrad durch - die Hotbar bleibt frei für Blöcke und Essen.

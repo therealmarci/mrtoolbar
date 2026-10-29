@@ -6,6 +6,12 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+## [1.0.0] - 2026-10-29
+
+### Behoben & geändert
+- **Stabile Version 1.0.0:** Funktionen, Config und Permissions gelten ab jetzt als fest; Änderungen daran gibt es nur noch mit einer neuen Hauptversion.
+- **Aufgeräumt:** ein nie benutzter Text (`switched`) ist aus den Sprachdateien entfernt, die Anleitung hat einen Überblick „Was kann MRtoolbar?“.
+
 ## [0.5.0] - 2026-10-28
 
 > [!WARNING]
