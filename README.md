@@ -143,6 +143,8 @@ Alles steht kommentiert in `plugins/MRtoolbar/config.yml`. Änderungen übernimm
 | `sorting.containers` | Kiste, Fass, Shulker … | Welche Behälter sortiert werden können (Plugin-Menüs nie) |
 | `mod.minimum-version` | leer | Ältere Mod-Versionen aussperren, z.B. `0.2.1` |
 | `mod.download-url` | Download-Seite | Link zum Mod in den Hinweisen |
+| `gui.refresh-ticks` · `gui.sounds` | `20` · `true` | Wie oft offene Menüs aktualisiert werden (Ticks) · Klick-Töne in Menüs |
+| `update-checker.*` | an, `github`, alle 6 h | Hinweis auf neue Versionen (Quelle, Vorabversionen, Prüfintervall) |
 
 Alle Texte stehen in `plugins/MRtoolbar/lang/de.yml` und `en.yml` ([MiniMessage](https://docs.advntr.dev/minimessage/format.html)). Plugin und Mod richten sich nach der Minecraft-Sprache des Spielers - so gibt es keine gemischten Sprachen. Eine eigene `fr.yml` bekommen französische Spieler automatisch.
 
