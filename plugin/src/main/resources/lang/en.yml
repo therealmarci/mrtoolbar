@@ -23,7 +23,6 @@ toolbar-disabled: "<prefix><gray>Toolbar switched off - tool slots are normal sl
 
 # ------------------------------------------------------------------ Switching
 # Action bar after switching. <tool> = name, <position> = place in the belt, <count> = tools in total
-switched: "<gold><tool></gold> <dark_gray>(<position>/<count>)"
 belt-empty: "<gray>Your belt is empty - open it and put tools in"
 belt-no-other: "<gray>No other tool in the belt"
 belt-not-allowed: "<prefix><red>This can't go into the belt."

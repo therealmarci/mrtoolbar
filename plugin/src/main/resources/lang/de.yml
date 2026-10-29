@@ -23,7 +23,6 @@ toolbar-disabled: "<prefix><gray>Werkzeugleiste ausgeschaltet - Tool-Slots sind 
 
 # ------------------------------------------------------------------ Wechseln
 # Actionbar nach dem Wechseln. <tool> = Name, <position> = Platz im Gürtel, <count> = Tools insgesamt
-switched: "<gold><tool></gold> <dark_gray>(<position>/<count>)"
 belt-empty: "<gray>Dein Gürtel ist leer - öffne ihn und leg Tools hinein"
 belt-no-other: "<gray>Kein weiteres Tool im Gürtel"
 belt-not-allowed: "<prefix><red>Das kann nicht in den Gürtel."

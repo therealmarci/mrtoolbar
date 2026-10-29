@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+/** Main class of the MRtoolbar plugin: config, texts, the mod channel (protocol) and the tool slots of all players. */
 public final class MRToolbar extends JavaPlugin {
 
     private FileConfiguration config;
