@@ -28,7 +28,7 @@ public final class MRToolbar extends JavaPlugin {
      * lang-version 4: toolbar only with the mod (help, belt-empty and usage texts changed); 5: /mrtoolbar debug;
      * 6: gui, view; 7: inventory sorting; 8: sorting containers.
      */
-    private final Messages messages = new Messages(9, Map.of(
+    private final Messages messages = new Messages(10, Map.of(
             4, Set.of("belt-empty", "gui-help-lore", "gui-slot-tool-lore", "gui-belt-info-name", "gui-belt-info-lore",
                     "toolbar-usage"),
             5, Set.of("admin-usage"),
@@ -36,7 +36,13 @@ public final class MRToolbar extends JavaPlugin {
             7, Set.of("toolbar-usage"),
             8, Set.of("gui-sort-help-lore"),
             // 9: "Website | GitHub" in /mrtoolbar version.
-            9, Set.of("version-links")));
+            9, Set.of("version-links"),
+            // 10: short chat messages, details on hover.
+            10, Set.of(
+                    "toolbar-disabled", "slot-cleared-dropped", "limits-reduced", "toolbar-paused", "slot-removed",
+                    "slot-no-room", "gui-help-lore", "gui-sort-lore", "gui-sort-help-lore", "gui-belt-info-lore",
+                    "mod-required", "mod-required-take-back", "mod-missing-notice", "mod-too-old", "mod-too-new",
+                    "take-back-done")));
     private final ToolbarManager toolbars = new ToolbarManager(this);
     private final MRadminLink mradmin = new MRadminLink(this);
     private final ModBridge modBridge = new ModBridge(this);

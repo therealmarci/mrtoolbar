@@ -6,6 +6,9 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+### Behoben & geändert
+- **Kurze Chat- und Menütexte:** Chatnachrichten sind jetzt eine knappe Zeile; Einzelheiten erscheinen, wenn man mit der Maus darüberfährt, in der Konsole in Klammern dahinter. Auch die Hilfetexte im Menü (Hilfe, Sortieren, Gürtel) sind kürzer (`lang-version` 10 - eigene Änderungen an diesen Texten in `lang/de.yml` und `lang/en.yml` werden dabei ersetzt). Nur das Plugin, der Mod bleibt unverändert.
+
 ## [1.0.0] - 2026-10-29
 
 ### Behoben & geändert

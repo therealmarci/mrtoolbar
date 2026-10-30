@@ -10,7 +10,7 @@
 # ==============================================================================
 
 # Nicht ändern - damit erkennt das Plugin bei Updates, welche Texte erneuert werden müssen.
-lang-version: 9
+lang-version: 10
 
 prefix: "<dark_gray>[<gold>MRtoolbar</gold>]</dark_gray> "
 no-permission: "<prefix><red>Dazu hast du keine Berechtigung."
@@ -19,22 +19,22 @@ reloaded: "<prefix><green>Konfiguration neu geladen."
 admin-usage: "<prefix><gray>Verwendung: <white>/<label> <reload|version|gui|view <spieler>|debug [spieler]>"
 toolbar-usage: "<prefix><gray>Verwendung: <white>/<label> [on|off|takeback|sort]"
 toolbar-enabled: "<prefix><green>Werkzeugleiste eingeschaltet."
-toolbar-disabled: "<prefix><gray>Werkzeugleiste ausgeschaltet - Tool-Slots sind jetzt normale Slots, deine Gürtel bleiben erhalten."
+toolbar-disabled: "<prefix><hover:show_text:'<gray>Tool-Slots sind normale Slots, die Gürtel bleiben.'><gray>Werkzeugleiste aus.</hover>"
 
 # ------------------------------------------------------------------ Wechseln
 # Actionbar nach dem Wechseln. <tool> = Name, <position> = Platz im Gürtel, <count> = Tools insgesamt
 belt-empty: "<gray>Dein Gürtel ist leer - öffne ihn und leg Tools hinein"
 belt-no-other: "<gray>Kein weiteres Tool im Gürtel"
 belt-not-allowed: "<prefix><red>Das kann nicht in den Gürtel."
-slot-cleared-dropped: "<prefix><gold>Im Tool-Slot lag etwas, das nicht in den Gürtel gehört - dein Inventar ist voll, es liegt jetzt vor dir."
-limits-reduced: "<prefix><gold><count> Tool(s) passten nicht mehr in deine Gürtel und sind jetzt in deinem Inventar."
-toolbar-paused: "<prefix><gray>Die Werkzeugleiste ist gerade pausiert (Adminmodus oder Duell) - danach geht alles wieder."
+slot-cleared-dropped: "<prefix><hover:show_text:'<gray>Gehörte nicht in den Gürtel, dein Inventar war voll.'><gold>Item aus dem Tool-Slot liegt vor dir.</hover>"
+limits-reduced: "<prefix><hover:show_text:'<gray>Passten nicht mehr in deine Gürtel.'><gold><count> Tool(s) jetzt im Inventar.</hover>"
+toolbar-paused: "<prefix><hover:show_text:'<gray>Admin-Modus oder Duell - danach geht alles wieder.'><gray>Werkzeugleiste pausiert.</hover>"
 
 # ------------------------------------------------------------------ Tool-Slots
 slot-added: "<prefix><green>Slot <slot> ist jetzt ein Tool-Slot."
-slot-removed: "<prefix><gray>Slot <slot> ist wieder ein normaler Slot. <count> Tool(s) aus dem Gürtel sind in deinem Inventar."
+slot-removed: "<prefix><hover:show_text:'<gray><count> Tool(s) aus dem Gürtel sind im Inventar.'><gray>Slot <slot> ist wieder normal.</hover>"
 slot-limit: "<prefix><red>Du kannst höchstens <max> Tool-Slot(s) haben."
-slot-no-room: "<prefix><red>In Slot <slot> liegt ein Item und dein Inventar ist voll - mach erst Platz."
+slot-no-room: "<prefix><red>Slot <slot> belegt, Inventar voll - erst Platz machen."
 
 state-on: "<green>an</green>"
 state-off: "<red>aus</red>"
@@ -43,13 +43,9 @@ state-off: "<red>aus</red>"
 gui-title-main: "Werkzeugleiste"
 gui-help-name: "<gold>Werkzeugleiste"
 gui-help-lore:
-  - "<gray>Mach Hotbar-Slots zu <gold>Tool-Slots</gold>."
-  - "<gray>Ein Tool-Slot enthält nur Tools aus"
-  - "<gray>seinem <white>Gürtel</white>. Tasten zum Öffnen und"
-  - "<gray>Durchschalten stellst du in Minecraft"
-  - "<gray>ein: <white>Optionen → Steuerung → MRtoolbar</white>"
-  - ""
-  - "<gray>Die Zeile darunter ist deine Hotbar."
+  - "<gray>Hotbar-Slots zu <gold>Tool-Slots</gold> machen,"
+  - "<gray>jeder mit eigenem <white>Gürtel</white>."
+  - "<gray>Tasten: <white>Optionen → Steuerung → MRtoolbar"
 gui-help-versions:
   - ""
   - "<gray>Server-Plugin: <white><server></white> <server-status>"
@@ -92,10 +88,7 @@ gui-enabled-lore:
   - "<yellow>Klick: <gray>an/aus"
 gui-sort-name: "<gold>Inventar sortieren"
 gui-sort-lore:
-  - "<gray>Welche Slots beim Sortieren"
-  - "<gray>bleiben, wo sie sind - und in"
-  - "<gray>welcher Reihenfolge sortiert wird."
-  - ""
+  - "<gray>Welche Slots bleiben, Reihenfolge."
   - "<yellow>Klick: <gray>Ausnahmen festlegen"
 
 # ------------------------------------------------------------------ Inventar sortieren
@@ -151,20 +144,10 @@ gui-sort-now-lore:
   - "<yellow>Klick: <gray>sortieren"
 gui-sort-help-name: "<gold>Inventar sortieren"
 gui-sort-help-lore:
-  - "<gray>Oben dein Inventar, darunter die Hotbar."
-  - "<green>Grün</green><gray> = wird sortiert, <red>Rot</red><gray> = bleibt."
-  - "<gray>Du kannst auch direkt in dein echtes"
-  - "<gray>Inventar unten klicken."
-  - ""
-  - "<gray>Gleiche Items werden zusammengelegt."
-  - "<gray>Rüstung, Zweithand und Tool-Slots"
-  - "<gray>werden nie angefasst."
-  - ""
-  - "<gray>Schneller: <white>Mausrad-Klick</white><gray> in einem"
-  - "<gray>offenen Inventar. Über einer Kiste,"
-  - "<gray>einem Fass, Trichter usw. sortiert er"
-  - "<gray>stattdessen den Behälter. Ändern unter"
-  - "<white>Optionen → Steuerung → MRtoolbar"
+  - "<green>Grün</green><gray> = sortiert, <red>Rot</red><gray> = bleibt."
+  - "<gray>Rüstung, Zweithand, Tool-Slots nie."
+  - "<gray>Schneller: <white>Mausrad-Klick</white><gray> im Inventar,"
+  - "<gray>über einer Kiste sortiert er die Kiste."
 
 # ------------------------------------------------------------------ Gürtel
 gui-title-belt: "Gürtel · Slot <slot>"
@@ -173,21 +156,18 @@ gui-belt-locked-lore:
   - "<gray>Dein Gürtel hat nicht mehr Plätze."
 gui-belt-info-name: "<gold>Gürtel <dark_gray>· <white><size> Plätze"
 gui-belt-info-lore:
-  - "<gray>Leg Tools hinein oder nimm sie"
-  - "<gray>heraus - wie bei einer Kiste."
-  - ""
-  - "<gray>Beim Schließen kommt dein Tool"
-  - "<gray>wieder in den Tool-Slot."
+  - "<gray>Tools rein oder raus wie bei einer Kiste."
+  - "<gray>Beim Schließen zurück in den Tool-Slot."
 
 # ------------------------------------------------------------------ Client-Mod
 # <download> = Link zum Mod (Adresse in der config.yml)
 mod-download-label: "<aqua><u>[MRtoolbar-Mod herunterladen]</u></aqua>"
-mod-required: "<prefix><gray>Die Werkzeugleiste braucht den <gold>MRtoolbar-Mod</gold> (Fabric). <download>"
-mod-required-take-back: "<prefix><gray>Deine Tools aus den Gürteln holst du mit <click:run_command:'/toolbar takeback'><yellow><u>[Tools zurückholen]</u></yellow></click> zurück ins Inventar."
-mod-missing-notice: "<prefix><gray>Ohne <gold>MRtoolbar-Mod</gold> sind deine Tool-Slots pausiert - deine Tools liegen sicher im Gürtel. <download>"
-mod-too-old: "<prefix><red>Dein MRtoolbar-Mod (<version>) ist zu alt für diesen Server - bitte aktualisieren. <download>"
-mod-too-new: "<prefix><red>Dein MRtoolbar-Mod (<version>) ist neuer als das Plugin auf diesem Server. Bitte melde das einem Admin oder nutze eine passende Mod-Version. <download>"
-take-back-done: "<prefix><green><count> Tool(s) sind jetzt in deinem Inventar, deine Tool-Slots sind wieder normale Slots."
+mod-required: "<prefix><gray>Braucht den <gold>MRtoolbar-Mod</gold> (Fabric). <download>"
+mod-required-take-back: "<prefix><gray>Tools aus den Gürteln: <click:run_command:'/toolbar takeback'><yellow><u>[zurückholen]</u></yellow></click>"
+mod-missing-notice: "<prefix><hover:show_text:'<gray>Deine Tools liegen sicher im Gürtel.'><gray>Ohne <gold>MRtoolbar-Mod</gold> pausiert.</hover> <download>"
+mod-too-old: "<prefix><red>Mod <version> zu alt - bitte aktualisieren. <download>"
+mod-too-new: "<prefix><hover:show_text:'<gray>Bitte einem Admin melden oder eine passende Mod-Version nutzen.'><red>Mod <version> neuer als das Plugin.</hover> <download>"
+take-back-done: "<prefix><hover:show_text:'<gray>Deine Tool-Slots sind wieder normale Slots.'><green><count> Tool(s) im Inventar.</hover>"
 
 # ------------------------------------------------------------------ Team (/mrtoolbar gui, Gürtel ansehen, MRadmin)
 gui-back-name: "<yellow>Zurück"
