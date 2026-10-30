@@ -10,7 +10,7 @@
 # ==============================================================================
 
 # Do not change - tells the plugin which texts have to be renewed on updates.
-lang-version: 9
+lang-version: 10
 
 prefix: "<dark_gray>[<gold>MRtoolbar</gold>]</dark_gray> "
 no-permission: "<prefix><red>You don't have permission to do that."
@@ -19,22 +19,22 @@ reloaded: "<prefix><green>Configuration reloaded."
 admin-usage: "<prefix><gray>Usage: <white>/<label> <reload|version|gui|view <player>|debug [player]>"
 toolbar-usage: "<prefix><gray>Usage: <white>/<label> [on|off|takeback|sort]"
 toolbar-enabled: "<prefix><green>Toolbar switched on."
-toolbar-disabled: "<prefix><gray>Toolbar switched off - tool slots are normal slots now, your belts are kept."
+toolbar-disabled: "<prefix><hover:show_text:'<gray>Tool slots are normal slots, the belts are kept.'><gray>Toolbar off.</hover>"
 
 # ------------------------------------------------------------------ Switching
 # Action bar after switching. <tool> = name, <position> = place in the belt, <count> = tools in total
 belt-empty: "<gray>Your belt is empty - open it and put tools in"
 belt-no-other: "<gray>No other tool in the belt"
 belt-not-allowed: "<prefix><red>This can't go into the belt."
-slot-cleared-dropped: "<prefix><gold>Something that does not belong to the belt was in the tool slot - your inventory is full, it is lying in front of you now."
-limits-reduced: "<prefix><gold><count> tool(s) no longer fit into your belts and are now in your inventory."
-toolbar-paused: "<prefix><gray>The toolbar is paused right now (admin mode or duel) - everything works again afterwards."
+slot-cleared-dropped: "<prefix><hover:show_text:'<gray>It did not belong to the belt, your inventory was full.'><gold>Item from the tool slot lies in front of you.</hover>"
+limits-reduced: "<prefix><hover:show_text:'<gray>They no longer fit into your belts.'><gold><count> tool(s) now in your inventory.</hover>"
+toolbar-paused: "<prefix><hover:show_text:'<gray>Admin mode or duel - everything works again afterwards.'><gray>Toolbar paused.</hover>"
 
 # ------------------------------------------------------------------ Tool slots
 slot-added: "<prefix><green>Slot <slot> is now a tool slot."
-slot-removed: "<prefix><gray>Slot <slot> is a normal slot again. <count> tool(s) from the belt are in your inventory."
+slot-removed: "<prefix><hover:show_text:'<gray><count> tool(s) from the belt are in your inventory.'><gray>Slot <slot> is normal again.</hover>"
 slot-limit: "<prefix><red>You can have at most <max> tool slot(s)."
-slot-no-room: "<prefix><red>There is an item in slot <slot> and your inventory is full - make room first."
+slot-no-room: "<prefix><red>Slot <slot> taken, inventory full - make room first."
 
 state-on: "<green>on</green>"
 state-off: "<red>off</red>"
@@ -43,12 +43,9 @@ state-off: "<red>off</red>"
 gui-title-main: "Toolbar"
 gui-help-name: "<gold>Toolbar"
 gui-help-lore:
-  - "<gray>Turn hotbar slots into <gold>tool slots</gold>."
-  - "<gray>A tool slot only holds tools of its"
-  - "<white>belt</white><gray>. Keys to open and switch are set"
-  - "<gray>in Minecraft: <white>Options → Controls → MRtoolbar</white>"
-  - ""
-  - "<gray>The row below is your hotbar."
+  - "<gray>Turn hotbar slots into <gold>tool slots</gold>,"
+  - "<gray>each with its own <white>belt</white>."
+  - "<gray>Keys: <white>Options → Controls → MRtoolbar"
 gui-help-versions:
   - ""
   - "<gray>Server plugin: <white><server></white> <server-status>"
@@ -91,10 +88,7 @@ gui-enabled-lore:
   - "<yellow>Click: <gray>on/off"
 gui-sort-name: "<gold>Sort inventory"
 gui-sort-lore:
-  - "<gray>Which slots stay where they are"
-  - "<gray>when sorting - and in which"
-  - "<gray>order items are sorted."
-  - ""
+  - "<gray>Which slots stay, sort order."
   - "<yellow>Click: <gray>set exceptions"
 
 # ------------------------------------------------------------------ Sorting the inventory
@@ -150,20 +144,10 @@ gui-sort-now-lore:
   - "<yellow>Click: <gray>sort"
 gui-sort-help-name: "<gold>Sorting the inventory"
 gui-sort-help-lore:
-  - "<gray>Your inventory on top, the hotbar below."
   - "<green>Green</green><gray> = sorted, <red>red</red><gray> = stays."
-  - "<gray>You can also click straight into your"
-  - "<gray>real inventory below."
-  - ""
-  - "<gray>Equal items are stacked together."
-  - "<gray>Armour, offhand and tool slots are"
-  - "<gray>never touched."
-  - ""
-  - "<gray>Faster: <white>middle click</white><gray> in an open"
-  - "<gray>inventory. Over a chest, barrel,"
-  - "<gray>hopper etc. it sorts the container"
-  - "<gray>instead. Change it in"
-  - "<white>Options → Controls → MRtoolbar"
+  - "<gray>Armour, offhand, tool slots never."
+  - "<gray>Faster: <white>middle click</white><gray> in an inventory,"
+  - "<gray>over a chest it sorts the chest."
 
 # ------------------------------------------------------------------ Belt
 gui-title-belt: "Belt · slot <slot>"
@@ -172,21 +156,18 @@ gui-belt-locked-lore:
   - "<gray>Your belt has no more places."
 gui-belt-info-name: "<gold>Belt <dark_gray>· <white><size> places"
 gui-belt-info-lore:
-  - "<gray>Put tools in or take them out -"
-  - "<gray>just like a chest."
-  - ""
-  - "<gray>When you close it, your tool goes"
-  - "<gray>back into the tool slot."
+  - "<gray>Put tools in or out like a chest."
+  - "<gray>Closing puts it back into the tool slot."
 
 # ------------------------------------------------------------------ Client mod
 # <download> = link to the mod (address in config.yml)
 mod-download-label: "<aqua><u>[Download the MRtoolbar mod]</u></aqua>"
-mod-required: "<prefix><gray>The toolbar needs the <gold>MRtoolbar mod</gold> (Fabric). <download>"
-mod-required-take-back: "<prefix><gray>Get the tools out of your belts with <click:run_command:'/toolbar takeback'><yellow><u>[Take tools back]</u></yellow></click>."
-mod-missing-notice: "<prefix><gray>Without the <gold>MRtoolbar mod</gold> your tool slots are paused - your tools are safe in the belt. <download>"
-mod-too-old: "<prefix><red>Your MRtoolbar mod (<version>) is too old for this server - please update it. <download>"
-mod-too-new: "<prefix><red>Your MRtoolbar mod (<version>) is newer than the plugin on this server. Please tell an admin or use a matching mod version. <download>"
-take-back-done: "<prefix><green><count> tool(s) are now in your inventory, your tool slots are normal slots again."
+mod-required: "<prefix><gray>Needs the <gold>MRtoolbar mod</gold> (Fabric). <download>"
+mod-required-take-back: "<prefix><gray>Tools out of the belts: <click:run_command:'/toolbar takeback'><yellow><u>[take back]</u></yellow></click>"
+mod-missing-notice: "<prefix><hover:show_text:'<gray>Your tools are safe in the belt.'><gray>Paused without the <gold>MRtoolbar mod</gold>.</hover> <download>"
+mod-too-old: "<prefix><red>Mod <version> too old - please update. <download>"
+mod-too-new: "<prefix><hover:show_text:'<gray>Please tell an admin or use a matching mod version.'><red>Mod <version> newer than the plugin.</hover> <download>"
+take-back-done: "<prefix><hover:show_text:'<gray>Your tool slots are normal slots again.'><green><count> tool(s) in your inventory.</hover>"
 
 # ------------------------------------------------------------------ Team (/mrtoolbar gui, viewing belts, MRadmin)
 gui-back-name: "<yellow>Back"
