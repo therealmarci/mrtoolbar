@@ -77,6 +77,13 @@ public final class PlayerToolbar {
         this.sortMode = mode;
     }
 
+    /** Copies what the player set for themselves, not their tools. */
+    void takeSettings(PlayerToolbar other) {
+        enabled = other.enabled;
+        sortLocked = other.sortLocked;
+        sortMode = other.sortMode;
+    }
+
     // ------------------------------------------------------------------ storage
 
     private record Keys(NamespacedKey data, NamespacedKey version, NamespacedKey enabled, NamespacedKey slots,

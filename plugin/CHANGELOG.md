@@ -6,6 +6,9 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+### Neu
+- **Eigene Gürtel pro Inventar-Gruppe:** Mit Multiverse-Inventories hat jede Gruppe eigene Tool-Slots und Gürtel, die beim Inventarwechsel mitwechseln. Bisher trugen Gürtel Werkzeuge an der Trennung der Gruppen vorbei. An/Aus und Sortier-Einstellungen gelten überall. Ohne Multiverse-Inventories ändert sich nichts.
+
 ## [1.0.1] - 2026-10-30
 
 ### Behoben & geändert
