@@ -9,8 +9,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.permissions.PermissionAttachmentInfo;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -60,6 +62,33 @@ public final class ToolbarManager {
     public void unload(Player player) {
         save(player);
         online.remove(player.getUniqueId());
+    }
+
+    /**
+     * Another plugin replaces the inventory (see {@link InventoriesHook}): the belts of {@code from} are put away and
+     * those of {@code to} take over. The selected tools stay in the inventory they lie in, so both sides stay whole.
+     * Stored with the player like the active toolbar. How the player likes it (on/off, sorting) goes with them.
+     */
+    void switchInventory(Player player, String from, String to) {
+        if (player.getOpenInventory().getTopInventory().getHolder(false) instanceof BeltEditor) {
+            player.closeInventory();
+        }
+        PersistentDataContainer pdc = player.getPersistentDataContainer();
+        PlayerToolbar current = get(player);
+        PersistentDataContainer stored = pdc.getAdapterContext().newPersistentDataContainer();
+        current.write(plugin, stored);
+        pdc.set(inventoryKey(from), PersistentDataType.TAG_CONTAINER, stored);
+
+        PersistentDataContainer waiting = pdc.get(inventoryKey(to), PersistentDataType.TAG_CONTAINER);
+        PlayerToolbar next = waiting == null ? new PlayerToolbar() : PlayerToolbar.read(plugin, waiting);
+        next.takeSettings(current);
+        online.put(player.getUniqueId(), next);
+        save(player);
+    }
+
+    private NamespacedKey inventoryKey(String inventory) {
+        // Names may contain anything, keys only a few characters.
+        return new NamespacedKey(plugin, "inventory-" + UUID.nameUUIDFromBytes(inventory.getBytes(StandardCharsets.UTF_8)));
     }
 
     // ------------------------------------------------------------------ limits

@@ -2,7 +2,7 @@ name: MRtoolbar
 version: '${version}'
 main: at.marcelr.mrtoolbar.MRToolbar
 api-version: '${mcVersion}'
-softdepend: [MRadmin]
+softdepend: [MRadmin, Multiverse-Inventories]
 author: _therealmarci
 website: ${website}/docs/${websiteSlug}/
 description: Tool slots in the hotbar with a tool belt - needs the MRtoolbar mod (Fabric).

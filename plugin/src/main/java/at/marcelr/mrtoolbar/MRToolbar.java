@@ -66,6 +66,13 @@ public final class MRToolbar extends JavaPlugin {
         getServer().getPluginManager().registerEvents(menuListener, this);
         getServer().getPluginManager().registerEvents(new ProtectionListener(this), this);
         getServer().getPluginManager().registerEvents(modBridge, this);
+        if (getServer().getPluginManager().getPlugin("Multiverse-Inventories") != null) {
+            try {
+                getServer().getPluginManager().registerEvents(new InventoriesHook(toolbars), this);
+            } catch (LinkageError e) {
+                getLogger().warning("This version of Multiverse-Inventories is not supported, belts are shared: " + e);
+            }
+        }
         // Optional: MRadmin (module API) - dashboard button, player menu, admin mode pauses the belt.
         getServer().getPluginManager().registerEvents(mradmin, this);
         mradmin.connect();

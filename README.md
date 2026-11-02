@@ -162,6 +162,9 @@ MRtoolbar läuft **allein**. Zusammen mit anderen MRtechnology-Plugins kann es m
 | Pause im Admin-Modus (`toolbar.pause-in-admin-mode`) | MRadmin |
 | Pause in Duellen, im Arena-Editor und beim Zuschauen (`toolbar.pause-in-pvp`), Gürtel werden mitgesichert | MRadmin + MRpvp |
 
+### Multiverse-Inventories
+Jede Inventar-Gruppe hat eigene Tool-Slots und Gürtel. Wechselt Multiverse-Inventories das Inventar, wechseln die Gürtel mit, damit keine Werkzeuge zwischen getrennten Gruppen wandern. Bei deinem ersten Besuch in einer Gruppe gibt es dort noch keine Tool-Slots, du richtest sie wie gewohnt mit `/toolbar` ein. An/Aus und die Sortier-Einstellungen gelten überall.
+
 ## Häufige Fragen
 **Ich drücke `B`, aber nichts passiert.**
 Prüf, ob der Mod geladen ist (Mod Menu) und ob der Slot ein Tool-Slot ist (`/toolbar`). Admins sehen mit `/mrtoolbar debug <spieler>`, ob die Verbindung zum Mod steht.
