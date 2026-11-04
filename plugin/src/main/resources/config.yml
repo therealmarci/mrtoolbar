@@ -1,6 +1,8 @@
 ﻿# ==============================================================================
 #   MRtoolbar - Configuration
 # ==============================================================================
+#   Easiest way:     MRadmin web interface -> Plugins -> MRtoolbar -> Configuration
+#                    (saved and reloaded right away; this file stays editable by hand)
 #   After changes:   /mrtoolbar reload   (no restart needed)
 #   Player menu:     /toolbar
 #   Help & docs:     https://mrtechnology.marcelr.at/docs/mrtoolbar/
@@ -16,25 +18,28 @@
 # ==============================================================================
 
 # Do not change - used for automatic config updates.
-config-version: 11
-
-# Language of the texts (menus, messages). The texts are in plugins/MRtoolbar/lang/<language>.yml.
-#   auto = every player gets the language set in their Minecraft client - just like the client mod.
-#          German (also Austria/Switzerland) -> de.yml, English -> en.yml, a language without a file -> fallback-language.
-#   de / en / ... = fixed language for all players.
-# The console is always English. Own language: copy a file (e.g. as fr.yml) and translate it - with "auto"
-# French players then get it automatically.
-language: auto
-
-# Language for players whose Minecraft language has no file of its own.
-fallback-language: en
-
-# Language of texts that are not meant for a single player: texts MRadmin shows outside the game (web interface).
-server-language: en
+config-version: 12
 
 
 # ------------------------------------------------------------------------------
-#   1) TOOL SLOTS & BELTS
+#   1) GENERAL
+# ------------------------------------------------------------------------------
+general:
+  # Language of the texts (menus, messages). The texts are in plugins/MRtoolbar/lang/<language>.yml.
+  #   auto = every player gets the language set in their Minecraft client - just like the client mod.
+  #          German (also Austria/Switzerland) -> de.yml, English -> en.yml, a language without a file -> fallback-language.
+  #   de / en / ... = fixed language for all players.
+  # The console is always English. Own language: copy a file (e.g. as fr.yml) and translate it - with "auto"
+  # French players then get it automatically.
+  language: auto
+  # Language for players whose Minecraft language has no file of its own.
+  fallback-language: en
+  # Language of texts that are not meant for a single player: texts MRadmin shows outside the game (web interface).
+  server-language: en
+
+
+# ------------------------------------------------------------------------------
+#   2) TOOL SLOTS & BELTS
 # ------------------------------------------------------------------------------
 toolbar:
   # How many hotbar slots each player may turn into tool slots (0-9).
@@ -90,7 +95,7 @@ toolbar:
 
 
 # ------------------------------------------------------------------------------
-#   2) INVENTORY SORTING
+#   3) INVENTORY SORTING
 # ------------------------------------------------------------------------------
 #   Key in the mod (Options → Controls → MRtoolbar → "Sort inventory", default: middle mouse button) - works in
 #   open inventories and chests. Every player sets their own exceptions: /toolbar → hopper, or /toolbar sort
@@ -138,7 +143,7 @@ sorting:
 
 
 # ------------------------------------------------------------------------------
-#   3) CLIENT MOD
+#   4) CLIENT MOD
 # ------------------------------------------------------------------------------
 mod:
   # Oldest version of the MRtoolbar mod that is still allowed (e.g. "0.2.1", empty = any compatible version).
@@ -154,9 +159,9 @@ mod:
 
 
 # ------------------------------------------------------------------------------
-#   4) UPDATE CHECK
+#   5) UPDATES
 # ------------------------------------------------------------------------------
-update-checker:
+updates:
   enabled: true
   # Source: "github" (GitHub Releases, default) or "modrinth"
   source: github
@@ -168,7 +173,7 @@ update-checker:
 
 
 # ------------------------------------------------------------------------------
-#   5) MENUS
+#   6) MENUS
 # ------------------------------------------------------------------------------
 gui:
   # How often open menus are refreshed (in ticks, 20 = 1 second).

@@ -6,6 +6,12 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+### Neu
+- **Einstellen im Browser:** Mit MRadmin (ab der Version mit „Konfiguration im Browser“) lässt sich die ganze `config.yml` unter **Plugins → MRtoolbar → Konfiguration** als Formular einstellen - jede Einstellung mit Erklärung auf Deutsch und Englisch, Speichern lädt MRtoolbar sofort neu (wie `/mrtoolbar reload`). Die Datei bleibt von Hand bearbeitbar.
+
+### Behoben & geändert
+- **Config neu gegliedert** (gleicher Aufbau wie alle MRtechnology-Plugins; `config-version` 12): `language`, `fallback-language`, `server-language` → `general.*`, `update-checker` → `updates`. Bestehende Einstellungen werden beim Update automatisch übernommen (Sicherung `config.v11.backup.yml`).
+
 ## [1.1.0] - 2026-11-02
 
 ### Neu

@@ -21,7 +21,7 @@ import java.util.logging.Level;
  */
 public final class ConfigUpdater {
 
-    public static final int CURRENT_VERSION = 11;
+    public static final int CURRENT_VERSION = 12;
     public static final String BOM = "\uFEFF";
     /**
      * Keys whose value is replaced by the new default, with the config-version that introduced the change: only files
@@ -29,15 +29,22 @@ public final class ConfigUpdater {
      */
     private static final Map<String, Integer> REPLACED_KEYS = Map.of(
             // v6: "auto" (language of each player) replaces the fixed language of the test versions
-            "language", 6);
+            "general.language", 6);
     /** Defaults that changed: whoever still has the old default gets the new one, changed values are kept. */
     private static final Map<String, Object> OLD_DEFAULTS = Map.of(
             // v10: the mod is downloaded from the website instead of GitHub Releases
             "mod.download-url", "https://github.com/therealmarci/mrtoolbar/releases");
     /** Keys that were renamed: old path -> new path (the value is carried over). */
-    private static final Map<String, String> RENAMED_KEYS = Map.of(
-            // (noch keine)
-            );
+    private static final Map<String, String> RENAMED_KEYS = Map.ofEntries(
+            // v12: same layout as all MRtechnology plugins (general, features, updates, gui)
+            Map.entry("language", "general.language"),
+            Map.entry("fallback-language", "general.fallback-language"),
+            Map.entry("server-language", "general.server-language"),
+            Map.entry("update-checker.enabled", "updates.enabled"),
+            Map.entry("update-checker.source", "updates.source"),
+            Map.entry("update-checker.include-prereleases", "updates.include-prereleases"),
+            Map.entry("update-checker.interval-hours", "updates.interval-hours"),
+            Map.entry("update-checker.notify-on-join", "updates.notify-on-join"));
 
     private ConfigUpdater() {
     }
@@ -84,9 +91,9 @@ public final class ConfigUpdater {
             if (version < 11) {
                 String old = existing.getString("language", "auto").trim();
                 if (!old.isEmpty() && !old.equalsIgnoreCase("auto")) {
-                    template.set("server-language", old);
+                    template.set("general.server-language", old);
                 }
-                template.set("language", "auto");
+                template.set("general.language", "auto");
             }
             template.set("config-version", CURRENT_VERSION);
             // Keep long messages on one line instead of folding them.

@@ -126,13 +126,13 @@ Ob es ein Mod-Update gibt, zeigt `/toolbar` im Buch oben links.
 </details>
 
 ### Konfiguration
-Alles steht kommentiert in `plugins/MRtoolbar/config.yml`. Änderungen übernimmst du mit `/mrtoolbar reload`.
+Am einfachsten im Browser: Mit **MRadmin** (ab der Version mit „Konfiguration im Browser“) unter **Plugins → MRtoolbar → Konfiguration** - jede Einstellung mit Erklärung, Speichern lädt MRtoolbar sofort neu (Permission `mradmin.config`). Alles steht außerdem kommentiert in `plugins/MRtoolbar/config.yml`; Änderungen von Hand übernimmst du mit `/mrtoolbar reload`.
 
 | Einstellung | Standard | Bedeutung |
 |---|---|---|
-| `language` | `auto` | `auto` = wie im Minecraft-Client des Spielers (wie der Mod), sonst `de` oder `en` für alle |
-| `fallback-language` | `en` | Für Spieler, deren Minecraft-Sprache keine eigene Datei hat |
-| `server-language` | `en` | Texte ohne einzelnen Empfänger (z.B. in der Weboberfläche von MRadmin) |
+| `general.language` | `auto` | `auto` = wie im Minecraft-Client des Spielers (wie der Mod), sonst `de` oder `en` für alle |
+| `general.fallback-language` | `en` | Für Spieler, deren Minecraft-Sprache keine eigene Datei hat |
+| `general.server-language` | `en` | Texte ohne einzelnen Empfänger (z.B. in der Weboberfläche von MRadmin) |
 | `toolbar.default-tool-slots` | `2` | Tool-Slots pro Spieler |
 | `toolbar.default-belt-size` | `6` | Plätze pro Gürtel (1-8) |
 | `toolbar.allowed-items` | Werkzeuge, Waffen … | Was in einen Gürtel darf (Item-Namen, `#Tags`, `*` für alles) |
@@ -144,7 +144,7 @@ Alles steht kommentiert in `plugins/MRtoolbar/config.yml`. Änderungen übernimm
 | `mod.minimum-version` | leer | Ältere Mod-Versionen aussperren, z.B. `0.2.1` |
 | `mod.download-url` | Download-Seite | Link zum Mod in den Hinweisen |
 | `gui.refresh-ticks` · `gui.sounds` | `20` · `true` | Wie oft offene Menüs aktualisiert werden (Ticks) · Klick-Töne in Menüs |
-| `update-checker.*` | an, `github`, alle 6 h | Hinweis auf neue Versionen (Quelle, Vorabversionen, Prüfintervall) |
+| `updates.*` | an, `github`, alle 6 h | Hinweis auf neue Versionen (Quelle, Vorabversionen, Prüfintervall) |
 
 Alle Texte stehen in `plugins/MRtoolbar/lang/de.yml` und `en.yml` ([MiniMessage](https://docs.advntr.dev/minimessage/format.html)). Plugin und Mod richten sich nach der Minecraft-Sprache des Spielers - so gibt es keine gemischten Sprachen. Eine eigene `fr.yml` bekommen französische Spieler automatisch.
 
