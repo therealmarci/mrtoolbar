@@ -213,8 +213,13 @@ public final class ModBridge implements Listener, PluginMessageListener {
         if (outdated) {
             plugin.getLogger().info(player.getName() + " uses an MRtoolbar mod from before the handshake (too old).");
             plugin.messages().send(player, "mod-too-old", tag("version", "?"), tag("download", downloadLink()));
-        } else if (plugin.toolbars().get(player).slotCount() > 0) {
-            plugin.messages().send(player, "mod-missing-notice", tag("download", downloadLink()));
+            plugin.discord().log("mod-too-old", "player", player.getName(), "version", "?",
+                    "required", plugin.settings().mod().minimumVersion());
+        } else {
+            plugin.discord().log("mod-missing", "player", player.getName());
+            if (plugin.toolbars().get(player).slotCount() > 0) {
+                plugin.messages().send(player, "mod-missing-notice", tag("download", downloadLink()));
+            }
         }
     }
 
@@ -271,6 +276,10 @@ public final class ModBridge implements Listener, PluginMessageListener {
             withoutMod(player, false);
             plugin.messages().send(player, status == Compatibility.Status.MOD_TOO_OLD ? "mod-too-old" : "mod-too-new",
                     tag("version", modVersion), tag("download", downloadLink()));
+            if (player.hasPermission(ToolbarManager.PERM_USE)) {
+                plugin.discord().log(status == Compatibility.Status.MOD_TOO_OLD ? "mod-too-old" : "mod-too-new",
+                        "player", player.getName(), "version", modVersion, "required", settings.minimumVersion());
+            }
         }
     }
 

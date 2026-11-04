@@ -2,6 +2,9 @@ package at.marcelr.mrtoolbar.api;
 
 import at.marcelr.mradmin.api.AdminModule;
 import at.marcelr.mradmin.api.MRadminService;
+import at.marcelr.mradmin.api.WebConfig;
+import at.marcelr.mradmin.api.WebModule;
+import at.marcelr.mradmin.api.WebUser;
 import at.marcelr.mrtoolbar.MRToolbar;
 import at.marcelr.mrtoolbar.PlayerToolbar;
 import at.marcelr.mrtoolbar.Settings;
@@ -14,7 +17,12 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import org.jspecify.annotations.Nullable;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -29,7 +37,7 @@ import static at.marcelr.mrtoolbar.Messages.tag;
  * <b>Only loaded while MRadmin runs</b> - everything else in MRtoolbar goes through {@link MRadminLink}, which has no
  * MRadmin types.
  */
-final class MRadminModule implements AdminModule {
+final class MRadminModule implements AdminModule, WebModule {
 
     static final String ID = "mrtoolbar";
 
@@ -146,5 +154,70 @@ final class MRadminModule implements AdminModule {
         }
         plugin.messages().run(viewer, () -> new BeltViewMenu(plugin, viewer, online, back).open());
         return true;
+    }
+
+    // ------------------------------------------------ web interface: only the config (API 12)
+
+    @Override
+    public WebModule web() {
+        return this;
+    }
+
+    @Override
+    public Map<String, String> permissions() {
+        return Map.of("view", viewPermission());
+    }
+
+    @Override
+    public @Nullable Object data(String request, Map<String, String> args) {
+        return null;
+    }
+
+    @Override
+    public Map<String, String> actions() {
+        return Map.of();
+    }
+
+    @Override
+    public @Nullable String action(String action, Map<String, Object> args, WebUser user) {
+        return "not-found";
+    }
+
+    /** config.yml in MRadmin's web interface (API 12): form from web-config.yml, saved and reloaded like the reload command. */
+    @Override
+    public @Nullable WebConfig webConfig() {
+        String form = resource("web-config.yml");
+        String defaults = resource("config.yml");
+        if (form == null || defaults == null) {
+            return null;
+        }
+        return new WebConfig(new File(plugin.getDataFolder(), "config.yml"), form, defaults, by -> {
+            plugin.reload();
+            plugin.discord().log("admin-reload", "admin", by);
+        });
+    }
+
+    private @Nullable String resource(String name) {
+        try (InputStream in = plugin.getResource(name)) {
+            return in == null ? null : new String(in.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    /** Into MRadmin's log (only with API 13 or newer). */
+    static void log(String event, String text, int color) {
+        MRadminService service = MRadminService.get();
+        if (service != null && service.apiVersion() >= 13) {
+            service.log(ID, event, text, color);
+        }
+    }
+
+    /** A line in MRadmin's Discord admin log (fallback when the plugin has no webhook of its own). */
+    static void adminLog(String text) {
+        MRadminService service = MRadminService.get();
+        if (service != null) {
+            service.adminLog(ID, text);
+        }
     }
 }

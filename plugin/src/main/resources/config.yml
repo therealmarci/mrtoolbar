@@ -1,6 +1,8 @@
 ﻿# ==============================================================================
 #   MRtoolbar - Configuration
 # ==============================================================================
+#   Easiest way:     MRadmin web interface -> Plugins -> MRtoolbar -> Configuration
+#                    (saved and reloaded right away; this file stays editable by hand)
 #   After changes:   /mrtoolbar reload   (no restart needed)
 #   Player menu:     /toolbar
 #   Help & docs:     https://mrtechnology.marcelr.at/docs/mrtoolbar/
@@ -16,25 +18,28 @@
 # ==============================================================================
 
 # Do not change - used for automatic config updates.
-config-version: 11
-
-# Language of the texts (menus, messages). The texts are in plugins/MRtoolbar/lang/<language>.yml.
-#   auto = every player gets the language set in their Minecraft client - just like the client mod.
-#          German (also Austria/Switzerland) -> de.yml, English -> en.yml, a language without a file -> fallback-language.
-#   de / en / ... = fixed language for all players.
-# The console is always English. Own language: copy a file (e.g. as fr.yml) and translate it - with "auto"
-# French players then get it automatically.
-language: auto
-
-# Language for players whose Minecraft language has no file of its own.
-fallback-language: en
-
-# Language of texts that are not meant for a single player: texts MRadmin shows outside the game (web interface).
-server-language: en
+config-version: 13
 
 
 # ------------------------------------------------------------------------------
-#   1) TOOL SLOTS & BELTS
+#   1) GENERAL
+# ------------------------------------------------------------------------------
+general:
+  # Language of the texts (menus, messages). The texts are in plugins/MRtoolbar/lang/<language>.yml.
+  #   auto = every player gets the language set in their Minecraft client - just like the client mod.
+  #          German (also Austria/Switzerland) -> de.yml, English -> en.yml, a language without a file -> fallback-language.
+  #   de / en / ... = fixed language for all players.
+  # The console is always English. Own language: copy a file (e.g. as fr.yml) and translate it - with "auto"
+  # French players then get it automatically.
+  language: auto
+  # Language for players whose Minecraft language has no file of its own.
+  fallback-language: en
+  # Language of texts that are not meant for a single player: texts MRadmin shows outside the game (web interface).
+  server-language: en
+
+
+# ------------------------------------------------------------------------------
+#   2) TOOL SLOTS & BELTS
 # ------------------------------------------------------------------------------
 toolbar:
   # How many hotbar slots each player may turn into tool slots (0-9).
@@ -90,7 +95,7 @@ toolbar:
 
 
 # ------------------------------------------------------------------------------
-#   2) INVENTORY SORTING
+#   3) INVENTORY SORTING
 # ------------------------------------------------------------------------------
 #   Key in the mod (Options → Controls → MRtoolbar → "Sort inventory", default: middle mouse button) - works in
 #   open inventories and chests. Every player sets their own exceptions: /toolbar → hopper, or /toolbar sort
@@ -138,7 +143,7 @@ sorting:
 
 
 # ------------------------------------------------------------------------------
-#   3) CLIENT MOD
+#   4) CLIENT MOD
 # ------------------------------------------------------------------------------
 mod:
   # Oldest version of the MRtoolbar mod that is still allowed (e.g. "0.2.1", empty = any compatible version).
@@ -154,9 +159,50 @@ mod:
 
 
 # ------------------------------------------------------------------------------
-#   4) UPDATE CHECK
+#   5) DISCORD LOGS
 # ------------------------------------------------------------------------------
-update-checker:
+# Create a webhook: Discord channel -> Edit Channel -> Integrations -> Webhooks
+#                   -> New Webhook -> Copy Webhook URL.
+# The texts of the events are in the language file (lang/<language>.yml, section discord).
+# An event with "enabled: false" or an empty text is not sent.
+# With MRadmin every event also goes into the log of its web interface - even while Discord is off.
+# Not working? -> /mrtoolbar discord shows the status, /mrtoolbar discord test sends a test message.
+discord:
+  enabled: false
+  # Full URL in quotes, e.g. "https://discord.com/api/webhooks/123456/abcdef"
+  webhook-url: ""
+  # Without a webhook of its own (webhook-url empty): true = send the events to MRadmin's Discord log instead
+  # (needs MRadmin with its Discord log set up).
+  use-mradmin-webhook: false
+  # Name and avatar of the webhook (empty = settings from Discord).
+  username: "MRtoolbar"
+  avatar-url: ""
+  # true = coloured embeds, false = plain text messages.
+  use-embeds: true
+  # Footer of the embeds, e.g. the server name (empty = none).
+  footer: "Minecraft-Server"
+  events:
+    mod-too-old:
+      enabled: true
+      color: "#E67E22"
+    mod-too-new:
+      enabled: true
+      color: "#E67E22"
+    mod-missing:
+      enabled: false
+      color: "#95A5A6"
+    belt-view:
+      enabled: true
+      color: "#9B59B6"
+    admin-reload:
+      enabled: true
+      color: "#3498DB"
+
+
+# ------------------------------------------------------------------------------
+#   6) UPDATES
+# ------------------------------------------------------------------------------
+updates:
   enabled: true
   # Source: "github" (GitHub Releases, default) or "modrinth"
   source: github
@@ -168,7 +214,7 @@ update-checker:
 
 
 # ------------------------------------------------------------------------------
-#   5) MENUS
+#   7) MENUS
 # ------------------------------------------------------------------------------
 gui:
   # How often open menus are refreshed (in ticks, 20 = 1 second).

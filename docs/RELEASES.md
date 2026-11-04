@@ -55,7 +55,8 @@ Der Update-Check meldet nur Versionen **derselben** Minecraft-Version.
 1. `version` in `plugin/gradle.properties` bzw. `mod/gradle.properties` erhöhen.
 2. Protokoll prüfen ([COMPATIBILITY.md](COMPATIBILITY.md)): hat sich eine Nachricht geändert? Dann Protokoll erhöhen,
    Historie dort ergänzen und **beide** Teile veröffentlichen.
-3. Nur Plugin: neuer Config-Schlüssel → `ConfigUpdater.CURRENT_VERSION` und `config-version` erhöhen; geänderte
+3. Nur Plugin: neuer Config-Schlüssel → `ConfigUpdater.CURRENT_VERSION` und `config-version` erhöhen und das Feld in
+   `plugin/src/main/resources/web-config.yml` (Formular für MRadmin, Namen DE/EN) eintragen; geänderte
    Texte → `lang-version` und die Liste in `MRToolbar` (Messages).
 4. Abschnitt `## [<version>] - <datum>` im CHANGELOG des Teils anlegen (wird zum Release-Text).
 5. Bauen (`./gradlew build` im Ordner), auf dem Testserver mit dem Mod testen.

@@ -1,0 +1,241 @@
+# Form of config.yml for MRadmin's web interface (Plugins -> MRtoolbar -> Configuration).
+# Every field names a key of config.yml, its type and limits, and a name and help text in German and English.
+# Format: MRadmin docs/MODULE-API.md, section "Konfiguration im Browser". Texts with a comma need quotes.
+sections:
+  - id: general
+    name: {de: Allgemein, en: General}
+    help: {de: Sprache der Texte im Spiel., en: Language of the texts in game.}
+    fields:
+      - key: general.language
+        type: choice
+        name: {de: Sprache der Spieler, en: Language of the players}
+        help: {de: "Automatisch = jeder Spieler bekommt die Sprache seines Minecraft-Clients (wie der Mod).", en: "Automatic = every player gets the language of their Minecraft client (like the mod)."}
+        options:
+          - {value: auto, de: Automatisch, en: Automatic}
+          - {value: de, de: Deutsch, en: German}
+          - {value: en, de: Englisch, en: English}
+      - key: general.fallback-language
+        type: choice
+        name: {de: Ersatzsprache, en: Fallback language}
+        help: {de: Für Spieler mit einer Sprache ohne eigene Datei., en: For players whose language has no file of its own.}
+        when: general.language=auto
+        options:
+          - {value: de, de: Deutsch, en: German}
+          - {value: en, de: Englisch, en: English}
+      - key: general.server-language
+        type: choice
+        name: {de: Server-Sprache, en: Server language}
+        help: {de: "Für Texte ohne einzelnen Spieler, z.B. in MRadmins Weboberfläche.", en: "For texts not meant for a single player, e.g. in MRadmin's web interface."}
+        options:
+          - {value: de, de: Deutsch, en: German}
+          - {value: en, de: Englisch, en: English}
+
+  - id: toolbar
+    name: {de: Werkzeug-Slots & Gürtel, en: Tool slots & belts}
+    help: {de: "Hotbar-Plätze, die mit dem Mod zu Werkzeug-Slots mit Gürtel werden.", en: "Hotbar slots that become tool slots with a belt with the mod."}
+    fields:
+      - key: toolbar.default-tool-slots
+        type: int
+        min: 0
+        max: 9
+        unit: {de: Slots, en: slots}
+        name: {de: Werkzeug-Slots pro Spieler, en: Tool slots per player}
+        help: {de: "Mehr per Permission mrtoolbar.slots.<Zahl> (die höchste zählt).", en: "More with the permission mrtoolbar.slots.<number> (the highest counts)."}
+      - key: toolbar.default-belt-size
+        type: int
+        min: 1
+        max: 8
+        unit: {de: Werkzeuge, en: tools}
+        name: {de: Platz im Gürtel, en: Room in the belt}
+        help: {de: "Das Werkzeug in der Hotbar zählt nicht. Mehr per mrtoolbar.belt.<Zahl>.", en: "The tool in the hotbar does not count. More with mrtoolbar.belt.<number>."}
+      - key: toolbar.allowed-items
+        type: strings
+        name: {de: Erlaubt im Gürtel, en: Allowed in the belt}
+        help: {de: "Item-Namen (bow, shears), Tags mit # (#minecraft:pickaxes) oder * für alles.", en: "Item names (bow, shears), tags with # (#minecraft:pickaxes) or * for anything."}
+      - key: toolbar.disabled-worlds
+        type: worlds
+        name: {de: Ausgenommene Welten, en: Excluded worlds}
+        help: {de: Hier verhalten sich Werkzeug-Slots wie normale Slots. Die Gürtel bleiben erhalten., en: Tool slots act like normal slots here. The belts are kept.}
+      - key: toolbar.on-death
+        type: choice
+        name: {de: Gürtel beim Tod, en: Belt on death}
+        help: {de: Mit keepInventory in der Welt bleibt der Gürtel immer., en: With keepInventory in the world the belt is always kept.}
+        options:
+          - {value: drop, de: Fallen lassen, en: Drop}
+          - {value: keep, de: Behalten, en: Keep}
+      - key: toolbar.pause-in-admin-mode
+        type: bool
+        name: {de: Pause im Admin-Modus, en: Pause in admin mode}
+        help: {de: "Der Admin-Modus von MRadmin hat ein eigenes Kreativ-Inventar - so landen keine Kreativ-Items im Gürtel.", en: "MRadmin's admin mode has its own creative inventory - so no creative items end up in the belt."}
+      - key: toolbar.pause-in-pvp
+        type: bool
+        name: {de: Pause im Duell, en: Pause in duels}
+        help: {de: "In MRpvp-Runden, im Arena-Editor und beim Zuschauen (MRpvp gibt das Inventar genau so zurück).", en: "In MRpvp rounds, the arena editor and while spectating (MRpvp gives the inventory back exactly like that)."}
+
+  - id: sorting
+    name: {de: Sortieren, en: Sorting}
+    help: {de: "Inventar und Kisten mit der Sortiertaste des Mods (Standard: mittlere Maustaste). Permission mrtoolbar.sort.", en: "Inventory and chests with the mod's sort key (default: middle mouse button). Permission mrtoolbar.sort."}
+    fields:
+      - key: sorting.enabled
+        type: bool
+        name: {de: Sortieren erlaubt, en: Sorting allowed}
+      - key: sorting.default-mode
+        type: choice
+        when: sorting.enabled
+        name: {de: Standard-Reihenfolge, en: Default order}
+        help: {de: Bis ein Spieler selbst eine wählt., en: Until a player picks one themselves.}
+        options:
+          - {value: type, de: Nach Art, en: By type}
+          - {value: name, de: Nach Name, en: By name}
+          - {value: amount, de: Nach Menge, en: By amount}
+      - key: sorting.default-locked
+        type: strings
+        when: sorting.enabled
+        name: {de: Standard-Ausnahmen, en: Default exceptions}
+        help: {de: "hotbar, hotbar-1 bis -9, inventory, inventory-1 bis -27 - bis ein Spieler eigene festlegt.", en: "hotbar, hotbar-1 to -9, inventory, inventory-1 to -27 - until a player sets their own."}
+      - key: sorting.cooldown-ticks
+        type: int
+        when: sorting.enabled
+        min: 0
+        max: 200
+        unit: {de: Ticks, en: ticks}
+        name: {de: Pause zwischen zwei Sortierungen, en: Pause between two sorts}
+        help: {de: "20 Ticks = 1 Sekunde, 0 = keine.", en: "20 ticks = 1 second, 0 = none."}
+      - key: sorting.containers
+        type: choices
+        when: sorting.enabled
+        name: {de: Sortierbare Behälter, en: Sortable containers}
+        help: {de: "Mit mrtoolbar.sort.containers. Keiner gewählt = nur das eigene Inventar.", en: "With mrtoolbar.sort.containers. None chosen = only the own inventory."}
+        options:
+          - {value: chest, de: Kiste, en: Chest}
+          - {value: barrel, de: Fass, en: Barrel}
+          - {value: shulker_box, de: Shulkerkiste, en: Shulker box}
+          - {value: ender_chest, de: Endertruhe, en: Ender chest}
+          - {value: hopper, de: Trichter, en: Hopper}
+          - {value: dispenser, de: Werfer, en: Dispenser}
+          - {value: dropper, de: Spender, en: Dropper}
+
+  - id: mod
+    name: {de: Client-Mod, en: Client mod}
+    help: {de: MRtoolbar braucht den Fabric-Mod auf dem Client., en: MRtoolbar needs the Fabric mod on the client.}
+    fields:
+      - key: mod.minimum-version
+        type: string
+        max-length: 40
+        name: {de: Älteste erlaubte Mod-Version, en: Oldest allowed mod version}
+        help: {de: "Z.B. 0.2.1 - sperrt ältere Versionen aus (leer = jede passende).", en: "E.g. 0.2.1 - locks out older versions (empty = any compatible one)."}
+      - key: mod.download-url
+        type: string
+        max-length: 300
+        name: {de: Download-Link, en: Download link}
+        help: {de: Wo Spieler den Mod bekommen (Link in den Hinweisen)., en: Where players get the mod (link in the notices).}
+      - key: mod.handshake-seconds
+        type: int
+        min: 1
+        max: 60
+        unit: {de: Sekunden, en: seconds}
+        name: {de: Auf den Mod warten, en: Wait for the mod}
+        help: {de: "So lange nach dem Betreten, bis ein Spieler als „ohne Mod“ gilt.", en: "That long after joining until a player counts as \"without mod\"."}
+
+  - id: discord
+    name: {de: Discord-Logs, en: Discord logs}
+    help: {de: "Ereignisse in einen Discord-Kanal schicken. Webhook: Kanal bearbeiten → Integrationen → Webhooks → Neuer Webhook → URL kopieren.", en: "Send events to a Discord channel. Webhook: Edit channel → Integrations → Webhooks → New webhook → copy URL."}
+    fields:
+      - key: discord.enabled
+        type: bool
+        name: {de: Discord-Logs senden, en: Send Discord logs}
+      - key: discord.webhook-url
+        type: secret
+        when: discord.enabled
+        max-length: 300
+        name: {de: Webhook-URL, en: Webhook URL}
+        help: {de: "Beginnt mit https://discord.com/api/webhooks/", en: "Starts with https://discord.com/api/webhooks/"}
+      - key: discord.use-mradmin-webhook
+        type: bool
+        when: discord.enabled
+        name: {de: MRadmins Webhook nutzen, en: Use MRadmin's webhook}
+        help: {de: "Ohne eigene Webhook-URL gehen die Ereignisse in MRadmins Discord-Log.", en: "Without a webhook URL of its own, the events go to MRadmin's Discord log."}
+      - key: discord.username
+        type: string
+        when: discord.enabled
+        max-length: 80
+        name: {de: Name im Kanal, en: Name in the channel}
+        help: {de: Leer = Einstellung aus Discord., en: Empty = setting from Discord.}
+      - key: discord.avatar-url
+        type: string
+        when: discord.enabled
+        max-length: 300
+        name: {de: Bild-URL, en: Avatar URL}
+        help: {de: Leer = Einstellung aus Discord., en: Empty = setting from Discord.}
+      - key: discord.use-embeds
+        type: bool
+        when: discord.enabled
+        name: {de: Farbige Karten, en: Coloured embeds}
+        help: {de: Aus = einfache Textnachrichten., en: Off = plain text messages.}
+      - key: discord.footer
+        type: string
+        when: discord.enabled
+        max-length: 120
+        name: {de: Fußzeile, en: Footer}
+        help: {de: "Z.B. der Servername (leer = keine).", en: "E.g. the server name (empty = none)."}
+      - key: discord.events
+        type: table
+        when: discord.enabled
+        name: {de: Ereignisse, en: Events}
+        help: {de: Welche Ereignisse gesendet werden und in welcher Farbe. Die Texte stehen in den Sprachdateien., en: Which events are sent and in which colour. The texts are in the language files.}
+        columns:
+          - {key: enabled, type: bool, name: {de: Senden, en: Send}}
+          - {key: color, type: color, name: {de: Farbe, en: Colour}}
+        rows:
+          mod-too-old: {de: Mod zu alt, en: Mod too old}
+          mod-too-new: {de: Mod zu neu, en: Mod too new}
+          mod-missing: {de: Ohne Mod, en: Without mod}
+          belt-view: {de: "Team: Gürtel angesehen", en: "Team: belt viewed"}
+          admin-reload: {de: "Team: neu geladen", en: "Team: reloaded"}
+  - id: updates
+    name: {de: Updates, en: Updates}
+    help: {de: Nach neuen Versionen des Plugins suchen., en: Look for new versions of the plugin.}
+    fields:
+      - key: updates.enabled
+        type: bool
+        name: {de: Nach Updates suchen, en: Look for updates}
+        help: {de: Beim Start und danach regelmäßig. Ein Hinweis erscheint in der Konsole., en: On start and regularly afterwards. A notice appears in the console.}
+      - key: updates.source
+        type: choice
+        when: updates.enabled
+        name: {de: Quelle, en: Source}
+        options:
+          - {value: github, de: GitHub, en: GitHub}
+          - {value: modrinth, de: Modrinth, en: Modrinth}
+      - key: updates.include-prereleases
+        type: bool
+        when: updates.enabled
+        name: {de: Auch Vorabversionen, en: Pre-releases too}
+        help: {de: "Läuft eine Vorabversion (0.x), werden sie immer gemeldet.", en: "When a pre-release (0.x) runs they are always reported."}
+      - key: updates.interval-hours
+        type: int
+        when: updates.enabled
+        min: 1
+        max: 168
+        unit: {de: Stunden, en: hours}
+        name: {de: Prüfen alle, en: Check every}
+      - key: updates.notify-on-join
+        type: bool
+        when: updates.enabled
+        name: {de: Team beim Betreten informieren, en: Tell the team on join}
+        help: {de: Spieler mit mrtoolbar.admin.update bekommen einen Hinweis., en: Players with mrtoolbar.admin.update get a notice.}
+
+  - id: gui
+    name: {de: Menüs, en: Menus}
+    help: {de: Die Menüs von /toolbar., en: The menus of /toolbar.}
+    fields:
+      - key: gui.refresh-ticks
+        type: int
+        min: 5
+        max: 200
+        unit: {de: Ticks, en: ticks}
+        name: {de: Aktualisieren alle, en: Refresh every}
+        help: {de: 20 Ticks = 1 Sekunde., en: 20 ticks = 1 second.}
+      - key: gui.sounds
+        type: bool
+        name: {de: Klickgeräusche, en: Click sounds}

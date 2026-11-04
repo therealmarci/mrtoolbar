@@ -1,5 +1,6 @@
 package at.marcelr.mrtoolbar.command;
 
+import at.marcelr.mrtoolbar.DiscordWebhook;
 import at.marcelr.mrtoolbar.MRToolbar;
 import at.marcelr.mrtoolbar.Messages;
 import at.marcelr.mrtoolbar.ModBridge;
@@ -26,11 +27,12 @@ import java.util.Locale;
 
 import static at.marcelr.mrtoolbar.Messages.tag;
 
-/** /mrtoolbar reload | version | debug [player] - administration. */
+/** /mrtoolbar reload | version | debug [player] | discord [test] - administration. */
 public final class MRToolbarCommand implements TabExecutor {
 
     private static final String PERM_RELOAD = "mrtoolbar.admin.reload";
     private static final String PERM_DEBUG = "mrtoolbar.admin.debug";
+    private static final String PERM_DISCORD = "mrtoolbar.admin.discord";
 
     private final MRToolbar plugin;
 
@@ -64,7 +66,15 @@ public final class MRToolbarCommand implements TabExecutor {
                 }
                 plugin.reload();
                 messages.send(sender, "reloaded");
+                plugin.discord().log("admin-reload", "admin", sender.getName());
                 plugin.getLogger().info(sender.getName() + " reloaded the configuration.");
+            }
+            case "discord" -> {
+                if (sender.hasPermission(PERM_DISCORD)) {
+                    discord(sender, args);
+                } else {
+                    messages.send(sender, "no-permission");
+                }
             }
             case "gui" -> {
                 if (!(sender instanceof Player player)) {
@@ -125,6 +135,41 @@ public final class MRToolbarCommand implements TabExecutor {
                 tag("slots", slots.isEmpty() ? "-" : String.join(", ", slots)));
     }
 
+    /** /mrtoolbar discord - status; /mrtoolbar discord test - sends a test message and reports Discord's answer. */
+    private void discord(CommandSender sender, String[] args) {
+        Messages messages = plugin.messages();
+        DiscordWebhook discord = plugin.discord();
+        if (discord.enabled()) {
+            int[] counts = discord.eventCounts();
+            messages.send(sender, discord.viaMradmin() ? "discord-status-mradmin" : "discord-status-active",
+                    tag("events", counts[0]), tag("total", counts[1]));
+        } else {
+            messages.send(sender, "discord-status-inactive", tag("reason", discord.disabledReason()));
+        }
+        if (!discord.viaMradmin()) {
+            String last = discord.lastResult();
+            messages.send(sender, "discord-status-last", tag("result", last == null ? messages.plain("discord-status-never") : last));
+        }
+        if (args.length < 2 || !args[1].equalsIgnoreCase("test")) {
+            if (discord.enabled()) {
+                messages.send(sender, "discord-test-hint");
+            }
+            return;
+        }
+        if (!discord.enabled()) {
+            return;
+        }
+        messages.send(sender, "discord-test-sending");
+        discord.test(sender).whenComplete((error, throwable) -> Bukkit.getScheduler().runTask(plugin, () -> {
+            String problem = throwable != null ? throwable.getMessage() : error;
+            if (problem == null) {
+                messages.send(sender, "discord-test-ok");
+            } else {
+                messages.send(sender, "discord-test-failed", tag("reason", problem));
+            }
+        }));
+    }
+
     private void sendVersion(CommandSender sender) {
         Messages messages = plugin.messages();
         UpdateChecker updates = plugin.updateChecker();
@@ -164,6 +209,9 @@ public final class MRToolbarCommand implements TabExecutor {
         }
         if (sender.hasPermission(PERM_DEBUG)) {
             options.add("debug");
+        }
+        if (sender.hasPermission(PERM_DISCORD)) {
+            options.add("discord");
         }
         if (sender.hasPermission(AdminMenu.PERM_GUI)) {
             options.add("gui");
