@@ -18,7 +18,7 @@
 # ==============================================================================
 
 # Do not change - used for automatic config updates.
-config-version: 12
+config-version: 13
 
 
 # ------------------------------------------------------------------------------
@@ -159,7 +159,48 @@ mod:
 
 
 # ------------------------------------------------------------------------------
-#   5) UPDATES
+#   5) DISCORD LOGS
+# ------------------------------------------------------------------------------
+# Create a webhook: Discord channel -> Edit Channel -> Integrations -> Webhooks
+#                   -> New Webhook -> Copy Webhook URL.
+# The texts of the events are in the language file (lang/<language>.yml, section discord).
+# An event with "enabled: false" or an empty text is not sent.
+# With MRadmin every event also goes into the log of its web interface - even while Discord is off.
+# Not working? -> /mrtoolbar discord shows the status, /mrtoolbar discord test sends a test message.
+discord:
+  enabled: false
+  # Full URL in quotes, e.g. "https://discord.com/api/webhooks/123456/abcdef"
+  webhook-url: ""
+  # Without a webhook of its own (webhook-url empty): true = send the events to MRadmin's Discord log instead
+  # (needs MRadmin with its Discord log set up).
+  use-mradmin-webhook: false
+  # Name and avatar of the webhook (empty = settings from Discord).
+  username: "MRtoolbar"
+  avatar-url: ""
+  # true = coloured embeds, false = plain text messages.
+  use-embeds: true
+  # Footer of the embeds, e.g. the server name (empty = none).
+  footer: "Minecraft-Server"
+  events:
+    mod-too-old:
+      enabled: true
+      color: "#E67E22"
+    mod-too-new:
+      enabled: true
+      color: "#E67E22"
+    mod-missing:
+      enabled: false
+      color: "#95A5A6"
+    belt-view:
+      enabled: true
+      color: "#9B59B6"
+    admin-reload:
+      enabled: true
+      color: "#3498DB"
+
+
+# ------------------------------------------------------------------------------
+#   6) UPDATES
 # ------------------------------------------------------------------------------
 updates:
   enabled: true
@@ -173,7 +214,7 @@ updates:
 
 
 # ------------------------------------------------------------------------------
-#   6) MENUS
+#   7) MENUS
 # ------------------------------------------------------------------------------
 gui:
   # How often open menus are refreshed (in ticks, 20 = 1 second).

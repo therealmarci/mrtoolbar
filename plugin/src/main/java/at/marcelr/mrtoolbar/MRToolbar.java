@@ -45,6 +45,7 @@ public final class MRToolbar extends JavaPlugin {
                     "take-back-done")));
     private final ToolbarManager toolbars = new ToolbarManager(this);
     private final MRadminLink mradmin = new MRadminLink(this);
+    private final DiscordWebhook discord = new DiscordWebhook(this);
     private final ModBridge modBridge = new ModBridge(this);
     private final InventorySorter sorter = new InventorySorter(this);
     private UpdateChecker updateChecker;
@@ -104,6 +105,7 @@ public final class MRToolbar extends JavaPlugin {
         }
         modBridge.stop();
         Bukkit.getOnlinePlayers().forEach(toolbars::unload);
+        discord.shutdown();
     }
 
     /** Reloads config.yml and the language file; tools that no longer fit go back to their owners. */
@@ -121,6 +123,7 @@ public final class MRToolbar extends JavaPlugin {
         messages.load(this, config.getString("general.language", "auto"), config.getString("general.fallback-language", "en"),
                 config.getString("general.server-language", "en"));
         settings = Settings.from(config, getLogger());
+        discord.load(config.getConfigurationSection("discord"));
     }
 
     /** Opens the belt of a tool slot (if the toolbar works for the player right now). */
@@ -168,6 +171,11 @@ public final class MRToolbar extends JavaPlugin {
     /** The optional connection to MRadmin. */
     public MRadminLink mradmin() {
         return mradmin;
+    }
+
+    /** Discord log (and with MRadmin its log in the web interface). */
+    public DiscordWebhook discord() {
+        return discord;
     }
 
     public ModBridge modBridge() {

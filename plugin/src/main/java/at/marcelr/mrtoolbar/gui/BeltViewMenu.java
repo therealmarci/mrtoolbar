@@ -32,6 +32,7 @@ public final class BeltViewMenu extends Menu {
                 tag("player", target.getName())));
         this.targetId = target.getUniqueId();
         this.back = back;
+        plugin.discord().log("belt-view", "admin", viewer.getName(), "player", target.getName());
     }
 
     private static int rows(MRToolbar plugin, Player target) {

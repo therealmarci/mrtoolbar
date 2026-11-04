@@ -137,6 +137,61 @@ sections:
         name: {de: Auf den Mod warten, en: Wait for the mod}
         help: {de: "So lange nach dem Betreten, bis ein Spieler als „ohne Mod“ gilt.", en: "That long after joining until a player counts as \"without mod\"."}
 
+  - id: discord
+    name: {de: Discord-Logs, en: Discord logs}
+    help: {de: "Ereignisse in einen Discord-Kanal schicken. Webhook: Kanal bearbeiten → Integrationen → Webhooks → Neuer Webhook → URL kopieren.", en: "Send events to a Discord channel. Webhook: Edit channel → Integrations → Webhooks → New webhook → copy URL."}
+    fields:
+      - key: discord.enabled
+        type: bool
+        name: {de: Discord-Logs senden, en: Send Discord logs}
+      - key: discord.webhook-url
+        type: secret
+        when: discord.enabled
+        max-length: 300
+        name: {de: Webhook-URL, en: Webhook URL}
+        help: {de: "Beginnt mit https://discord.com/api/webhooks/", en: "Starts with https://discord.com/api/webhooks/"}
+      - key: discord.use-mradmin-webhook
+        type: bool
+        when: discord.enabled
+        name: {de: MRadmins Webhook nutzen, en: Use MRadmin's webhook}
+        help: {de: "Ohne eigene Webhook-URL gehen die Ereignisse in MRadmins Discord-Log.", en: "Without a webhook URL of its own, the events go to MRadmin's Discord log."}
+      - key: discord.username
+        type: string
+        when: discord.enabled
+        max-length: 80
+        name: {de: Name im Kanal, en: Name in the channel}
+        help: {de: Leer = Einstellung aus Discord., en: Empty = setting from Discord.}
+      - key: discord.avatar-url
+        type: string
+        when: discord.enabled
+        max-length: 300
+        name: {de: Bild-URL, en: Avatar URL}
+        help: {de: Leer = Einstellung aus Discord., en: Empty = setting from Discord.}
+      - key: discord.use-embeds
+        type: bool
+        when: discord.enabled
+        name: {de: Farbige Karten, en: Coloured embeds}
+        help: {de: Aus = einfache Textnachrichten., en: Off = plain text messages.}
+      - key: discord.footer
+        type: string
+        when: discord.enabled
+        max-length: 120
+        name: {de: Fußzeile, en: Footer}
+        help: {de: "Z.B. der Servername (leer = keine).", en: "E.g. the server name (empty = none)."}
+      - key: discord.events
+        type: table
+        when: discord.enabled
+        name: {de: Ereignisse, en: Events}
+        help: {de: Welche Ereignisse gesendet werden und in welcher Farbe. Die Texte stehen in den Sprachdateien., en: Which events are sent and in which colour. The texts are in the language files.}
+        columns:
+          - {key: enabled, type: bool, name: {de: Senden, en: Send}}
+          - {key: color, type: color, name: {de: Farbe, en: Colour}}
+        rows:
+          mod-too-old: {de: Mod zu alt, en: Mod too old}
+          mod-too-new: {de: Mod zu neu, en: Mod too new}
+          mod-missing: {de: Ohne Mod, en: Without mod}
+          belt-view: {de: "Team: Gürtel angesehen", en: "Team: belt viewed"}
+          admin-reload: {de: "Team: neu geladen", en: "Team: reloaded"}
   - id: updates
     name: {de: Updates, en: Updates}
     help: {de: Nach neuen Versionen des Plugins suchen., en: Look for new versions of the plugin.}

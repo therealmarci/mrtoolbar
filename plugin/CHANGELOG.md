@@ -7,6 +7,8 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 ## [Unveröffentlicht]
 
 ### Neu
+- **Discord-Log:** MRtoolbar meldet in einen Discord-Kanal, wer mit zu alter (`mod-too-old`), zu neuer (`mod-too-new`) oder ohne Mod (`mod-missing`, anfangs aus) spielt, wenn das Team einen Gürtel ansieht (`belt-view`) und wenn jemand neu lädt (`admin-reload`). Einrichten unter `discord` in der `config.yml` (`config-version` 13, auch im Browser), prüfen mit **`/mrtoolbar discord [test]`** - neue Permission `mrtoolbar.admin.discord` (in `mrtoolbar.groups.admin`). Ohne eigenen Webhook geht es mit `discord.use-mradmin-webhook: true` über MRadmins Discord-Log.
+- **Ereignisse im MRadmin-Protokoll:** Jedes dieser Ereignisse steht mit MRadmin (Modul-API 13) zusätzlich im Protokoll der Weboberfläche (bis zu 14 Tage) - auch wenn Discord aus ist.
 - **Einstellen im Browser:** Mit MRadmin (ab der Version mit „Konfiguration im Browser“) lässt sich die ganze `config.yml` unter **Plugins → MRtoolbar → Konfiguration** als Formular einstellen - jede Einstellung mit Erklärung auf Deutsch und Englisch, Speichern lädt MRtoolbar sofort neu (wie `/mrtoolbar reload`). Die Datei bleibt von Hand bearbeitbar.
 
 ### Behoben & geändert

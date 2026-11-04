@@ -14,7 +14,7 @@ commands:
     aliases: [tb, tools]
   mrtoolbar:
     description: Management of MRtoolbar.
-    usage: /mrtoolbar <reload|version|debug|gui|view>
+    usage: /mrtoolbar <reload|version|debug|discord|gui|view>
 
 permissions:
   # ------------------------------------------------------------------ Groups
@@ -43,11 +43,12 @@ permissions:
       mrtoolbar.groups.support: true
       mrtoolbar.admin.debug: true
   mrtoolbar.groups.admin:
-    description: "Group admin: everything of MRtoolbar - reload, update notice."
+    description: "Group admin: everything of MRtoolbar - reload, Discord log, update notice."
     default: op
     children:
       mrtoolbar.groups.staff: true
       mrtoolbar.admin.reload: true
+      mrtoolbar.admin.discord: true
       mrtoolbar.admin.update: true
 
   # ------------------------------------------------------------------ Single permissions
@@ -65,6 +66,9 @@ permissions:
     default: op
   mrtoolbar.admin.reload:
     description: /mrtoolbar reload
+    default: op
+  mrtoolbar.admin.discord:
+    description: /mrtoolbar discord [test] - status of the Discord log, send a test message.
     default: op
   mrtoolbar.admin.debug:
     description: /mrtoolbar debug [player] - show a player's mod connection and tool slots.

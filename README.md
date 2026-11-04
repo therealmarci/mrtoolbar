@@ -96,6 +96,7 @@ Ob es ein Mod-Update gibt, zeigt `/toolbar` im Buch oben links.
 | `/mrtoolbar view <spieler>` | Gürtel eines Spielers ansehen (nur lesen) | `mrtoolbar.admin.view` |
 | `/mrtoolbar debug [spieler]` | Mod-Verbindung, Status und Tool-Slots eines Spielers | `mrtoolbar.admin.debug` |
 | `/mrtoolbar reload` | Config und Sprachdateien neu laden | `mrtoolbar.admin.reload` |
+| `/mrtoolbar discord [test]` | Status des Discord-Logs · Testnachricht senden | `mrtoolbar.admin.discord` |
 | `/mrtoolbar version` | Version und Update-Status | `mrtoolbar.version` (in `mrtoolbar.player`) |
 
 ### Permissions
@@ -109,9 +110,9 @@ Ob es ein Mod-Update gibt, zeigt `/toolbar` im Buch oben links.
 | `mrtoolbar.belt.<n>` | – | `<n>` Plätze pro Gürtel, höchstens 8 (sonst `toolbar.default-belt-size`) |
 | `mrtoolbar.groups.support` | OP | **Gruppe** Support: Spieler + Admin-Menü, Gürtel anderer ansehen |
 | `mrtoolbar.groups.staff` | OP | **Gruppe** Staff: Support + `/mrtoolbar debug` |
-| `mrtoolbar.groups.admin` | OP | **Gruppe** Admin: alles (+ Reload, Update-Hinweis). Die Gruppen sind in allen MRtechnology-Plugins gleich aufgebaut, jede enthält die darunter |
+| `mrtoolbar.groups.admin` | OP | **Gruppe** Admin: alles (+ Reload, Discord-Log, Update-Hinweis). Die Gruppen sind in allen MRtechnology-Plugins gleich aufgebaut, jede enthält die darunter |
 | `mrtoolbar.admin.gui` · `view` | OP | Admin-Menü · Gürtel anderer ansehen (auch über MRadmin) |
-| `mrtoolbar.admin.debug` · `reload` | OP | `/mrtoolbar debug` · `/mrtoolbar reload` |
+| `mrtoolbar.admin.debug` · `reload` · `discord` | OP | `/mrtoolbar debug` · `/mrtoolbar reload` · `/mrtoolbar discord` |
 | `mrtoolbar.admin.update` | OP | Update-Hinweis beim Betreten |
 
 <details>
@@ -143,10 +144,25 @@ Am einfachsten im Browser: Mit **MRadmin** (ab der Version mit „Konfiguration 
 | `sorting.containers` | Kiste, Fass, Shulker … | Welche Behälter sortiert werden können (Plugin-Menüs nie) |
 | `mod.minimum-version` | leer | Ältere Mod-Versionen aussperren, z.B. `0.2.1` |
 | `mod.download-url` | Download-Seite | Link zum Mod in den Hinweisen |
+| `discord.*` | aus | Discord-Log: Webhook, eigener oder MRadmins (`use-mradmin-webhook`), welche Ereignisse in welcher Farbe |
 | `gui.refresh-ticks` · `gui.sounds` | `20` · `true` | Wie oft offene Menüs aktualisiert werden (Ticks) · Klick-Töne in Menüs |
 | `updates.*` | an, `github`, alle 6 h | Hinweis auf neue Versionen (Quelle, Vorabversionen, Prüfintervall) |
 
 Alle Texte stehen in `plugins/MRtoolbar/lang/de.yml` und `en.yml` ([MiniMessage](https://docs.advntr.dev/minimessage/format.html)). Plugin und Mod richten sich nach der Minecraft-Sprache des Spielers - so gibt es keine gemischten Sprachen. Eine eigene `fr.yml` bekommen französische Spieler automatisch.
+
+### Discord-Log
+MRtoolbar meldet in einen Discord-Kanal, wer mit zu alter, zu neuer oder ganz ohne Mod spielt, wenn das Team einen Gürtel ansieht und wenn jemand neu lädt.
+
+1. In Discord: **Kanal bearbeiten → Integrationen → Webhooks → Neuer Webhook** und die **Webhook-URL kopieren**.
+2. In der Config `discord.enabled: true` setzen und die URL bei `webhook-url` eintragen.
+3. `/mrtoolbar reload`, dann mit **`/mrtoolbar discord test`** prüfen.
+
+Unter `discord.events` legst du pro Ereignis fest, ob es gesendet wird und in welcher Farbe (`mod-too-old`, `mod-too-new`, `mod-missing`, `belt-view`, `admin-reload`). „Ohne Mod“ (`mod-missing`) ist anfangs aus, weil es bei jedem Login ohne Mod kommt. Die Texte stehen in der Sprachdatei unter `discord`.
+
+> [!TIP]
+> **Kein eigener Webhook?** Mit MRadmin geht es auch über dessen Discord-Log: `discord.enabled: true`, `webhook-url` leer lassen und `discord.use-mradmin-webhook: true` setzen.
+>
+> Mit MRadmin steht jedes Ereignis außerdem im **Protokoll** der Weboberfläche (bis zu 14 Tage) - auch wenn Discord aus ist.
 
 ### Wie Plugin und Mod zusammenarbeiten
 Der **Server** macht alles, was mit Items zu tun hat: Gürtel speichern, Tools wechseln, Tool-Slots schützen, Rechte, Tod. Der **Mod** kümmert sich nur um Tasten und Darstellung und fragt beim Server an - er kann keine Items erzeugen oder verschieben. Beim Betreten prüfen beide, ob ihre Versionen zusammenpassen. Details: [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
@@ -161,6 +177,7 @@ MRtoolbar läuft **allein**. Zusammen mit anderen MRtechnology-Plugins kann es m
 | MRtoolbar im Dashboard und Spieler-Menü von MRadmin (Mod-Version, Tool-Slots, Gürtel ansehen) | MRadmin |
 | Pause im Admin-Modus (`toolbar.pause-in-admin-mode`) | MRadmin |
 | Pause in Duellen, im Arena-Editor und beim Zuschauen (`toolbar.pause-in-pvp`), Gürtel werden mitgesichert | MRadmin + MRpvp |
+| Ereignisse im **Protokoll** der MRadmin-Weboberfläche, Discord-Log über MRadmins Webhook (`discord.use-mradmin-webhook`) | MRadmin |
 
 ### Multiverse-Inventories
 Jede Inventar-Gruppe hat eigene Tool-Slots und Gürtel. Wechselt Multiverse-Inventories das Inventar, wechseln die Gürtel mit, damit keine Werkzeuge zwischen getrennten Gruppen wandern. Bei deinem ersten Besuch in einer Gruppe gibt es dort noch keine Tool-Slots, du richtest sie wie gewohnt mit `/toolbar` ein. An/Aus und die Sortier-Einstellungen gelten überall.
