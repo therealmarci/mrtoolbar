@@ -71,6 +71,10 @@ sections:
         type: bool
         name: {de: Pause im Duell, en: Pause in duels}
         help: {de: "In MRpvp-Runden, im Arena-Editor und beim Zuschauen (MRpvp gibt das Inventar genau so zurück).", en: "In MRpvp rounds, the arena editor and while spectating (MRpvp gives the inventory back exactly like that)."}
+      - key: toolbar.mending
+        type: bool
+        name: {de: Mending repariert den Gürtel, en: Mending repairs the belt}
+        help: {de: "Übrige XP reparieren Werkzeuge mit Mending im Gürtel - zuerst der Gürtel in der Hand, dann von links nach rechts. Permission mrtoolbar.mending.", en: "Leftover XP repairs Mending tools in the belt - first the belt in hand, then left to right. Permission mrtoolbar.mending."}
 
   - id: sorting
     name: {de: Sortieren, en: Sorting}

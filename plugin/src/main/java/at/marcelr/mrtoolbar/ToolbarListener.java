@@ -2,17 +2,19 @@ package at.marcelr.mrtoolbar;
 
 import at.marcelr.mrtoolbar.gui.BeltEditor;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerExpChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 
-/** Joins, quits, deaths and keeping the tool of a tool slot in place (no off hand, no dropping). */
+/** Joins, quits, deaths, Mending of the belts and keeping the tool of a tool slot in place (no off hand, no dropping). */
 public final class ToolbarListener implements Listener {
 
     private final MRToolbar plugin;
@@ -56,6 +58,14 @@ public final class ToolbarListener implements Listener {
             return;
         }
         toolbars().onDeath(player, event.getDrops(), plugin.settings().toolbar().death() == Settings.DeathMode.KEEP);
+    }
+
+    /** Minecraft repaired the held and worn items already - what is left of the orb's XP goes to the belts. */
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onExpChange(PlayerExpChangeEvent event) {
+        if (event.getSource() instanceof ExperienceOrb) {
+            event.setAmount(toolbars().mendBelts(event.getPlayer(), event.getAmount()));
+        }
     }
 
     // ------------------------------------------------------------------ protection

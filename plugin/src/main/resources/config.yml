@@ -18,7 +18,7 @@
 # ==============================================================================
 
 # Do not change - used for automatic config updates.
-config-version: 13
+config-version: 14
 
 
 # ------------------------------------------------------------------------------
@@ -92,6 +92,11 @@ toolbar:
   # Pause in MRpvp duels (also in the arena editor and while spectating). MRpvp saves the whole inventory
   # including the selected tool and gives it back exactly like that - the tool bar must not move anything in between.
   pause-in-pvp: true
+
+  # Mending also repairs the tools in the belts: the XP Minecraft does not need for the held and worn items goes
+  # to the belts - first the belt of the tool slot in hand, then the others from left to right, each belt from its
+  # first tool to its last. Permission: mrtoolbar.mending
+  mending: true
 
 
 # ------------------------------------------------------------------------------

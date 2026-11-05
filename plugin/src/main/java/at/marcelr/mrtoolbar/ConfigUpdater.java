@@ -21,7 +21,7 @@ import java.util.logging.Level;
  */
 public final class ConfigUpdater {
 
-    public static final int CURRENT_VERSION = 13;
+    public static final int CURRENT_VERSION = 14;
     public static final String BOM = "\uFEFF";
     /**
      * Keys whose value is replaced by the new default, with the config-version that introduced the change: only files

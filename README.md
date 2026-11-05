@@ -23,6 +23,7 @@ Spieler **ohne** Mod spielen ganz normal auf dem Server, nur ohne Werkzeugleiste
 
 ## Was kann MRtoolbar?
 - **Tool-Slots:** Ein Hotbar-Slot wird zum Gürtel mit bis zu 8 Werkzeugen. Du schaltest per Taste oder `Alt` + Mausrad durch - die Hotbar bleibt frei für Blöcke und Essen.
+- **Mending im Gürtel:** Werkzeuge mit Mending werden auch im Gürtel repariert - erst der Gürtel in der Hand, dann die anderen.
 - **Inventar und Kisten sortieren** mit einem Mausrad-Klick. Welche Slots dabei bleiben, legst du selbst fest.
 - **Hotbar-Design:** Rahmen, Ecken, Unterstrich, Hintergrund oder eine eigene Textur für deine Tool-Slots.
 - **Sicher:** Alle Items liegen auf dem Server, der Mod zeigt nur an. Spieler ohne Mod spielen ganz normal und holen ihre Tools mit `/toolbar takeback` zurück.
@@ -102,8 +103,9 @@ Ob es ein Mod-Update gibt, zeigt `/toolbar` im Buch oben links.
 ### Permissions
 | Permission | Standard | Wofür |
 |---|---|---|
-| `mrtoolbar.player` | OP | **Alle Spieler-Rechte** (`use`, `sort`, `sort.containers`) - am besten der Default-Gruppe geben |
+| `mrtoolbar.player` | OP | **Alle Spieler-Rechte** (`use`, `mending`, `sort`, `sort.containers`) - am besten der Default-Gruppe geben |
 | `mrtoolbar.use` | OP | Werkzeugleiste nutzen, `/toolbar` |
+| `mrtoolbar.mending` | OP | Mending repariert auch die Tools im Gürtel |
 | `mrtoolbar.sort` | OP | Inventar sortieren, eigene Ausnahmen festlegen |
 | `mrtoolbar.sort.containers` | OP | Offene Kisten, Fässer, Shulker, Trichter … sortieren |
 | `mrtoolbar.slots.<n>` | – | Höchstens `<n>` Tool-Slots (sonst `toolbar.default-tool-slots`) |
@@ -139,6 +141,7 @@ Am einfachsten im Browser: Mit **MRadmin** (ab der Version mit „Konfiguration 
 | `toolbar.allowed-items` | Werkzeuge, Waffen … | Was in einen Gürtel darf (Item-Namen, `#Tags`, `*` für alles) |
 | `toolbar.disabled-worlds` | `[]` | Welten ohne Werkzeugleiste |
 | `toolbar.on-death` | `drop` | Gürtel-Inhalt beim Tod: `drop` oder `keep` |
+| `toolbar.mending` | `true` | Mending repariert auch die Tools im Gürtel (übrige XP: zuerst der Gürtel in der Hand, dann von links nach rechts) |
 | `sorting.enabled` | `true` | Sortieren an/aus |
 | `sorting.default-locked` | `[hotbar]` | Gesperrte Slots für Spieler ohne eigene Ausnahmen |
 | `sorting.containers` | Kiste, Fass, Shulker … | Welche Behälter sortiert werden können (Plugin-Menüs nie) |
@@ -191,6 +194,9 @@ Nein. Spieler ohne Mod spielen ganz normal, nur ohne Werkzeugleiste. `/toolbar t
 
 **Was passiert mit den Tools beim Tod?**
 Standardmäßig fallen sie wie normale Items (`toolbar.on-death: drop`). Mit `keep` bleiben sie im Gürtel.
+
+**Repariert Mending auch die Tools im Gürtel?**
+Ja. Was Minecraft nicht für das Item in der Hand und die Rüstung braucht, geht an die Gürtel: zuerst an den Gürtel des Tool-Slots, den du gerade in der Hand hast, dann an die anderen Gürtel von links nach rechts - in jedem Gürtel ein Tool nach dem anderen, in der Reihenfolge, in der sie im Gürtel liegen. Erst wenn alles heil ist, bekommst du die XP. Abschalten: `toolbar.mending: false` bzw. Permission `mrtoolbar.mending` entziehen.
 
 **Ich habe einen Fehler gefunden oder einen Wunsch.**
 Gern über das **[Formular auf der Website](https://mrtechnology.marcelr.at/report/mrtoolbar/)** - am besten mit der Ausgabe von `/mrtoolbar version` und deiner Mod-Version.
