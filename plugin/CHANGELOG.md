@@ -9,6 +9,9 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 ### Neu
 - **Mending repariert den Gürtel:** Werkzeuge mit Mending werden jetzt auch im Gürtel repariert. Die XP, die Minecraft nicht für das Item in der Hand und die Rüstung braucht, geht zuerst an den Gürtel des Tool-Slots in der Hand (ein Tool nach dem anderen, in der Reihenfolge im Gürtel), ist dort alles heil, an die anderen Gürtel von links nach rechts. Erst danach bekommt der Spieler die XP. Neue Einstellung `toolbar.mending` (Standard an, `config-version` 14, auch im Browser) und Permission `mrtoolbar.mending` (in `mrtoolbar.player`).
 
+### Behoben & geändert
+- **Gürtel-Fenster zeigt keine fremden Tools mehr:** Solange ein Gürtel offen ist, liegen die ausgewählten Tools aller Tool-Slots in ihren Gürteln - in der Hotbar unter dem Fenster tauchen keine Tools aus anderen Gürteln mehr auf (das führte zu Fehlern beim Verschieben). Beim Schließen kommen sie wieder in ihre Slots.
+
 ## [1.2.0] - 2026-11-04
 
 ### Neu

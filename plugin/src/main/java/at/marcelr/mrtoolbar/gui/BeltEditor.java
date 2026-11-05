@@ -18,9 +18,10 @@ import static at.marcelr.mrtoolbar.Messages.tag;
 
 /**
  * The belt of one tool slot as a chest row: tools are put in and taken out like in any chest. While it is open,
- * the selected tool lies in the belt too (the tool slot is empty), so the row shows every tool of the belt.
+ * the selected tools of all tool slots lie in their belts (the tool slots are empty): the row shows every tool of
+ * this belt, and the hotbar below shows no tools of other belts.
  * Every change is written into the player data a tick later (see {@code ProtectionListener}) and once more when
- * the window closes; then the selected tool goes back into the tool slot.
+ * the window closes; then the selected tools go back into the tool slots.
  */
 public final class BeltEditor implements InventoryHolder {
 
@@ -45,7 +46,9 @@ public final class BeltEditor implements InventoryHolder {
 
     /** Opens the belt of a tool slot. */
     public static void open(MRToolbar plugin, Player player, ToolSlot slot) {
-        plugin.toolbars().prepareEditor(player, slot);
+        for (ToolSlot each : plugin.toolbars().get(player).slots()) {
+            plugin.toolbars().prepareEditor(player, each);
+        }
         BeltEditor editor = new BeltEditor(plugin, player, slot);
         editor.fill();
         player.openInventory(editor.inventory);
@@ -111,13 +114,19 @@ public final class BeltEditor implements InventoryHolder {
         sync();
         closed = true;
         inventory.clear();
-        plugin.toolbars().finishEditor(viewer, slot);
+        plugin.toolbars().finishEditor(viewer);
     }
 
     /** Whether the player has the belt of this tool slot open right now. */
     public static boolean isOpen(Player player, ToolSlot slot) {
         return player.getOpenInventory().getTopInventory().getHolder(false) instanceof BeltEditor editor
                 && editor.slot == slot && !editor.closed;
+    }
+
+    /** Whether the player has any belt open right now. */
+    public static boolean isOpen(Player player) {
+        return player.getOpenInventory().getTopInventory().getHolder(false) instanceof BeltEditor editor
+                && !editor.closed;
     }
 
     /** Closes the player's belt if it is open (writes it back first). */

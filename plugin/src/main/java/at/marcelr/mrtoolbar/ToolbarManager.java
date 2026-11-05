@@ -310,7 +310,7 @@ public final class ToolbarManager {
 
     /** Next / previous tool (cycling is the only way to choose). @return whether something changed */
     public boolean cycle(Player player, ToolSlot slot, int step) {
-        if (BeltEditor.isOpen(player, slot)) {
+        if (BeltEditor.isOpen(player)) {
             return false;
         }
         guardSlot(player, slot);
@@ -401,7 +401,10 @@ public final class ToolbarManager {
 
     // ------------------------------------------------------------------ belt editor
 
-    /** Before the belt opens: the selected tool goes back into the belt, so the window shows all tools. */
+    /**
+     * Before a belt opens: the selected tool goes back into the belt, so the window shows all tools. Done for every
+     * tool slot - the tools of the other belts must not lie in the hotbar below the window.
+     */
     public void prepareEditor(Player player, ToolSlot slot) {
         PlayerInventory inventory = player.getInventory();
         ItemStack inHand = inventory.getItem(slot.hotbar());
@@ -416,25 +419,23 @@ public final class ToolbarManager {
         save(player);
     }
 
-    /** After the belt closed: the last selected tool (or the first one) goes into the tool slot again. */
-    public void finishEditor(Player player, ToolSlot slot) {
-        if (get(player).slot(slot.hotbar()) != slot) {
-            return;
-        }
-        guardSlot(player, slot);
+    /** After the belt closed: the last selected tools (or the first ones) go into all tool slots again. */
+    public void finishEditor(Player player) {
+        guard(player);
     }
 
     // ------------------------------------------------------------------ guard
 
-    /** Checks all tool slots of the player (see {@link #guardSlot}). */
+    /**
+     * Checks all tool slots of the player (see {@link #guardSlot}). Not while a belt is open: then every selected
+     * tool lies in its belt on purpose.
+     */
     public void guard(Player player) {
-        if (!active(player)) {
+        if (!active(player) || BeltEditor.isOpen(player)) {
             return;
         }
         for (ToolSlot slot : get(player).slots()) {
-            if (!BeltEditor.isOpen(player, slot)) {
-                guardSlot(player, slot);
-            }
+            guardSlot(player, slot);
         }
     }
 
