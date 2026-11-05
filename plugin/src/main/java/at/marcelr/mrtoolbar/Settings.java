@@ -28,7 +28,7 @@ public record Settings(
 
     public record ToolbarSettings(int defaultToolSlots, int defaultBeltSize, ToolFilter allowed,
                                   Set<String> disabledWorlds, DeathMode death, boolean pauseInAdminMode,
-                                  boolean pauseInPvp) {
+                                  boolean pauseInPvp, boolean mending) {
 
         public boolean disabledIn(String world) {
             return disabledWorlds.contains(world.toLowerCase(Locale.ROOT));
@@ -106,7 +106,8 @@ public record Settings(
                         .collect(Collectors.toUnmodifiableSet()),
                 death,
                 c.getBoolean("toolbar.pause-in-admin-mode", true),
-                c.getBoolean("toolbar.pause-in-pvp", true));
+                c.getBoolean("toolbar.pause-in-pvp", true),
+                c.getBoolean("toolbar.mending", true));
 
         SortMode mode = SortMode.parse(c.getString("sorting.default-mode", "type"));
         if (mode == null) {

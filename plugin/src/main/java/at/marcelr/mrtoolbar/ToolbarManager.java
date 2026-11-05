@@ -5,9 +5,11 @@ import at.marcelr.mrtoolbar.gui.BeltEditor;
 import org.bukkit.GameMode;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -33,6 +35,7 @@ import static at.marcelr.mrtoolbar.Messages.tag;
 public final class ToolbarManager {
 
     public static final String PERM_USE = "mrtoolbar.use";
+    public static final String PERM_MENDING = "mrtoolbar.mending";
     private static final String PERM_SLOTS = "mrtoolbar.slots.";
     private static final String PERM_BELT = "mrtoolbar.belt.";
 
@@ -527,6 +530,69 @@ public final class ToolbarManager {
             }
         }
         return false;
+    }
+
+    // ------------------------------------------------------------------ mending
+
+    /**
+     * Repairs damaged Mending tools of the belts with XP that Minecraft did not need for the held and worn items
+     * (order see {@link BeltMending}). The selected tool of a tool slot counts at the belt position it came from.
+     *
+     * @return the XP that is left for the player
+     */
+    public int mendBelts(Player player, int xp) {
+        if (xp <= 0 || !plugin.settings().toolbar().mending() || !player.hasPermission(PERM_MENDING)
+                || !active(player)) {
+            return xp;
+        }
+        PlayerToolbar toolbar = get(player);
+        PlayerInventory inventory = player.getInventory();
+        int size = beltSize(player);
+        int left = xp;
+        boolean changed = false;
+        List<Integer> order = BeltMending.order(inventory.getHeldItemSlot(),
+                toolbar.slots().stream().map(ToolSlot::hotbar).toList());
+        for (int hotbar : order) {
+            ToolSlot slot = toolbar.slot(hotbar);
+            if (BeltEditor.isOpen(player, slot)) {
+                // The tools lie in the open window right now.
+                continue;
+            }
+            ItemStack selected = inventory.getItem(hotbar);
+            // The selected tool is missing from the belt - it counts at its old position (or last, if unknown).
+            int selectedAt = !marked(selected, hotbar) ? -1
+                    : slot.active() >= 0 && slot.active() < size && slot.free(slot.active()) ? slot.active() : size;
+            for (int position = 0; position <= size && left > 0; position++) {
+                ItemStack tool = position == selectedAt ? selected : position < size ? slot.get(position) : null;
+                int repaired = mend(tool, left);
+                if (repaired > 0) {
+                    left -= BeltMending.xpUsed(repaired);
+                    changed = true;
+                    if (position == selectedAt) {
+                        inventory.setItem(hotbar, tool);
+                    }
+                }
+            }
+            if (left <= 0) {
+                break;
+            }
+        }
+        if (changed) {
+            save(player);
+        }
+        return left;
+    }
+
+    /** Repairs {@code tool} if it has Mending and is damaged. @return the repaired durability */
+    private static int mend(ItemStack tool, int xp) {
+        if (tool == null || tool.getEnchantmentLevel(Enchantment.MENDING) <= 0
+                || !(tool.getItemMeta() instanceof Damageable meta) || !meta.hasDamage()) {
+            return 0;
+        }
+        int repaired = BeltMending.repaired(xp, meta.getDamage());
+        meta.setDamage(meta.getDamage() - repaired);
+        tool.setItemMeta(meta);
+        return repaired;
     }
 
     // ------------------------------------------------------------------ death
