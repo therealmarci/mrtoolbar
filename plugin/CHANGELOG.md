@@ -6,6 +6,8 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+## [1.3.0] - 2026-11-05
+
 ### Neu
 - **Mending repariert den Gürtel:** Werkzeuge mit Mending werden jetzt auch im Gürtel repariert. Die XP, die Minecraft nicht für das Item in der Hand und die Rüstung braucht, geht zuerst an den Gürtel des Tool-Slots in der Hand (ein Tool nach dem anderen, in der Reihenfolge im Gürtel), ist dort alles heil, an die anderen Gürtel von links nach rechts. Erst danach bekommt der Spieler die XP. Neue Einstellung `toolbar.mending` (Standard an, `config-version` 14, auch im Browser) und Permission `mrtoolbar.mending` (in `mrtoolbar.player`).
 
