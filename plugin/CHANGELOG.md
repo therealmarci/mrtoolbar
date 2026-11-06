@@ -6,6 +6,8 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+## [1.3.1] - 2026-11-06
+
 ### Behoben & geändert
 - **Anleitung als Wiki:** Die Anleitung (Plugin und Mod) steht jetzt im Wiki auf der Website (https://mrtechnology.marcelr.at/wiki/mrtoolbar/) - aufgeteilt in Seiten für Spieler (Mod einrichten & Tasten, Inventar sortieren, Hotbar-Design) und für Admins (Befehle, Permissions, Konfiguration, Discord-Log, Plugin und Mod, Häufige Fragen), mit Suche über alle Plugins. Die README ist nur noch eine kurze Übersicht. Alte Links auf `/docs/mrtoolbar/` führen automatisch ins Wiki. Die Seiten **Permissions** und **Konfiguration** listen jede Permission bzw. Einstellung mit Standardwert automatisch aus dem Plugin - sie sind also immer auf dem Stand der Version.
 
