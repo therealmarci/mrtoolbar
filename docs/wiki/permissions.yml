@@ -1,0 +1,33 @@
+# Texte der Permission-Tabellen im Wiki (Platzhalter <!-- auto:permissions --> und <!-- auto:permission-groups -->).
+# Die Tabelle selbst (Permissions, Standard, Gruppe) erzeugt die Website aus plugin.yml - hier steht nur, wofür eine
+# Permission ist, auf Deutsch (de) und optional Englisch (en). Ohne Eintrag gilt die description aus plugin.yml.
+mrtoolbar.player:
+  de: "**Alle Spieler-Rechte** (`use`, `mending`, `sort`, `sort.containers`, `version`) - am besten der Default-Gruppe geben"
+mrtoolbar.groups.support:
+  de: "Admin-Menü, Gürtel anderer ansehen"
+mrtoolbar.groups.staff:
+  de: "Support + `/mrtoolbar debug`"
+mrtoolbar.groups.admin:
+  de: "Alles: Staff + Reload, Discord-Log, Update-Hinweis"
+mrtoolbar.version:
+  de: "`/mrtoolbar version`"
+mrtoolbar.sort:
+  de: "Inventar sortieren, eigene Ausnahmen festlegen"
+mrtoolbar.sort.containers:
+  de: "Offene Kisten, Fässer, Shulker, Trichter … sortieren"
+mrtoolbar.use:
+  de: "Werkzeugleiste nutzen, `/toolbar`"
+mrtoolbar.mending:
+  de: "Mending repariert auch die Tools im Gürtel"
+mrtoolbar.admin.reload:
+  de: "`/mrtoolbar reload`"
+mrtoolbar.admin.discord:
+  de: "`/mrtoolbar discord [test]` - Zustand des Discord-Logs, Testnachricht senden"
+mrtoolbar.admin.debug:
+  de: "`/mrtoolbar debug [spieler]` - Mod-Verbindung und Werkzeug-Slots eines Spielers anzeigen"
+mrtoolbar.admin.gui:
+  de: "`/mrtoolbar gui` - alle Online-Spieler mit Mod-Version und Werkzeug-Slots (auch der MRtoolbar-Knopf in MRadmin)"
+mrtoolbar.admin.view:
+  de: "Gürtel anderer Spieler ansehen (nur lesen) - `/mrtoolbar view <spieler>`, Admin-Menü und Spieler-Menü von MRadmin"
+mrtoolbar.admin.update:
+  de: "Update-Hinweis beim Betreten"
