@@ -1,0 +1,32 @@
+# Seitenbaum des Wikis (https://mrtechnology.marcelr.at/wiki/mrtoolbar/).
+# Abschnitte mit Seiten; "file" relativ zu docs/wiki/, mit "/" am Anfang relativ zum Repo.
+# id "" = Einstieg. audience: player | admin | dev (Etikett und Einordnung auf der Wiki-Startseite).
+sections:
+  - title: {de: Einstieg, en: Getting started}
+    pages:
+      - {id: "", file: einstieg.md, title: {de: Überblick, en: Overview}}
+      - {id: schnellstart, file: schnellstart.md, title: {de: Schnellstart (Server), en: Quick start (server)}}
+  - title: {de: Für Spieler, en: For players}
+    audience: player
+    pages:
+      - {id: einrichten, file: einrichten.md, title: {de: Mod einrichten & Tasten, en: Set up the mod & keys}}
+      - {id: sortieren, file: sortieren.md, title: {de: Inventar sortieren, en: Sorting your inventory}}
+      - {id: design, file: design.md, title: {de: Hotbar-Design, en: Hotbar design}}
+  - title: {de: Für Admins, en: For admins}
+    audience: admin
+    pages:
+      - {id: befehle, file: befehle.md, title: {de: Befehle, en: Commands}}
+      - {id: permissions, file: permissions.md, title: {de: Permissions, en: Permissions}}
+      - {id: konfiguration, file: konfiguration.md, title: {de: Konfiguration, en: Configuration}}
+      - {id: discord, file: discord.md, title: {de: Discord-Log, en: Discord log}}
+      - {id: plugin-und-mod, file: plugin-und-mod.md, title: {de: Plugin und Mod, en: Plugin and mod}}
+      - {id: zusammenarbeit, file: zusammenarbeit.md, title: {de: Zusammenarbeit mit anderen Plugins, en: Working with other plugins}}
+      - {id: faq, file: faq.md, title: {de: Häufige Fragen, en: FAQ}}
+  - title: {de: Mehr, en: More}
+    pages:
+      - {id: changelog-plugin, file: /plugin/CHANGELOG.md, title: {de: Changelog Plugin, en: Changelog plugin}}
+      - {id: changelog-mod, file: /mod/CHANGELOG.md, title: {de: Changelog Mod, en: Changelog mod}}
+  - title: {de: Für Entwickler, en: For developers}
+    audience: dev
+    pages:
+      - {id: dev, file: /docs/COMPATIBILITY.md, title: {de: Kompatibilität Plugin ↔ Mod, en: Plugin ↔ mod compatibility}}

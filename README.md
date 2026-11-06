@@ -2,7 +2,7 @@
 
 **Tool-Slots für die Hotbar:** Ein Hotbar-Slot wird zum Werkzeuggürtel mit bis zu 8 Tools, durch die du per Taste schaltest. Spitzhacke, Axt, Schaufel und Schwert brauchen nur noch **einen** Platz - der Rest der Hotbar bleibt frei für Blöcke und Essen. Dazu: Inventar und Kisten mit einem Klick sortieren.
 
-**[⬇ Download](https://mrtechnology.marcelr.at/download/mrtoolbar/)** · **[📖 Anleitung online](https://mrtechnology.marcelr.at/docs/mrtoolbar/)** · **[🐞 Fehler melden](https://mrtechnology.marcelr.at/report/mrtoolbar/)**
+**[⬇ Download](https://mrtechnology.marcelr.at/download/mrtoolbar/)** · **[📖 Wiki](https://mrtechnology.marcelr.at/wiki/mrtoolbar/)** · **[🐞 Fehler melden](https://mrtechnology.marcelr.at/report/mrtoolbar/)**
 
 MRtoolbar besteht aus **zwei Teilen** - beide gibt es auf der [Download-Seite](https://mrtechnology.marcelr.at/download/mrtoolbar/):
 
@@ -10,8 +10,6 @@ MRtoolbar besteht aus **zwei Teilen** - beide gibt es auf der [Download-Seite](h
 |---|---|---|
 | **Plugin** (`MRtoolbar-mc26.3-v….jar`) | der Server | Paper 26.3, Java 25 → Ordner `plugins/` |
 | **Client-Mod** (`MRtoolbar-mod-mc26.3-v….jar`) | jeder Spieler, der die Werkzeugleiste nutzen will | Fabric 26.3 mit [Fabric API](https://modrinth.com/mod/fabric-api) → Ordner `mods/` |
-
-Spieler **ohne** Mod spielen ganz normal auf dem Server, nur ohne Werkzeugleiste. Plugin und Mod haben eigene Versionen: Nicht jedes Plugin-Update braucht ein Mod-Update.
 
 | Auf einen Blick | |
 |---|---|
@@ -22,186 +20,31 @@ Spieler **ohne** Mod spielen ganz normal auf dem Server, nur ohne Werkzeugleiste
 | Status | stabil (1.x) - Plugin und Mod |
 
 ## Was kann MRtoolbar?
-- **Tool-Slots:** Ein Hotbar-Slot wird zum Gürtel mit bis zu 8 Werkzeugen. Du schaltest per Taste oder `Alt` + Mausrad durch - die Hotbar bleibt frei für Blöcke und Essen.
-- **Mending im Gürtel:** Werkzeuge mit Mending werden auch im Gürtel repariert - erst der Gürtel in der Hand, dann die anderen.
-- **Inventar und Kisten sortieren** mit einem Mausrad-Klick. Welche Slots dabei bleiben, legst du selbst fest.
-- **Hotbar-Design:** Rahmen, Ecken, Unterstrich, Hintergrund oder eine eigene Textur für deine Tool-Slots.
-- **Sicher:** Alle Items liegen auf dem Server, der Mod zeigt nur an. Spieler ohne Mod spielen ganz normal und holen ihre Tools mit `/toolbar takeback` zurück.
-- **Für Admins:** Anzahl der Slots und Gürtelgröße per Permission, Übersicht über alle Gürtel, alles in der `config.yml` einstellbar.
+- **Tool-Slots:** bis zu 8 Werkzeuge in einem Hotbar-Slot, durchschalten mit `Alt` + Mausrad.
+- **Mending im Gürtel**, **Inventar und Kisten sortieren** per Mausrad-Klick.
+- **Hotbar-Design** für deine Tool-Slots.
+- **Sicher:** Alle Items liegen auf dem Server, Spieler ohne Mod spielen ganz normal.
+- **Für Admins:** Slots und Gürtelgröße per Permission, Übersicht über alle Gürtel - mit MRadmin auch im Browser.
 
----
-
-## Für Spieler
-
-### Einrichten
-1. **Fabric Loader** und **[Fabric API](https://modrinth.com/mod/fabric-api)** für Minecraft 26.3 installieren.
-2. Den **[MRtoolbar-Mod herunterladen](https://mrtechnology.marcelr.at/download/mrtoolbar/)** (Zeile „Fabric-Mod (Client)“) und in den Ordner `mods/` legen.
-3. Auf den Server gehen und **`/toolbar`** öffnen: Einen Hotbar-Slot zum **Tool-Slot** machen.
-4. Auf dem Tool-Slot **`B`** drücken: Der Gürtel öffnet sich wie eine Kiste - Tools hineinlegen.
-5. **`Alt` halten + Mausrad** schaltet durch die Tools.
-
-### Tasten
-| Taste (Standard) | Funktion |
-|---|---|
-| `B` | Gürtel des Tool-Slots öffnen |
-| `Alt` halten + Mausrad | Nächstes / vorheriges Tool |
-| Mausrad-Klick im Inventar | **Sortieren** - über deinem Inventar das Inventar, über einer Kiste, einem Fass, Trichter … den Behälter |
-| nicht belegt | Nächstes Tool, Vorheriges Tool, Hotbar-Design öffnen |
-
-Alle Tasten änderst du unter **Optionen → Steuerung → MRtoolbar**.
-
-### Inventar sortieren
-Gleiche Items werden zusammengelegt und nach Kategorie, Name oder Menge geordnet. In **`/toolbar` → Trichter** (oder `/toolbar sort`) legst du fest, welche Slots bleiben, wo sie sind: Ein Menü wie dein Inventar, jeder Slot ein Schalter - grün wird sortiert, rot bleibt. Standardmäßig bleibt die Hotbar, wie sie ist. Tool-Slots, Rüstung und Zweithand werden nie angefasst.
-
-### Hotbar-Design
-Wie deine Tool-Slots in der Hotbar markiert werden: Rahmen, Ecken, Unterstrich, Hintergrund oder eine Textur aus deinem Resourcepack - dazu Farbe, Deckkraft, Dicke und Abstand. Öffnen über den Knopf in `/toolbar`, eine eigene Taste oder „Konfigurieren“ in Mod Menu. Gespeichert wird auf deinem PC in `config/mrtoolbar.json`.
-
-<details>
-<summary>Für Resourcepack-Ersteller</summary>
-
-Der Stil „Textur“ zeichnet `assets/mrtoolbar/textures/gui/sprites/hud/tool_slot.png` (20×20, Nine-Slice mit 3 px Rand). Sie wird mit der gewählten Farbe eingefärbt - Weiß behält die Originalfarben.
-</details>
-
-### Befehle für Spieler
-| Befehl | Was er tut |
-|---|---|
-| `/toolbar` (`/tb`, `/tools`) | Menü: Tool-Slots, Gürtel, Hotbar-Design, Sortieren, an/aus |
-| `/toolbar on` · `off` | Werkzeugleiste ein- oder ausschalten |
-| `/toolbar takeback` | Alle Tools aus den Gürteln zurück ins Inventar (geht auch ohne Mod) |
-| `/toolbar sort` | Sortier-Ausnahmen festlegen und jetzt sortieren (geht auch ohne Mod) |
-
-Ob es ein Mod-Update gibt, zeigt `/toolbar` im Buch oben links.
-
----
-
-## Für Server-Admins
-
-### Schnellstart
-1. **[Plugin herunterladen](https://mrtechnology.marcelr.at/download/mrtoolbar/)** (Zeile „Plugin (Server)“) und in den Ordner `plugins/` legen.
-2. Den Server starten.
-3. **Spielern die Rechte geben** - ohne sie dürfen nur OPs die Werkzeugleiste nutzen:
-   ```text
-   /lp group default permission set mrtoolbar.player true
-   /lp group supporter permission set mrtoolbar.groups.support true
-   /lp group staff permission set mrtoolbar.groups.staff true
-   /lp group admin permission set mrtoolbar.groups.admin true
-   ```
-4. Deinen Spielern den Link zum Mod geben: **https://mrtechnology.marcelr.at/download/mrtoolbar/**. Im Spiel steht der Link auch in `/toolbar`, und wer mit Tool-Slots, aber ohne Mod beitritt, bekommt einen Hinweis mit Link.
-
-**Update:** Die alte JAR durch die neue ersetzen und den Server neu starten. Die Config wird automatisch angepasst.
-
-### Befehle
-| Befehl | Was er tut | Permission |
-|---|---|---|
-| `/mrtoolbar gui` | Alle Online-Spieler mit Mod-Version und Tool-Slots, Klick zeigt ihre Gürtel | `mrtoolbar.admin.gui` |
-| `/mrtoolbar view <spieler>` | Gürtel eines Spielers ansehen (nur lesen) | `mrtoolbar.admin.view` |
-| `/mrtoolbar debug [spieler]` | Mod-Verbindung, Status und Tool-Slots eines Spielers | `mrtoolbar.admin.debug` |
-| `/mrtoolbar reload` | Config und Sprachdateien neu laden | `mrtoolbar.admin.reload` |
-| `/mrtoolbar discord [test]` | Status des Discord-Logs · Testnachricht senden | `mrtoolbar.admin.discord` |
-| `/mrtoolbar version` | Version und Update-Status | `mrtoolbar.version` (in `mrtoolbar.player`) |
-
-### Permissions
-| Permission | Standard | Wofür |
-|---|---|---|
-| `mrtoolbar.player` | OP | **Alle Spieler-Rechte** (`use`, `mending`, `sort`, `sort.containers`) - am besten der Default-Gruppe geben |
-| `mrtoolbar.use` | OP | Werkzeugleiste nutzen, `/toolbar` |
-| `mrtoolbar.mending` | OP | Mending repariert auch die Tools im Gürtel |
-| `mrtoolbar.sort` | OP | Inventar sortieren, eigene Ausnahmen festlegen |
-| `mrtoolbar.sort.containers` | OP | Offene Kisten, Fässer, Shulker, Trichter … sortieren |
-| `mrtoolbar.slots.<n>` | – | Höchstens `<n>` Tool-Slots (sonst `toolbar.default-tool-slots`) |
-| `mrtoolbar.belt.<n>` | – | `<n>` Plätze pro Gürtel, höchstens 8 (sonst `toolbar.default-belt-size`) |
-| `mrtoolbar.groups.support` | OP | **Gruppe** Support: Spieler + Admin-Menü, Gürtel anderer ansehen |
-| `mrtoolbar.groups.staff` | OP | **Gruppe** Staff: Support + `/mrtoolbar debug` |
-| `mrtoolbar.groups.admin` | OP | **Gruppe** Admin: alles (+ Reload, Discord-Log, Update-Hinweis). Die Gruppen sind in allen MRtechnology-Plugins gleich aufgebaut, jede enthält die darunter |
-| `mrtoolbar.admin.gui` · `view` | OP | Admin-Menü · Gürtel anderer ansehen (auch über MRadmin) |
-| `mrtoolbar.admin.debug` · `reload` · `discord` | OP | `/mrtoolbar debug` · `/mrtoolbar reload` · `/mrtoolbar discord` |
-| `mrtoolbar.admin.update` | OP | Update-Hinweis beim Betreten |
-
-<details>
-<summary>LuckPerms-Beispiele</summary>
-
+## Schnellstart
+**Server:** Plugin nach `plugins/`, starten, Rechte geben:
 ```text
-/lp group default permission set mrtoolbar.player true      # alle Spieler
-/lp group vip permission set mrtoolbar.slots.3 true          # VIPs: 3 Tool-Slots …
-/lp group vip permission set mrtoolbar.belt.8 true           # … mit je 8 Plätzen
-/lp group default permission set mrtoolbar.sort.containers false   # Kisten nicht sortieren
+/lp group default permission set mrtoolbar.player true
+/lp group supporter permission set mrtoolbar.groups.support true
+/lp group staff permission set mrtoolbar.groups.staff true
+/lp group admin permission set mrtoolbar.groups.admin true
 ```
-</details>
 
-### Konfiguration
-Am einfachsten im Browser: Mit **MRadmin** (ab der Version mit „Konfiguration im Browser“) unter **Plugins → MRtoolbar → Konfiguration** - jede Einstellung mit Erklärung, Speichern lädt MRtoolbar sofort neu (Permission `mradmin.config`). Alles steht außerdem kommentiert in `plugins/MRtoolbar/config.yml`; Änderungen von Hand übernimmst du mit `/mrtoolbar reload`.
+**Spieler:** Fabric Loader + Fabric API installieren, den Mod nach `mods/` legen, auf dem Server `/toolbar` öffnen und einen Tool-Slot einrichten, mit `B` den Gürtel füllen.
 
-| Einstellung | Standard | Bedeutung |
-|---|---|---|
-| `general.language` | `auto` | `auto` = wie im Minecraft-Client des Spielers (wie der Mod), sonst `de` oder `en` für alle |
-| `general.fallback-language` | `en` | Für Spieler, deren Minecraft-Sprache keine eigene Datei hat |
-| `general.server-language` | `en` | Texte ohne einzelnen Empfänger (z.B. in der Weboberfläche von MRadmin) |
-| `toolbar.default-tool-slots` | `2` | Tool-Slots pro Spieler |
-| `toolbar.default-belt-size` | `6` | Plätze pro Gürtel (1-8) |
-| `toolbar.allowed-items` | Werkzeuge, Waffen … | Was in einen Gürtel darf (Item-Namen, `#Tags`, `*` für alles) |
-| `toolbar.disabled-worlds` | `[]` | Welten ohne Werkzeugleiste |
-| `toolbar.on-death` | `drop` | Gürtel-Inhalt beim Tod: `drop` oder `keep` |
-| `toolbar.mending` | `true` | Mending repariert auch die Tools im Gürtel (übrige XP: zuerst der Gürtel in der Hand, dann von links nach rechts) |
-| `sorting.enabled` | `true` | Sortieren an/aus |
-| `sorting.default-locked` | `[hotbar]` | Gesperrte Slots für Spieler ohne eigene Ausnahmen |
-| `sorting.containers` | Kiste, Fass, Shulker … | Welche Behälter sortiert werden können (Plugin-Menüs nie) |
-| `mod.minimum-version` | leer | Ältere Mod-Versionen aussperren, z.B. `0.2.1` |
-| `mod.download-url` | Download-Seite | Link zum Mod in den Hinweisen |
-| `discord.*` | aus | Discord-Log: Webhook, eigener oder MRadmins (`use-mradmin-webhook`), welche Ereignisse in welcher Farbe |
-| `gui.refresh-ticks` · `gui.sounds` | `20` · `true` | Wie oft offene Menüs aktualisiert werden (Ticks) · Klick-Töne in Menüs |
-| `updates.*` | an, `github`, alle 6 h | Hinweis auf neue Versionen (Quelle, Vorabversionen, Prüfintervall) |
+**Update:** alte JAR durch die neue ersetzen, Server neu starten - die Config passt sich selbst an. Plugin und Mod haben eigene Versionen.
 
-Alle Texte stehen in `plugins/MRtoolbar/lang/de.yml` und `en.yml` ([MiniMessage](https://docs.advntr.dev/minimessage/format.html)). Plugin und Mod richten sich nach der Minecraft-Sprache des Spielers - so gibt es keine gemischten Sprachen. Eine eigene `fr.yml` bekommen französische Spieler automatisch.
-
-### Discord-Log
-MRtoolbar meldet in einen Discord-Kanal, wer mit zu alter, zu neuer oder ganz ohne Mod spielt, wenn das Team einen Gürtel ansieht und wenn jemand neu lädt.
-
-1. In Discord: **Kanal bearbeiten → Integrationen → Webhooks → Neuer Webhook** und die **Webhook-URL kopieren**.
-2. In der Config `discord.enabled: true` setzen und die URL bei `webhook-url` eintragen.
-3. `/mrtoolbar reload`, dann mit **`/mrtoolbar discord test`** prüfen.
-
-Unter `discord.events` legst du pro Ereignis fest, ob es gesendet wird und in welcher Farbe (`mod-too-old`, `mod-too-new`, `mod-missing`, `belt-view`, `admin-reload`). „Ohne Mod“ (`mod-missing`) ist anfangs aus, weil es bei jedem Login ohne Mod kommt. Die Texte stehen in der Sprachdatei unter `discord`.
-
-> [!TIP]
-> **Kein eigener Webhook?** Mit MRadmin geht es auch über dessen Discord-Log: `discord.enabled: true`, `webhook-url` leer lassen und `discord.use-mradmin-webhook: true` setzen.
->
-> Mit MRadmin steht jedes Ereignis außerdem im **Protokoll** der Weboberfläche (bis zu 14 Tage) - auch wenn Discord aus ist.
-
-### Wie Plugin und Mod zusammenarbeiten
-Der **Server** macht alles, was mit Items zu tun hat: Gürtel speichern, Tools wechseln, Tool-Slots schützen, Rechte, Tod. Der **Mod** kümmert sich nur um Tasten und Darstellung und fragt beim Server an - er kann keine Items erzeugen oder verschieben. Beim Betreten prüfen beide, ob ihre Versionen zusammenpassen. Details: [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
-
----
-
-## Zusammenarbeit mit anderen Plugins
-MRtoolbar läuft **allein**. Zusammen mit anderen MRtechnology-Plugins kann es mehr - die Plugins sprechen dafür über **MRadmin** miteinander:
-
-| Funktion | Braucht |
+## Ganze Anleitung im Wiki
+| Für Spieler | Für Admins |
 |---|---|
-| MRtoolbar im Dashboard und Spieler-Menü von MRadmin (Mod-Version, Tool-Slots, Gürtel ansehen) | MRadmin |
-| Pause im Admin-Modus (`toolbar.pause-in-admin-mode`) | MRadmin |
-| Pause in Duellen, im Arena-Editor und beim Zuschauen (`toolbar.pause-in-pvp`), Gürtel werden mitgesichert | MRadmin + MRpvp |
-| Ereignisse im **Protokoll** der MRadmin-Weboberfläche, Discord-Log über MRadmins Webhook (`discord.use-mradmin-webhook`) | MRadmin |
+| [Mod einrichten & Tasten](https://mrtechnology.marcelr.at/wiki/mrtoolbar/einrichten/) · [Inventar sortieren](https://mrtechnology.marcelr.at/wiki/mrtoolbar/sortieren/) · [Hotbar-Design](https://mrtechnology.marcelr.at/wiki/mrtoolbar/design/) | [Befehle](https://mrtechnology.marcelr.at/wiki/mrtoolbar/befehle/) · [Permissions](https://mrtechnology.marcelr.at/wiki/mrtoolbar/permissions/) · [Konfiguration](https://mrtechnology.marcelr.at/wiki/mrtoolbar/konfiguration/) · [Plugin und Mod](https://mrtechnology.marcelr.at/wiki/mrtoolbar/plugin-und-mod/) · [Häufige Fragen](https://mrtechnology.marcelr.at/wiki/mrtoolbar/faq/) |
 
-### Multiverse-Inventories
-Jede Inventar-Gruppe hat eigene Tool-Slots und Gürtel. Wechselt Multiverse-Inventories das Inventar, wechseln die Gürtel mit, damit keine Werkzeuge zwischen getrennten Gruppen wandern. Bei deinem ersten Besuch in einer Gruppe gibt es dort noch keine Tool-Slots, du richtest sie wie gewohnt mit `/toolbar` ein. An/Aus und die Sortier-Einstellungen gelten überall.
-
-## Häufige Fragen
-**Ich drücke `B`, aber nichts passiert.**
-Prüf, ob der Mod geladen ist (Mod Menu) und ob der Slot ein Tool-Slot ist (`/toolbar`). Admins sehen mit `/mrtoolbar debug <spieler>`, ob die Verbindung zum Mod steht.
-
-**Muss jeder Spieler den Mod installieren?**
-Nein. Spieler ohne Mod spielen ganz normal, nur ohne Werkzeugleiste. `/toolbar takeback` und das Sortieren über `/toolbar sort` gehen auch ohne Mod.
-
-**Was passiert mit den Tools beim Tod?**
-Standardmäßig fallen sie wie normale Items (`toolbar.on-death: drop`). Mit `keep` bleiben sie im Gürtel.
-
-**Repariert Mending auch die Tools im Gürtel?**
-Ja. Was Minecraft nicht für das Item in der Hand und die Rüstung braucht, geht an die Gürtel: zuerst an den Gürtel des Tool-Slots, den du gerade in der Hand hast, dann an die anderen Gürtel von links nach rechts - in jedem Gürtel ein Tool nach dem anderen, in der Reihenfolge, in der sie im Gürtel liegen. Erst wenn alles heil ist, bekommst du die XP. Abschalten: `toolbar.mending: false` bzw. Permission `mrtoolbar.mending` entziehen.
-
-**Ich habe einen Fehler gefunden oder einen Wunsch.**
-Gern über das **[Formular auf der Website](https://mrtechnology.marcelr.at/report/mrtoolbar/)** - am besten mit der Ausgabe von `/mrtoolbar version` und deiner Mod-Version.
-
----
+Die Seiten liegen als Markdown in [`docs/wiki/`](docs/wiki/) (Seitenbaum: [`docs/wiki/index.yml`](docs/wiki/index.yml)).
 
 ## Lizenz
 MRtoolbar (Plugin und Mod) steht unter der **[MRtechnology Lizenz](LICENSE)** (source-available, nicht Open Source). Kurz gesagt:
@@ -220,4 +63,4 @@ Die Nutzung erfolgt auf eigenes Risiko - leg vor Updates eine Sicherung an. Maß
 |---|---|---|
 | `plugin/` | Paper-Plugin (Java 25, Gradle) - [CHANGELOG](plugin/CHANGELOG.md) | `cd plugin && ./gradlew build` |
 | `mod/` | Fabric-Mod (Java 25, Fabric Loom) - [CHANGELOG](mod/CHANGELOG.md) | `cd mod && ./gradlew build` |
-| `docs/` | [Kompatibilität](docs/COMPATIBILITY.md), [Releases](docs/RELEASES.md), [Plan](docs/PLAN.md) | |
+| `docs/` | [Wiki-Seiten](docs/wiki/), [Kompatibilität](docs/COMPATIBILITY.md), [Releases](docs/RELEASES.md), [Plan](docs/PLAN.md) | |
