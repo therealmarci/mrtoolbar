@@ -6,6 +6,9 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+### Behoben & geändert
+- **Erkennbar als Dev-Build:** Builds aus GitHub Actions tragen jetzt Commit und Branch in sich - MRadmin (Server → Plugins) erkennt daran Dev-Builds und zeigt sie mit „Dev <Commit>“ an.
+
 ## [1.3.2] - 2026-11-07
 
 ### Behoben & geändert
