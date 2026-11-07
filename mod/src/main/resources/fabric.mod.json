@@ -11,6 +11,9 @@
 		"sources": "https://github.com/therealmarci/mrtoolbar"
 	},
 	"license": "LicenseRef-MRtechnology",
+	"custom": {
+		"mrtechnology:version": "${fullVersion}"
+	},
 	"icon": "assets/mrtoolbar/icon.png",
 	"environment": "client",
 	"entrypoints": {
