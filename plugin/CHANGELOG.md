@@ -6,6 +6,8 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+## [BET-1.3.3-bu001] - 2026-11-08
+
 ### Behoben & geändert
 - **Erkennbar als Dev-Build:** Builds aus GitHub Actions tragen jetzt Commit und Branch in sich - MRadmin (Server → Plugins) erkennt daran Dev-Builds und zeigt sie mit „Dev <Commit>“ an.
 
@@ -155,4 +157,3 @@ Erste Vorabversion für Minecraft 26.3. Braucht auf dem Client den MRtoolbar-Mod
   Österreich/Schweiz → Deutsch, sonst Englisch bzw. eigene Sprachdateien) - keine gemischten Sprachen.
   Feste Sprache für alle weiterhin möglich (`language: de`). Konsole immer Englisch.
 - Update-Check über GitHub Releases.
-
