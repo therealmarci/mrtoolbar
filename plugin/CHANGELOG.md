@@ -6,6 +6,17 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+### Neu
+- **Team-Hinweise über MRadmin:** Mit MRadmin (Modul-API 15) richtet sich der Update-Hinweis beim Betreten nach der Wahl „Update verfügbar → Im Spiel“ unter Konto → Benachrichtigungen und nach `/mradmin mute`; ohne MRadmin bleibt alles wie bisher.
+
+### Behoben & geändert
+- **`updates.beta` statt `updates.include-prereleases`:** Der Schalter für Beta-Versionen in der Update-Prüfung heißt jetzt `updates.beta` (passend zum Beta-Kanal); der alte Wert wird übernommen (`config-version` 15).
+
+## [BET-1.3.3-bu001] - 2026-11-08
+
+### Behoben & geändert
+- **Erkennbar als Dev-Build:** Builds aus GitHub Actions tragen jetzt Commit und Branch in sich - MRadmin (Server → Plugins) erkennt daran Dev-Builds und zeigt sie mit „Dev <Commit>“ an.
+
 ## [1.3.2] - 2026-11-07
 
 ### Behoben & geändert
@@ -152,4 +163,3 @@ Erste Vorabversion für Minecraft 26.3. Braucht auf dem Client den MRtoolbar-Mod
   Österreich/Schweiz → Deutsch, sonst Englisch bzw. eigene Sprachdateien) - keine gemischten Sprachen.
   Feste Sprache für alle weiterhin möglich (`language: de`). Konsole immer Englisch.
 - Update-Check über GitHub Releases.
-

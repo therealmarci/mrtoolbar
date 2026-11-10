@@ -9,6 +9,7 @@ MRtoolbar runs **on its own**. Together with other MRtechnology plugins it can d
 | Pause in admin mode (`toolbar.pause-in-admin-mode`) | MRadmin |
 | Pause in duels, in the arena editor and while spectating (`toolbar.pause-in-pvp`), belts are saved along | MRadmin + MRpvp |
 | Events in the **log** of the MRadmin web interface, Discord log via MRadmin's webhook (`discord.use-mradmin-webhook`) | MRadmin |
+| Messages to the team in the game (e.g. update available) can be switched on and off under Account → Notifications and muted with `/mradmin mute` | MRadmin |
 
 ## Multiverse-Inventories
 Every inventory group has its own tool slots and belts. When Multiverse-Inventories switches the inventory, the belts switch along, so no tools move between separate groups. On your first visit to a group there are no tool slots there yet, you set them up as usual with `/toolbar`. On/off and the sorting settings apply everywhere.
