@@ -58,6 +58,8 @@ public final class MRToolbar extends JavaPlugin {
         loadConfiguration();
 
         updateChecker = new UpdateChecker(this);
+        // With MRadmin the join notice follows the member's choice for update notices and /mradmin mute.
+        updateChecker.gameFilter(p -> mradmin.teamInGame(p, "update-available"));
         updateChecker.start();
         menuListener = new MenuListener(this);
         menuListener.start();

@@ -6,6 +6,9 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+### Neu
+- **Team-Hinweise über MRadmin:** Mit MRadmin (Modul-API 15) richtet sich der Update-Hinweis beim Betreten nach der Wahl „Update verfügbar → Im Spiel“ unter Konto → Benachrichtigungen und nach `/mradmin mute`; ohne MRadmin bleibt alles wie bisher.
+
 ## [BET-1.3.3-bu001] - 2026-11-08
 
 ### Behoben & geändert
