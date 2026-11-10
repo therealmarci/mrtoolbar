@@ -9,6 +9,9 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 ### Neu
 - **Team-Hinweise über MRadmin:** Mit MRadmin (Modul-API 15) richtet sich der Update-Hinweis beim Betreten nach der Wahl „Update verfügbar → Im Spiel“ unter Konto → Benachrichtigungen und nach `/mradmin mute`; ohne MRadmin bleibt alles wie bisher.
 
+### Behoben & geändert
+- **`updates.beta` statt `updates.include-prereleases`:** Der Schalter für Beta-Versionen in der Update-Prüfung heißt jetzt `updates.beta` (passend zum Beta-Kanal); der alte Wert wird übernommen (`config-version` 15).
+
 ## [BET-1.3.3-bu001] - 2026-11-08
 
 ### Behoben & geändert
