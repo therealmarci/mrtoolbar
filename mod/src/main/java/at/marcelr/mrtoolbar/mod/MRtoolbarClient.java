@@ -98,19 +98,15 @@ public final class MRtoolbarClient implements ClientModInitializer {
                 sayHello();
             }
         });
+        // Every join starts fresh: behind a proxy (Velocity) a server switch keeps the connection, so DISCONNECT does
+        // not come - without this the slots of the last server stayed and the new one was never greeted.
         ClientPlayConnectionEvents.JOIN.register((handler, sender, client) -> {
+            reset();
             if (ClientPlayNetworking.canSend(HelloPayload.TYPE)) {
                 sayHello();
             }
         });
-        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
-            state = null;
-            compatible = false;
-            helloSent = false;
-            helloTicks = 0;
-            pluginVersion = null;
-            status = null;
-        });
+        ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> reset());
 
         // Fixed order in Options -> Controls (otherwise Minecraft sorts alphabetically by the translated name).
         // The ids stay the same, so bindings players already changed are kept.
@@ -198,6 +194,16 @@ public final class MRtoolbarClient implements ClientModInitializer {
     private static KeyMapping key(String name, InputConstants.Type type, int defaultKey, int order) {
         return KeyMappingHelper.registerKeyMapping(new KeyMapping("key.mrtoolbar." + name, type, defaultKey,
                 CATEGORY, order));
+    }
+
+    /** Forgets everything about the server (new server or no server). */
+    private static void reset() {
+        state = null;
+        compatible = false;
+        helloSent = false;
+        helloTicks = 0;
+        pluginVersion = null;
+        status = null;
     }
 
     private static void sayHello() {
