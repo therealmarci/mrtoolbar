@@ -6,6 +6,8 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+## [STA-1.3.5-bu001] - 2026-11-11
+
 ### Behoben & geändert
 - **`mod.minimum-version` im neuen Versionsschema:** Werte wie `STA-1.0.0-bu001` wurden als ungültig abgelehnt („Invalid mod.minimum-version“) und ignoriert. Jetzt gelten sie - so lässt sich auch ein neuer Build derselben Version erzwingen.
 
