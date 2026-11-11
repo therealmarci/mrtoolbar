@@ -123,8 +123,10 @@ public record Settings(
                 containers(c.getStringList("sorting.containers"), log));
 
         String minimum = c.getString("mod.minimum-version", "").trim();
-        if (!minimum.isEmpty() && !minimum.matches("[vV]?\\d+(\\.\\d+)*(-[0-9A-Za-z.]+)?")) {
-            log.warning("Invalid mod.minimum-version '" + minimum + "' (expected e.g. 0.2.0), ignoring it.");
+        // New scheme (STA-1.0.0-bu001, what the mod reports) or an old version (0.2.0).
+        if (!minimum.isEmpty() && !at.marcelr.mrtoolbar.util.Versions.isScheme(minimum)
+                && !minimum.matches("[vV]?\\d+(\\.\\d+)*(-[0-9A-Za-z.]+)?")) {
+            log.warning("Invalid mod.minimum-version '" + minimum + "' (expected e.g. STA-1.0.0-bu001 or 0.2.0), ignoring it.");
             minimum = "";
         }
         ModSettings mod = new ModSettings(minimum,
