@@ -6,6 +6,8 @@ Versionen - welche Mod-Versionen passen, steht in [docs/COMPATIBILITY.md](../doc
 
 ## [Unveröffentlicht]
 
+## [STA-1.3.6-bu001] - 2026-11-15
+
 ### Neu
 - **Gruppe Bots für Zweitaccounts:** `mrtoolbar.groups.bots` (nicht für OPs, in keiner Team-Gruppe) - keine Rechte in MRtoolbar. Fertige LuckPerms-Gruppe „bots“ im MRadmin-Wiki unter Permissions.
 
