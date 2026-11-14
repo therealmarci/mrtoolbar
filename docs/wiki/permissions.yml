@@ -31,3 +31,5 @@ mrtoolbar.admin.view:
   de: "Gürtel anderer Spieler ansehen (nur lesen) - `/mrtoolbar view <spieler>`, Admin-Menü und Spieler-Menü von MRadmin"
 mrtoolbar.admin.update:
   de: "Update-Hinweis beim Betreten"
+mrtoolbar.groups.bots:
+  de: "Gruppe Bots (Zweitaccounts): keine Rechte in MRtoolbar (kein Werkzeuggürtel)."
